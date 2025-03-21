@@ -7,7 +7,25 @@ contracts: contract_id(pk), client_id(nn)(fk:clients,cascade), contract_number, 
 payments: payment_id(pk), contract_id(nn)(fk:contracts,cascade), client_id(nn)(fk:clients,cascade), received_date, total_assets, actual_fee, method, notes, valid_from(def:CURRENT_TIMESTAMP), valid_to, applied_start_month, applied_start_month_year, applied_end_month, applied_end_month_year, applied_start_quarter, applied_start_quarter_year, applied_end_quarter, applied_end_quarter_year
 period_reference: reference_date(pk)(unique), current_month_year, current_month, current_quarter_year, current_quarter
 [VIEWS]
-distributed_payments: payments JOIN month_numbers JOIN quarter_numbers
+v_current_period: period_reference
+v_active_contracts: contracts
+v_monthly_periods: v_current_period JOIN payments
+v_quarterly_periods: v_current_period JOIN payments
+v_all_periods: v_monthly_periods
+v_client_first_payment: clients JOIN payments
+v_payments_expanded: v_monthly_periods JOIN v_active_contracts JOIN v_quarterly_periods
+v_client_aum_history: v_payments_expanded
+v_expected_fees: v_all_periods JOIN v_payments_expanded JOIN v_active_contracts
+v_expected_fees_with_estimates: v_expected_fees JOIN v_client_aum_history
+v_payment_variance: v_expected_fees
+v_payment_variance_with_estimates: v_expected_fees_with_estimates
+v_payment_status: v_current_period JOIN v_active_contracts
+v_missing_payments: v_payment_variance JOIN clients
+v_client_sidebar: clients JOIN v_active_contracts JOIN v_payment_status
+v_client_details: contacts JOIN v_active_contracts JOIN v_payment_status JOIN v_client_first_payment
+v_payment_history: v_client_aum_history JOIN clients JOIN v_active_contracts JOIN payment_files JOIN client_files
+v_last_payment: v_payment_history
+v_missing_payment_periods: v_missing_payments
 [TRIGGERS]
 [INDEXES]
 payments(received_date)

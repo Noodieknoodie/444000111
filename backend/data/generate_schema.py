@@ -191,7 +191,7 @@ def main():
     # Assume project root is the current working directory
     project_root = Path.cwd()
     
-    parser.add_argument('--db', dest='database', default=str(project_root / "backend" / "data" / "401k_payments_views.db"),
+    parser.add_argument('--db', dest='database', default=str(project_root / "backend" / "data" / "401k_payments_66.db"),
                         help='Path to SQLite database')
     parser.add_argument('--compact', dest='compact_schema', default=str(project_root / "backend" / "data" / "compact_schema.txt"),
                         help='Output path for compact schema')

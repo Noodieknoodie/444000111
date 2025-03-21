@@ -70,14 +70,204 @@ payment_id, contract_id, client_id, received_date, total_assets, actual_fee, met
 -- TABLE: period_reference
 reference_date, current_month_year, current_month, current_quarter_year, current_quarter
 2025-03-20, 2025, 2, 2024, 4
--- VIEW: distributed_payments
-payment_id, contract_id, client_id, period_type, period_year, period_number, is_split, whole_amount, distributed_amount, received_date
-1, 1, 1, MONTH, 2019, 4, 0, 547.51, 547.51, 2019-05-03
-2, 1, 1, MONTH, 2019, 5, 0, 535.03, 535.03, 2019-06-07
-3, 1, 1, MONTH, 2019, 6, 0, 557.54, 557.54, 2019-07-05
-453, 13, 13, MONTH, 2022, 1, 1, 5000.01, 1666.67, 2022-01-20
-453, 13, 13, MONTH, 2022, 2, 1, 5000.01, 1666.67, 2022-01-20
-453, 13, 13, MONTH, 2022, 3, 1, 5000.01, 1666.67, 2022-01-20
-922, 35, 29, QUARTER, 2024, 1, 0, 915.53, 915.53, 2024-04-15
-923, 35, 29, QUARTER, 2024, 2, 0, 946.32, 946.32, 2024-07-16
-924, 35, 29, QUARTER, 2024, 3, 0, 1043.09, 1043.09, 2024-10-14
+-- VIEW: v_active_contracts
+contract_id, client_id, contract_number, provider_name, contract_start_date, fee_type, percent_rate, flat_rate, payment_schedule, num_people, valid_from, valid_to, is_active
+1, 1, 134565, John Hancock, 2018-03-22, percentage, 0.0007, NULL, monthly, 18, 2025-03-14 04:04:26, NULL, 1
+2, 2, NULL, Voya, 2019-04-19, percentage, 0.000416, NULL, monthly, 35, 2025-03-14 04:04:26, NULL, 1
+3, 3, 551296, Voya, NULL, flat, NULL, 666.66, monthly, NULL, 2025-03-14 04:04:26, NULL, 1
+17, 17, NULL, Capital Group / American Funds, NULL, flat, NULL, 1000.0, quarterly, 15, 2025-03-14 04:04:26, NULL, 1
+18, 18, 24277, Fidelity, NULL, flat, NULL, 2499.99, quarterly, 32, 2025-03-14 04:04:26, NULL, 1
+19, 19, NULL, Ascensus, NULL, flat, NULL, 2000.0, quarterly, 18, 2025-03-14 04:04:26, NULL, 1
+33, 16, NULL, Empower, NULL, flat, NULL, 3500.0, quarterly, NULL, 2025-03-14 04:04:26, NULL, 1
+34, 28, NULL, Empower, NULL, percentage, 0.000667, NULL, monthly, 43, 2025-03-14 04:04:26, NULL, 1
+35, 29, NULL, Principal, NULL, percentage, 0.001875, NULL, quarterly, 15, 2025-03-14 04:04:26, NULL, 1
+-- VIEW: v_all_periods
+client_id, contract_id, year, month, quarter, schedule_type, period_key
+1, 1, 2019, 4, NULL, monthly, 201904
+1, 1, 2019, 5, NULL, monthly, 201905
+1, 1, 2019, 6, NULL, monthly, 201906
+21, 21, 2023, 4, NULL, monthly, 202304
+21, 21, 2023, 5, NULL, monthly, 202305
+21, 21, 2023, 6, NULL, monthly, 202306
+29, 35, 2024, NULL, 2, quarterly, 20242
+29, 35, 2024, NULL, 3, quarterly, 20243
+29, 35, 2024, NULL, 4, quarterly, 20244
+-- VIEW: v_client_aum_history
+client_id, contract_id, year, month, quarter, schedule_type, period_key, actual_aum, estimated_aum, is_estimated_aum
+1, 1, 2019, 4, NULL, monthly, 201904, 824305, 824305, 0
+1, 1, 2019, 5, NULL, monthly, 201905, 805477, 805477, 0
+1, 1, 2019, 6, NULL, monthly, 201906, 839288, 839288, 0
+21, 21, 2023, 8, NULL, monthly, 202308, 175308, 175308, 0
+21, 21, 2023, 9, NULL, monthly, 202309, 174112, 174112, 0
+21, 21, 2023, 10, NULL, monthly, 202310, 171002, 171002, 0
+29, 35, 2024, NULL, 2, quarterly, 20242, NULL, NULL, 0
+29, 35, 2024, NULL, 3, quarterly, 20243, NULL, NULL, 0
+29, 35, 2024, NULL, 4, quarterly, 20244, NULL, NULL, 0
+-- VIEW: v_client_details
+client_id, display_name, full_name, ima_signed_date, address, contract_id, contract_number, provider_name, payment_schedule, fee_type, percent_rate, flat_rate, participants, payment_status, current_period, missing_payment_count, client_days, client_since_formatted
+1, AirSea America, THE TRUSTEES OF AIRSEA AMERICA INC 401K PLAN AND TRUST, 2020-07-31, 3500 West Vally HWY, Ste B-106, Auburn, WA 98001, 1, 134565, John Hancock, monthly, percentage, 0.0007, NULL, 18, UNPAID, Feb 2025, 2, 2149.248911990784, 05/03/2019
+2, Bumgardner Architects (ABC), THE BUMGARDNER ARCHITECTS A WASHINGTON CORPORATION PROFIT, 2020-08-02, 2111 Third Ave, Seattle, WA 98121, 2, NULL, Voya, monthly, percentage, 0.000416, NULL, 35, UNPAID, Feb 2025, 8, 2013.2489121644758, 09/16/2019
+3, Amplero, AMPLERO INC 401K, 2019-03-15, 1218 3rd Ave #900, Seattle, WA 98101, 3, 551296, Voya, monthly, flat, NULL, 666.66, NULL, UNPAID, Feb 2025, 8, 2090.248912326526, 07/01/2019
+14, Hos Bros, HOS BROS CONSTRUCTION INC, 2019-05-08, 7733 W. Bostian Rd, Woodinville, WA 98072, 14, 34283, Fidelity, quarterly, flat, NULL, 3750.0, 24, UNPAID, Q4 2024, 1, 2082.248912488576, 07/09/2019
+15, Lavle USA, LAVLE USA INC 401K, 2019-03-22, 916 8th St, Anacortes, WA 98221, 15, 809872, Transamerica, monthly, percentage, 0.000417, NULL, NULL, UNPAID, Feb 2025, 4, 2117.2489126734436, 06/04/2019
+16, Lynnwood Honda, LYNNWOOD ENTERPRISES INC 401K, 2020-02-06, 22020 Highway 99, Edmonds, WA 98026, 33, NULL, Empower, quarterly, flat, NULL, 3500.0, NULL, UNPAID, Q4 2024, 1, 1447.2489128471352, 04/04/2021
+27, XFire, XFIRE INDUSTRIES INC 401K PLAN, NULL, 22916 57th Ave E, Spanaway WA 98387, 27, 171414, Capital Group / American Funds, quarterly, percentage, 0.0025, NULL, 2, PAID, Q4 2024, 0, 785.2489130324684, 01/26/2023
+28, Younker Motors, YOUNKER MOTORS, 2020-07-30, 3401 E. Valley Rd, Renton, WA 98057, 34, NULL, Empower, monthly, percentage, 0.000667, NULL, 43, UNPAID, Feb 2025, 2, 1726.2489132289775, 06/29/2020
+29, Youth Dynamics, YOUTH DYNAMICS, NULL, NULL, 35, NULL, Principal, quarterly, percentage, 0.001875, NULL, 15, UNPAID, Q4 2024, 1, 519.2489134259522, 10/19/2023
+-- VIEW: v_client_first_payment
+client_id, display_name, first_payment_date, client_days, client_since_formatted
+1, AirSea America, 2019-05-03, 2149.248913634103, 05/03/2019
+2, Bumgardner Architects (ABC), 2019-09-16, 2013.2489136341028, 09/16/2019
+3, Amplero, 2019-07-01, 2090.248913634103, 07/01/2019
+14, Hos Bros, 2019-07-09, 2082.248913634103, 07/09/2019
+15, Lavle USA, 2019-06-04, 2117.248913634103, 06/04/2019
+16, Lynnwood Honda, 2021-04-04, 1447.2489136341028, 04/04/2021
+27, XFire, 2023-01-26, 785.2489136341028, 01/26/2023
+28, Younker Motors, 2020-06-29, 1726.2489136341028, 06/29/2020
+29, Youth Dynamics, 2023-10-19, 519.2489136341028, 10/19/2023
+-- VIEW: v_client_sidebar
+client_id, display_name, initials, provider_name, payment_status, formatted_current_period
+1, AirSea America, A, John Hancock, UNPAID, Feb 2025
+3, Amplero, A, Voya, UNPAID, Feb 2025
+4, Auction Edge, A, John Hancock, UNPAID, Q4 2024
+14, Hos Bros, H, Fidelity, UNPAID, Q4 2024
+15, Lavle USA, L, Transamerica, UNPAID, Feb 2025
+16, Lynnwood Honda, L, Empower, UNPAID, Q4 2024
+27, XFire, X, Capital Group / American Funds, PAID, Q4 2024
+28, Younker Motors, Y, Empower, UNPAID, Feb 2025
+29, Youth Dynamics, Y, Principal, UNPAID, Q4 2024
+-- VIEW: v_current_period
+reference_date, monthly_year, monthly_month, quarterly_year, quarterly_quarter
+2025-03-20, 2025, 2, 2024, 4
+-- VIEW: v_expected_fees
+client_id, contract_id, year, month, quarter, schedule_type, period_key, fee_type, percent_rate, flat_rate, assets_under_management, expected_fee, payment_id, actual_fee, is_split
+1, 1, 2019, 4, NULL, monthly, 201904, percentage, 0.0007, NULL, 824305, 577.01, 1, 547.51, 0
+1, 1, 2019, 5, NULL, monthly, 201905, percentage, 0.0007, NULL, 805477, 563.83, 2, 535.03, 0
+1, 1, 2019, 6, NULL, monthly, 201906, percentage, 0.0007, NULL, 839288, 587.5, 3, 557.54, 0
+14, 14, 2024, NULL, 1, quarterly, 20241, flat, NULL, 3750.0, NULL, 3750.0, 484, 3750.0, 0
+14, 14, 2024, NULL, 2, quarterly, 20242, flat, NULL, 3750.0, NULL, 3750.0, 485, 3750.0, 0
+14, 14, 2024, NULL, 3, quarterly, 20243, flat, NULL, 3750.0, NULL, 3750.0, 486, 3750.0, 0
+29, 35, 2024, NULL, 2, quarterly, 20242, percentage, 0.001875, NULL, NULL, NULL, 923, 946.32, 0
+29, 35, 2024, NULL, 3, quarterly, 20243, percentage, 0.001875, NULL, NULL, NULL, 924, 1043.09, 0
+29, 35, 2024, NULL, 4, quarterly, 20244, percentage, 0.001875, NULL, NULL, NULL, NULL, NULL, NULL
+-- VIEW: v_expected_fees_with_estimates
+client_id, contract_id, year, month, quarter, schedule_type, period_key, fee_type, percent_rate, flat_rate, assets_under_management, expected_fee, payment_id, actual_fee, is_split, estimated_aum, is_estimated_aum, estimated_expected_fee, is_estimated_fee
+1, 1, 2019, 4, NULL, monthly, 201904, percentage, 0.0007, NULL, 824305, 577.01, 1, 547.51, 0, 824305, 0, 577.01, 0
+1, 1, 2019, 5, NULL, monthly, 201905, percentage, 0.0007, NULL, 805477, 563.83, 2, 535.03, 0, 805477, 0, 563.83, 0
+1, 1, 2019, 6, NULL, monthly, 201906, percentage, 0.0007, NULL, 839288, 587.5, 3, 557.54, 0, 839288, 0, 587.5, 0
+15, 15, 2019, 9, NULL, monthly, 201909, percentage, 0.000417, NULL, 195061, 81.34, 491, 81.28, 0, 195061, 0, 81.34, 0
+15, 15, 2019, 10, NULL, monthly, 201910, percentage, 0.000417, NULL, 271832, 113.35, 492, 113.26, 0, 271832, 0, 113.35, 0
+15, 15, 2019, 11, NULL, monthly, 201911, percentage, 0.000417, NULL, 327785, 136.69, 493, 136.58, 0, 327785, 0, 136.69, 0
+29, 35, 2024, NULL, 2, quarterly, 20242, percentage, 0.001875, NULL, NULL, NULL, 923, 946.32, 0, NULL, 0, NULL, 0
+29, 35, 2024, NULL, 3, quarterly, 20243, percentage, 0.001875, NULL, NULL, NULL, 924, 1043.09, 0, NULL, 0, NULL, 0
+29, 35, 2024, NULL, 4, quarterly, 20244, percentage, 0.001875, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, 0
+-- VIEW: v_last_payment
+payment_id, client_id, display_name, payment_date_formatted, applied_period, aum, displayed_aum, is_estimated_aum, expected_fee, displayed_expected_fee, is_estimated_fee, actual_fee, variance_amount, variance_classification, is_split, estimated_variance_amount, estimated_variance_classification, file_id, file_name
+57, 1, AirSea America, 12/19/2023, Nov 2023, 1208139, 1208139, 0, 845.7, 845.7, 0, 802.51, -43.19, Underpaid, 0, NULL, NULL, NULL, NULL
+86, 2, Bumgardner Architects (ABC), 12/18/2020, Nov 2020, NULL, 3247119, 1, NULL, 1350.8, 1, 1295.02, NULL, NULL, 0, -55.78, Underpaid, NULL, NULL
+148, 3, Amplero, 12/18/2020, Nov 2020, NULL, NULL, 0, 666.66, 666.66, 0, 666.66, 0.0, Within Target, 0, NULL, NULL, NULL, NULL
+474, 14, Hos Bros, 10/18/2021, Q3 2021, NULL, NULL, 0, 3750.0, 3750.0, 0, 3749.99, -0.01, Within Target, 0, NULL, NULL, NULL, NULL
+529, 15, Lavle USA, 12/13/2022, Nov 2022, 166997, 166997, 0, 69.64, 69.64, 0, 69.58, -0.06, Within Target, 0, NULL, NULL, NULL, NULL
+570, 16, Lynnwood Honda, 10/23/2023, Q3 2023, NULL, NULL, 0, 3500.0, 3500.0, 0, 3500.0, 0.0, Within Target, 0, NULL, NULL, NULL, NULL
+823, 27, XFire, 10/23/2023, Q3 2023, 41457, 41457, 0, 103.64, 103.64, 0, 104.49, 0.85, Within Target, 0, NULL, NULL, NULL, NULL
+838, 28, Younker Motors, 12/23/2020, Nov 2020, 2074496, 2074496, 0, 1383.69, 1383.69, 0, 1383.03, -0.66, Within Target, 0, NULL, NULL, NULL, NULL
+920, 29, Youth Dynamics, 10/19/2023, Q3 2023, NULL, NULL, 0, NULL, NULL, 0, 665.49, NULL, NULL, 0, NULL, NULL, NULL, NULL
+-- VIEW: v_missing_payment_periods
+client_id, display_name, missing_periods
+1, AirSea America, Oct 2022, Feb 2025
+2, Bumgardner Architects (ABC), Jul 2024, Aug 2024, Sep 2024, Oct 2024, Nov 2024, Dec 2024, Jan 2025, Feb 2025
+3, Amplero, Jul 2024, Aug 2024, Sep 2024, Oct 2024, Nov 2024, Dec 2024, Jan 2025, Feb 2025
+14, Hos Bros, Q4 2024
+15, Lavle USA, Nov 2024, Dec 2024, Jan 2025, Feb 2025
+16, Lynnwood Honda, Q4 2024
+26, Urban Renaissance, Q2 2022, Q3 2022, Q4 2022, Q1 2023
+28, Younker Motors, Jan 2025, Feb 2025
+29, Youth Dynamics, Q4 2024
+-- VIEW: v_missing_payments
+client_id, contract_id, display_name, year, month, quarter, schedule_type, period_key, formatted_period
+1, 1, AirSea America, 2022, 10, NULL, monthly, 202210, Oct 2022
+1, 1, AirSea America, 2025, 2, NULL, monthly, 202502, Feb 2025
+2, 2, Bumgardner Architects (ABC), 2024, 7, NULL, monthly, 202407, Jul 2024
+13, 13, Harper Engineering, 2025, 2, NULL, monthly, 202502, Feb 2025
+14, 14, Hos Bros, 2024, NULL, 4, quarterly, 20244, Q4 2024
+15, 15, Lavle USA, 2024, 11, NULL, monthly, 202411, Nov 2024
+28, 34, Younker Motors, 2025, 1, NULL, monthly, 202501, Jan 2025
+28, 34, Younker Motors, 2025, 2, NULL, monthly, 202502, Feb 2025
+29, 35, Youth Dynamics, 2024, NULL, 4, quarterly, 20244, Q4 2024
+-- VIEW: v_monthly_periods
+client_id, contract_id, year, month, period_key
+1, 1, 2019, 4, 201904
+1, 1, 2019, 5, 201905
+1, 1, 2019, 6, 201906
+13, 13, 2023, 2, 202302
+13, 13, 2023, 3, 202303
+13, 13, 2023, 4, 202304
+28, 34, 2024, 12, 202412
+28, 34, 2025, 1, 202501
+28, 34, 2025, 2, 202502
+-- VIEW: v_payment_history
+payment_id, client_id, display_name, payment_date_formatted, period_start_formatted, period_end_formatted, aum, displayed_aum, is_estimated_aum, expected_fee, displayed_expected_fee, is_estimated_fee, actual_fee, is_split, variance_amount, variance_classification, estimated_variance_amount, estimated_variance_classification, method, notes, file_id, file_name, onedrive_path
+1054, 1, AirSea America, 02/07/2025, Jan 2025, , 1400805.79, 1400805.79, 0, 980.56, 980.56, 0, 930.44, 0, -50.12, Underpaid, NULL, NULL, Check, John Hancock payment, 64, John Hancock - 401K Adivsor Fee Bellmont AirSea Benevon MFM, FlorForm, 3 Sigma 2.24.25.pdf, Air Sea America\Consulting Fee\2025\John Hancock - 401K Adivsor Fee Bellmont AirSea Benevon MFM, FlorForm, 3 Sigma 2.24.25.pdf
+1055, 1, AirSea America, 01/03/2025, Dec 2024, , 1373196.53, 1373196.53, 0, 961.24, 961.24, 0, 912.13, 0, -49.11, Underpaid, NULL, NULL, Check, John Hancock payment, 69, John Hancock-401K Advisor Fee Bellmont,AirSea,3Sig,FF, MFM 1.16.25.pdf, Air Sea America\Consulting Fee\2025\John Hancock-401K Advisor Fee Bellmont,AirSea,3Sig,FF, MFM 1.16.25.pdf
+1056, 1, AirSea America, 12/06/2024, Nov 2024, , 1395147.37, 1395147.37, 0, 976.6, 976.6, 0, 926.68, 0, -49.92, Underpaid, NULL, NULL, Check, John Hancock payment, 74, John Hancock - Air Sea, Bellmont, 3sigma, FloForm, MFM chk rcvd 12.20.24.pdf, Air Sea America\Consulting Fee\2024\John Hancock - Air Sea, Bellmont, 3sigma, FloForm, MFM chk rcvd 12.20.24.pdf
+457, 13, Harper Engineering, 01/24/2023, Dec 2022,  to Feb 2023, NULL, NULL, 0, 1250.0, 1250.0, 0, 4999.97, 1, NULL, NULL, NULL, NULL, Auto - Check, Per fee statement payment (October, November December ), NULL, NULL, NULL
+456, 13, Harper Engineering, 10/10/2022, Sep 2022,  to Nov 2022, NULL, NULL, 0, 1250.0, 1250.0, 0, 5000.01, 1, NULL, NULL, NULL, NULL, Auto - Check, Per fee statement payment (July, August, September), NULL, NULL, NULL
+455, 13, Harper Engineering, 07/18/2022, Jun 2022,  to Aug 2022, NULL, NULL, 0, 1250.0, 1250.0, 0, 5000.01, 1, NULL, NULL, NULL, NULL, Auto - Check, Per fee statement payment (April, May, June ), NULL, NULL, NULL
+922, 29, Youth Dynamics, 04/15/2024, Q1 2024, , NULL, NULL, 0, NULL, NULL, 0, 915.53, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL
+921, 29, Youth Dynamics, 01/17/2024, Q4 2023, , NULL, NULL, 0, NULL, NULL, 0, 748.16, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL
+920, 29, Youth Dynamics, 10/19/2023, Q3 2023, , NULL, NULL, 0, NULL, NULL, 0, 665.49, 0, NULL, NULL, NULL, NULL, NULL, Newly established at Principal; amount will be posted on 10.27.23, NULL, NULL, NULL
+-- VIEW: v_payment_status
+client_id, contract_id, display_name, payment_schedule, current_year, current_month, current_quarter, current_period_key, payment_status, formatted_current_period
+1, 1, AirSea America, monthly, 2025, 2, NULL, 202502, UNPAID, Feb 2025
+2, 2, Bumgardner Architects (ABC), monthly, 2025, 2, NULL, 202502, UNPAID, Feb 2025
+3, 3, Amplero, monthly, 2025, 2, NULL, 202502, UNPAID, Feb 2025
+17, 17, Nordic Museum, quarterly, 2024, NULL, 4, 20244, UNPAID, Q4 2024
+18, 18, Marten Law, quarterly, 2024, NULL, 4, 20244, UNPAID, Q4 2024
+19, 19, Opportunity Interactive, quarterly, 2024, NULL, 4, 20244, PAID, Q4 2024
+16, 33, Lynnwood Honda, quarterly, 2024, NULL, 4, 20244, UNPAID, Q4 2024
+28, 34, Younker Motors, monthly, 2025, 2, NULL, 202502, UNPAID, Feb 2025
+29, 35, Youth Dynamics, quarterly, 2024, NULL, 4, 20244, UNPAID, Q4 2024
+-- VIEW: v_payment_variance
+client_id, contract_id, year, month, quarter, schedule_type, period_key, fee_type, percent_rate, flat_rate, assets_under_management, expected_fee, payment_id, actual_fee, is_split, variance_amount, variance_percentage, variance_classification
+1, 1, 2019, 4, NULL, monthly, 201904, percentage, 0.0007, NULL, 824305, 577.01, 1, 547.51, 0, -29.5, -5.11, Underpaid
+1, 1, 2019, 5, NULL, monthly, 201905, percentage, 0.0007, NULL, 805477, 563.83, 2, 535.03, 0, -28.8, -5.11, Underpaid
+1, 1, 2019, 6, NULL, monthly, 201906, percentage, 0.0007, NULL, 839288, 587.5, 3, 557.54, 0, -29.96, -5.1, Underpaid
+14, 14, 2024, NULL, 1, quarterly, 20241, flat, NULL, 3750.0, NULL, 3750.0, 484, 3750.0, 0, 0.0, 0.0, Within Target
+14, 14, 2024, NULL, 2, quarterly, 20242, flat, NULL, 3750.0, NULL, 3750.0, 485, 3750.0, 0, 0.0, 0.0, Within Target
+14, 14, 2024, NULL, 3, quarterly, 20243, flat, NULL, 3750.0, NULL, 3750.0, 486, 3750.0, 0, 0.0, 0.0, Within Target
+29, 35, 2024, NULL, 2, quarterly, 20242, percentage, 0.001875, NULL, NULL, NULL, 923, 946.32, 0, NULL, NULL, NULL
+29, 35, 2024, NULL, 3, quarterly, 20243, percentage, 0.001875, NULL, NULL, NULL, 924, 1043.09, 0, NULL, NULL, NULL
+29, 35, 2024, NULL, 4, quarterly, 20244, percentage, 0.001875, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL
+-- VIEW: v_payment_variance_with_estimates
+client_id, contract_id, year, month, quarter, schedule_type, period_key, fee_type, percent_rate, flat_rate, assets_under_management, expected_fee, payment_id, actual_fee, is_split, estimated_aum, is_estimated_aum, estimated_expected_fee, is_estimated_fee, variance_amount, variance_percentage, variance_classification, is_estimated_fee:1
+1, 1, 2019, 4, NULL, monthly, 201904, percentage, 0.0007, NULL, 824305, 577.01, 1, 547.51, 0, 824305, 0, 577.01, 0, -29.5, -5.11, Underpaid, 0
+1, 1, 2019, 5, NULL, monthly, 201905, percentage, 0.0007, NULL, 805477, 563.83, 2, 535.03, 0, 805477, 0, 563.83, 0, -28.8, -5.11, Underpaid, 0
+1, 1, 2019, 6, NULL, monthly, 201906, percentage, 0.0007, NULL, 839288, 587.5, 3, 557.54, 0, 839288, 0, 587.5, 0, -29.96, -5.1, Underpaid, 0
+15, 15, 2019, 9, NULL, monthly, 201909, percentage, 0.000417, NULL, 195061, 81.34, 491, 81.28, 0, 195061, 0, 81.34, 0, -0.06, -0.07, Within Target, 0
+15, 15, 2019, 10, NULL, monthly, 201910, percentage, 0.000417, NULL, 271832, 113.35, 492, 113.26, 0, 271832, 0, 113.35, 0, -0.09, -0.08, Within Target, 0
+15, 15, 2019, 11, NULL, monthly, 201911, percentage, 0.000417, NULL, 327785, 136.69, 493, 136.58, 0, 327785, 0, 136.69, 0, -0.11, -0.08, Within Target, 0
+29, 35, 2024, NULL, 2, quarterly, 20242, percentage, 0.001875, NULL, NULL, NULL, 923, 946.32, 0, NULL, 0, NULL, 0, NULL, NULL, NULL, 0
+29, 35, 2024, NULL, 3, quarterly, 20243, percentage, 0.001875, NULL, NULL, NULL, 924, 1043.09, 0, NULL, 0, NULL, 0, NULL, NULL, NULL, 0
+29, 35, 2024, NULL, 4, quarterly, 20244, percentage, 0.001875, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, 0, NULL, NULL, NULL, 0
+-- VIEW: v_payments_expanded
+payment_id, client_id, contract_id, received_date, total_assets, period_fee, total_fee, year, month, quarter, schedule_type, period_key, is_split, start_period_key, end_period_key, periods_covered
+1, 1, 1, 2019-05-03, 824305, 547.51, 547.51, 2019, 4, NULL, monthly, 201904, 0, 201904, 201904, 1
+2, 1, 1, 2019-06-07, 805477, 535.03, 535.03, 2019, 5, NULL, monthly, 201905, 0, 201905, 201905, 1
+3, 1, 1, 2019-07-05, 839288, 557.54, 557.54, 2019, 6, NULL, monthly, 201906, 0, 201906, 201906, 1
+545, 15, 15, 2024-04-10, 124695, 51.96, 51.96, 2024, 3, NULL, monthly, 202403, 0, 202403, 202403, 1
+546, 15, 15, 2024-05-08, 119953, 49.98, 49.98, 2024, 4, NULL, monthly, 202404, 0, 202404, 202404, 1
+547, 15, 15, 2024-06-18, 124234, 51.76, 51.76, 2024, 5, NULL, monthly, 202405, 0, 202405, 202405, 1
+1070, 19, 19, 2025-01-14, NULL, 2000.0, 2000.0, 2024, NULL, 4, quarterly, 20244, 0, 20244, 20244, 1
+1079, 26, 26, 2025-01-02, NULL, 6250.0, 6250.0, 2024, NULL, 4, quarterly, 20244, 0, 20244, 20244, 1
+1080, 27, 27, 2025-01-13, 61703.1, 155.1, 155.1, 2024, NULL, 4, quarterly, 20244, 0, 20244, 20244, 1
+-- VIEW: v_quarterly_periods
+client_id, contract_id, year, quarter, period_key
+5, 5, 2019, 3, 20193
+5, 5, 2019, 4, 20194
+5, 5, 2020, 1, 20201
+18, 18, 2022, 3, 20223
+18, 18, 2022, 4, 20224
+18, 18, 2023, 1, 20231
+29, 35, 2024, 2, 20242
+29, 35, 2024, 3, 20243
+29, 35, 2024, 4, 20244

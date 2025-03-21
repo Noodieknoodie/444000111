@@ -1,4 +1,4 @@
-
+# README_LLM.md
 
 # 401(k) Payment Management System: Technical Implementation Guide
 
@@ -486,3 +486,51 @@ File path handling is tested through:
 
 This design allows developers to work on and test file handling functionality regardless of their location or access to the production OneDrive structure, while ensuring consistent behavior when deployed to production.​​​​​​​​​​​​​​​​
 
+
+# Testing Strategy
+ 
+## Test Database
+
+The application uses a dedicated test database that is a copy of the production database:
+
+```
+backend/data/401k_payments_test.db
+```
+
+This test database provides several advantages:
+- Contains real-world data with all edge cases
+- Allows destructive testing without affecting production data
+- Maintains consistent test scenarios across development environments
+
+## Configuration
+
+The test configuration automatically selects the test database when running in test mode:
+
+```yaml
+database:
+  office: C:/Users/{username}/Hohimer Wealth Management/.../401k_payments_66.db
+  home: backend/data/401k_payments_66.db
+  test: backend/data/401k_payments_test.db
+```
+
+## Test Database Maintenance
+
+Before major test runs, refresh the test database:
+
+```bash
+# Update test database with latest schema and anonymized data
+cp backend/data/401k_payments_66.db backend/data/401k_payments_test.db
+```
+
+## Integration with Test Suite
+
+Tests automatically use the test database through the configuration system:
+
+```python
+# Tests will use this helper function
+def get_test_db_connection():
+    """Returns a connection to the test database"""
+    return sqlite3.connect("backend/data/401k_payments_test.db")
+```
+
+This approach ensures tests run against realistic data while protecting the production database from test operations.
