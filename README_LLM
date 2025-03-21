@@ -1,4 +1,4 @@
-Hello Thor,
+
 
 # 401(k) Payment Management System: Technical Implementation Guide
 
@@ -429,4 +429,60 @@ def backup_database():
 ## Initial Application View
 - Application launches directly to Payments screen
 - No client selection is preserved between sessions
+
+
+
+# Testing File Path Management
+
+## Challenge & Solution
+
+The 401(k) Payment Management System relies on accessing files in specific OneDrive locations, which presents challenges when developing or testing outside the work environment. To address this, we implement a configurable file path resolution system that works seamlessly across environments.
+
+## Implementation Approach
+
+The system implements a `FilePathManager` class that:
+
+- Detects whether the application is running in production or development environment
+- Uses environment-appropriate base paths from configuration
+- Constructs consistent client-specific file paths in either environment
+- Provides methods to build and resolve paths for documents
+
+## Testing Configuration
+
+The application includes test-specific path configurations in the YAML config that define:
+
+- Production OneDrive paths (with username placeholders)
+- Development/testing paths pointing to local mock directories
+
+## Environment Integration
+
+During development and testing, the system uses a local directory structure that mimics the production OneDrive organization:
+
+```
+/test_data
+  /mock_onedrive
+    /Client1_Name
+      /Consulting Fee
+        /2024
+    /Client2_Name
+      /Consulting Fee
+        /2024
+```
+
+## Testing Strategy
+
+File path handling is tested through:
+
+1. **Unit tests** that verify path construction logic
+2. **Integration tests** that confirm file operations work correctly
+
+## Benefits of This Approach
+
+1. **Environment Agnostic**: The same code works in both development and production
+2. **Automatic Detection**: The system can auto-detect which environment it's running in
+3. **Testable**: File operations can be thoroughly tested without access to OneDrive
+4. **Consistent Structure**: Ensures files are organized the same way across environments
+5. **Configuration-Driven**: Path structures can be adjusted through configuration
+
+This design allows developers to work on and test file handling functionality regardless of their location or access to the production OneDrive structure, while ensuring consistent behavior when deployed to production.​​​​​​​​​​​​​​​​
 
