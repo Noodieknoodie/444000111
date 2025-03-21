@@ -7,6 +7,8 @@ import uvicorn
 import asyncio
 from fastapi_utils.tasks import repeat_every
 from datetime import datetime
+from backend.api import clients_router, payments_router, contracts_router, files_router, contacts_router
+from backend.database import get_db_connection, backup_database
 
 # Setup logging
 logging.basicConfig(
@@ -37,17 +39,11 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Import database connection
-from backend.database import get_db_connection, backup_database
-
-# Create API router imports here
-# from backend.api import clients, payments, contracts, files
-
-# Include API routers here
-# app.include_router(clients.router, prefix="/api/clients", tags=["clients"])
-# app.include_router(payments.router, prefix="/api/payments", tags=["payments"])
-# app.include_router(contracts.router, prefix="/api/contracts", tags=["contracts"])
-# app.include_router(files.router, prefix="/api/files", tags=["files"])
+app.include_router(clients_router, prefix="/api/clients", tags=["clients"])
+app.include_router(payments_router, prefix="/api/payments", tags=["payments"])
+app.include_router(contracts_router, prefix="/api/contracts", tags=["contracts"])
+app.include_router(files_router, prefix="/api/files", tags=["files"])
+app.include_router(contacts_router, prefix="/api/contacts", tags=["contacts"])
 
 @app.on_event("startup")
 async def startup_event():
