@@ -1,4 +1,5 @@
 Cheat Sheet: Modern SQLite & FastAPI App Development
+Database is located in backend/data/401k_payments_master.db
 SQLite Data Types & Time Handling
 Dynamic Typing (Type Affinity): SQLite doesn’t enforce column types rigidly. The declared type of a column is just a preference (affinity) – any column can store any type of value​
 . For example, there’s no dedicated BOOLEAN type; use integer 0/1 (SQLite treats TRUE/FALSE as 1/0)​
