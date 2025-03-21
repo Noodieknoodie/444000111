@@ -1,0 +1,22 @@
+[TABLES]
+contacts: contact_id(pk), client_id(nn)(fk:clients,cascade), contact_type(nn), contact_name, phone, email, fax, physical_address, mailing_address, valid_from(def:CURRENT_TIMESTAMP), valid_to
+clients: client_id(pk), display_name(nn), full_name, ima_signed_date, onedrive_folder_path, valid_from(def:CURRENT_TIMESTAMP), valid_to
+client_files: file_id(pk), client_id(nn)(fk:clients,cascade), file_name(nn), onedrive_path(nn), uploaded_at(def:CURRENT_TIMESTAMP)
+payment_files: payment_id(pk)(fk:payments,cascade), file_id(pk)(fk:client_files,cascade), linked_at(def:CURRENT_TIMESTAMP) UNIQUE(payment_id,file_id)
+contracts: contract_id(pk), client_id(nn)(fk:clients,cascade), contract_number, provider_name, contract_start_date, fee_type, percent_rate, flat_rate, payment_schedule, num_people, valid_from(def:CURRENT_TIMESTAMP), valid_to, is_active(nn)(def:1)
+payments: payment_id(pk), contract_id(nn)(fk:contracts,cascade), client_id(nn)(fk:clients,cascade), received_date, total_assets, actual_fee, method, notes, valid_from(def:CURRENT_TIMESTAMP), valid_to, applied_start_month, applied_start_month_year, applied_end_month, applied_end_month_year, applied_start_quarter, applied_start_quarter_year, applied_end_quarter, applied_end_quarter_year
+period_reference: reference_date(pk)(unique), current_month_year, current_month, current_quarter_year, current_quarter
+[VIEWS]
+distributed_payments: payments JOIN month_numbers JOIN quarter_numbers
+[TRIGGERS]
+[INDEXES]
+payments(received_date)
+payments(client_id, received_date)
+payment_files(payment_id)
+payments(valid_to)
+[RELATIONSHIPS]
+contacts → clients
+client_files → clients
+payment_files → client_files, payments
+contracts → clients
+payments → contracts, clients

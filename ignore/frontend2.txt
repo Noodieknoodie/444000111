@@ -1,0 +1,98 @@
+# FRONT END SHIT 
+
+# Add Payment / Edit Payment Section/Form 
+Received Date *
+-- mm/dd/yyyy
+Applied Period *
+> Multi-period (untoggled)
+>> Select period
+-- Dropdown options, in period format. from client's inception period to one prior to today's (areers!), sorted recent first. (ie. Q1 2025, Q4 2024... or Dec 2024 Nov 2024...) 
+> Multi-period (toggled)
+>> Select periods
+-- Two Dropdowns replace the single option, "Start" and "End" in period format. from client's inception period to one prior to today's (areers!), sorted recent first. (ie. Q1 2025, Q4 2024... or Dec 2024 Nov 2024...) End period cant come before first. 
+Payment Amount *
+-- ($)
+Assets Under Management: 
+-- ($)
+Payment Type:
+-- Dropdown: Auto-ACH, Check, Wire, Invoice
+Check Number: 
+-- number/text
+Expected Fee (calculated)
+-- ($) (FOR PERCENT FEE TYPES: live calculation as Assets Under Management is entered on this form. AUM x Rate. FOR FIXED FEE TYPES: Always the fixed rate)
+Attacchment:
+-- Upload Action
+Notes:
+-- (text field)
+** Add Payment-- Button
+// TODO: create "clear"  button / action 
+// TODO: create "cancle edit" button / action 
+# Client Details Section:
+-- (Full Name) 
+-- xxx participants 
+-- Since (month day, year)
+## Fee Structure
+-- Fee Type (% Percentage or $ Flat)
+-- Annual Rate / Fee (%) or ($) *
+-- Schedule (monthly / quarterly)
+-- (Schedule) (% rate or $ fee) (ie. Monthly 0.5645%)
+## Last Payment
+-- (Period) 
+-- Received (mm/dd/yyyy)
+-- Expected ($)
+-- Actual ($)
+-- Variance (%) and (%)*
+## Last AUM 
+-- ($) 
+-- as of (mm/dd/yyyy)
+## Current Period
+-- (MON YEAR or QX YEAR)
+-- (Paid/Pending)
+# Payment History Section:
+Received Date
+-- mm/dd/yyyy
+Period
+-- Period format (Month YYYY or QX YYYY)
+AUM
+-- ($)
+Expected Fee
+-- ($)
+Actual Fee
+-- ($)
+Variance
+-- ($) and (%)
+Actions
+-- Edit (icon)
+-- Delete (icon)
+-- View Document (icon, enabled only when document exists)
+Pagination
+-- "Showing X to Y of Z payments" text
+-- Previous button
+-- Next button
+Empty State
+-- "No payment history available" message
+# Client Sidebar Section:
+View Mode Toggle
+-- Clients/Providers switch
+Search Field
+-- Search clients/providers text input
+## Clients View (when toggle is set to "Clients"):
+Client List Items (for each client):
+-- Client Name
+-- Provider Name
+-- Participants count
+## Providers View (when toggle is set to "Providers"):
+Provider List Items (for each provider):
+-- Provider Name
+-- Client count
+-- Total AUM
+Provider Expansion (when provider is clicked):
+-- Client List under Provider
+-- Client Name
+-- Participants count
+Empty States:
+-- "No clients found" (when search returns no clients)
+-- "No providers found" (when search returns no providers)
+# Top Nav bar 
+-- Payments (current)
+-- Summary, Manage Clients, Export (all under construction)

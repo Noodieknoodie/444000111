@@ -1,0 +1,27 @@
+---
+description: 
+globs: *.py
+alwaysApply: false
+---
+---
+description: Core Python reqs to ensure clean, maintainable code organization and structure
+globs: *.py
+alwaysApply: false
+---
+# Python Code Organization Best Practices
+
+1. MODULE STRUCTURE: Organize code into modules with clear responsibilities. Break files larger than 400 lines into smaller modules.
+
+2. IMPORTS: Structure imports as: standard library, third-party packages, local modules. Use absolute imports over relative imports.
+
+3. AVOID CIRCULAR IMPORTS: Never create circular dependencies. Extract shared functionality to dedicated utility modules.
+
+4. CONSTANTS: Place repeated values (month names, status codes, error messages) in a dedicated constants.py file.
+
+5. ERROR HANDLING: Use specific exceptions rather than general try/except blocks. Include informative error messages.
+
+6. FUNCTION SIZE: Keep functions under 30 lines. Each function should have a single responsibility.
+
+7. TYPE HINTS: Use type annotations for function parameters and return values to improve readability and enable static type checking.
+
+8. DOCSTRINGS: Include docstrings for all public functions, classes, and modules following a consistent format.

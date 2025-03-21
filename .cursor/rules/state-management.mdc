@@ -1,0 +1,22 @@
+---
+description: managing application state in frontend applications
+globs: /store//.js, /store//.ts, /context//.js, /context//.ts
+alwaysApply: false
+---
+# State Management Best Practices
+
+1. CENTRALIZATION: Maintain a single source of truth for application-wide state.
+
+2. GRANULARITY: Split state into logical domains rather than one massive state object.
+
+3. IMMUTABILITY: Always update state immutably, never modify state objects directly.
+
+4. ACTION PATTERNS: Use consistent patterns for state changes (actions, reducers, etc.) depending on your library.
+
+5. SELECTORS: Create selector functions to access derived state rather than calculating derived data in components.
+
+6. LOCAL VS. GLOBAL: Keep state as local as possible. Only elevate to global state when truly needed by multiple components.
+
+7. PERSISTENCE: Implement clear strategies for state persistence (local storage, cookies) when needed.
+
+8. CACHING: Define explicit caching and invalidation strategies for remote data.

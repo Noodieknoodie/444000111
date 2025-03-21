@@ -1,0 +1,595 @@
+================================================================================
+             401K PAYMENT SYSTEM - DATABASE AUDIT REPORT
+================================================================================
+Generated: 2025-03-20 13:42:23
+Database: C:\CODING\OK_401K\backend\data\401k_payments.db
+================================================================================
+
+SUMMARY OF FINDINGS
+--------------------------------------------------------------------------------
+Total Clients Analyzed: 29
+Clients with Schedule Mismatches: 2
+Clients with Fee Structure Mismatches: 3
+Clients with Missing Payments: 14
+Total Missing Payments: 85
+Clients with Makeup Payments: 1
+
+================================================================================
+
+DETAILED FINDINGS BY CLIENT
+================================================================================
+
+CLIENT: Amplero (ID: 3)
+Provider: Voya (Contract ID: 3)
+--------------------------------------------------------------------------------
+Payment History: 62 payments from 2019-07-01 to 2024-07-31
+
+PAYMENT SCHEDULE ANALYSIS:
+  Inferred Schedule: Monthly (confidence: 0.93)
+  Average Gap: 30.4 days
+  Gap Analysis: {0: 1, 1: 60} (in months)
+  Database Setting: Monthly
+
+FEE STRUCTURE ANALYSIS:
+  Inferred Structure: Likely Percentage (confidence: 0.70)
+  Consistency: Medium (CV: 0.1681)
+  Inferred Rate: 0.0367%
+  Database Setting: Flat
+  Database Amount: $666.66
+  ** MISMATCH DETECTED: Data suggests Likely Percentage, database says Flat
+
+MISSING PAYMENT ANALYSIS:
+  Potential Missing Payments: 8
+  Missing Dates: 2019-11-01, 2021-02-01, 2021-11-01, 2022-08-01, 2023-01-01 (plus 3 more)
+
+CLIENT: Harper Engineering (ID: 13)
+Provider: Fidelity (Contract ID: 13)
+--------------------------------------------------------------------------------
+Payment History: 22 payments from 2019-06-06 to 2024-10-16
+
+PAYMENT SCHEDULE ANALYSIS:
+  Inferred Schedule: Quarterly (confidence: 0.57)
+  Average Gap: 93.3 days
+  Gap Analysis: {5: 1, 2: 1, 3: 18, 4: 1} (in months)
+  Database Setting: Monthly
+  ** MISMATCH DETECTED: Data suggests Quarterly, database says Monthly
+
+FEE STRUCTURE ANALYSIS:
+  Inferred Structure: Variable (insufficient data for determination)
+
+MISSING PAYMENT ANALYSIS:
+  Potential Missing Payments: 21
+  Missing Dates: 2019-09-06, 2019-12-06, 2020-03-06, 2020-06-06, 2020-09-06 (plus 16 more)
+
+CLIENT: Three Sigma (ID: 23)
+Provider: John Hancock (Contract ID: 23)
+--------------------------------------------------------------------------------
+Payment History: 50 payments from 2021-02-16 to 2025-02-07
+
+PAYMENT SCHEDULE ANALYSIS:
+  Inferred Schedule: Monthly (confidence: 0.65)
+  Average Gap: 29.6 days
+  Gap Analysis: {1: 46, 2: 1, 0: 2} (in months)
+  Database Setting: Monthly
+
+FEE STRUCTURE ANALYSIS:
+  Inferred Structure: Likely Flat (confidence: 0.60)
+  Consistency: Medium (CV: 0.2047)
+  Inferred Amount: $628.67
+  Database Setting: Percentage
+  Database Rate: 0.0417%
+  ** MISMATCH DETECTED: Data suggests Likely Flat, database says Percentage
+
+MISSING PAYMENT ANALYSIS:
+  Potential Missing Payments: 1
+  Missing Dates: 2022-11-16
+
+CLIENT: United Way (ID: 25)
+Provider: Principal (Contract ID: 25)
+--------------------------------------------------------------------------------
+Payment History: 7 payments from 2023-05-15 to 2024-10-14
+
+PAYMENT SCHEDULE ANALYSIS:
+  Inferred Schedule: Quarterly (confidence: 0.67)
+  Average Gap: 86.3 days
+  Gap Analysis: {2: 1, 3: 5} (in months)
+  Database Setting: Monthly
+  ** MISMATCH DETECTED: Data suggests Quarterly, database says Monthly
+
+FEE STRUCTURE ANALYSIS:
+  Inferred Structure: Flat (confidence: 0.90)
+  Consistency: High (CV: 0.0357)
+  Inferred Amount: $5,401.51
+  Database Setting: Percentage
+  Database Rate: 0.0300%
+  ** MISMATCH DETECTED: Data suggests Flat, database says Percentage
+
+MISSING PAYMENT ANALYSIS:
+  Potential Missing Payments: 5
+  Missing Dates: 2023-08-15, 2023-11-15, 2024-02-15, 2024-05-15, 2024-08-15
+
+CLIENT: AirSea America (ID: 1)
+Provider: John Hancock (Contract ID: 1)
+--------------------------------------------------------------------------------
+Payment History: 72 payments from 2019-05-03 to 2025-02-07
+
+PAYMENT SCHEDULE ANALYSIS:
+  Inferred Schedule: Monthly (confidence: 0.68)
+  Average Gap: 29.7 days
+  Gap Analysis: {1: 67, 0: 3, 2: 1} (in months)
+  Database Setting: Monthly
+
+FEE STRUCTURE ANALYSIS:
+  Inferred Structure: Percentage (confidence: 0.90)
+  Consistency: High (CV: 0.0000)
+  Inferred Rate: 0.0664%
+  Database Setting: Percentage
+  Database Rate: 0.0700%
+
+MISSING PAYMENT ANALYSIS:
+  Potential Missing Payments: 11
+  Missing Dates: 2020-02-03, 2020-06-03, 2020-08-03, 2021-01-03, 2022-01-03 (plus 6 more)
+
+CLIENT: Auction Edge (ID: 4)
+Provider: John Hancock (Contract ID: 31)
+--------------------------------------------------------------------------------
+Payment History: 9 payments from 2023-06-09 to 2024-10-23
+
+PAYMENT SCHEDULE ANALYSIS:
+  Inferred Schedule: Quarterly (confidence: 0.62)
+  Average Gap: 62.8 days
+  Gap Analysis: {0: 2, 2: 1, 3: 5} (in months)
+  Database Setting: Quarterly
+
+FEE STRUCTURE ANALYSIS:
+  Inferred Structure: Variable (insufficient data for determination)
+
+MISSING PAYMENT ANALYSIS:
+  Potential Missing Payments: 5
+  Missing Dates: 2023-09-09, 2023-12-09, 2024-03-09, 2024-06-09, 2024-09-09
+
+CLIENT: Bellmont Cabinets (ID: 6)
+Provider: John Hancock (Contract ID: 6)
+--------------------------------------------------------------------------------
+Payment History: 33 payments from 2022-07-15 to 2025-02-07
+
+PAYMENT SCHEDULE ANALYSIS:
+  Inferred Schedule: Monthly (confidence: 0.56)
+  Average Gap: 29.3 days
+  Gap Analysis: {1: 29, 2: 1, 0: 2} (in months)
+  Database Setting: Monthly
+
+FEE STRUCTURE ANALYSIS:
+  Inferred Structure: Percentage (confidence: 0.90)
+  Consistency: High (CV: 0.0001)
+  Inferred Rate: 0.0125%
+  Database Setting: Percentage
+  Database Rate: 0.0125%
+
+MISSING PAYMENT ANALYSIS:
+  Potential Missing Payments: 1
+  Missing Dates: 2022-11-15
+
+CLIENT: Floform (ID: 11)
+Provider: John Hancock (Contract ID: 11)
+--------------------------------------------------------------------------------
+Payment History: 34 payments from 2022-06-16 to 2025-02-07
+
+PAYMENT SCHEDULE ANALYSIS:
+  Inferred Schedule: Monthly (confidence: 0.58)
+  Average Gap: 29.3 days
+  Gap Analysis: {1: 30, 2: 1, 0: 2} (in months)
+  Database Setting: Monthly
+
+FEE STRUCTURE ANALYSIS:
+  Inferred Structure: Percentage (confidence: 0.90)
+  Consistency: High (CV: 0.0009)
+  Inferred Rate: 0.0208%
+  Database Setting: Percentage
+  Database Rate: 0.0208%
+
+MISSING PAYMENT ANALYSIS:
+  Potential Missing Payments: 1
+  Missing Dates: 2022-11-16
+
+CLIENT: Hansen Bros (ID: 12)
+Provider: Ascensus Trust Company (Contract ID: 12)
+--------------------------------------------------------------------------------
+Payment History: 23 payments from 2019-07-11 to 2024-10-16
+
+PAYMENT SCHEDULE ANALYSIS:
+  Inferred Schedule: Quarterly (confidence: 0.75)
+  Average Gap: 87.5 days
+  Gap Analysis: {3: 18, 1: 1, 2: 1, 0: 1, 6: 1} (in months)
+  Database Setting: Quarterly
+
+FEE STRUCTURE ANALYSIS:
+  Inferred Structure: Variable (insufficient data for determination)
+
+MISSING PAYMENT ANALYSIS:
+  Potential Missing Payments: 1
+  Missing Dates: 2023-01-11
+
+CLIENT: Lavle USA (ID: 15)
+Provider: Transamerica (Contract ID: 15)
+--------------------------------------------------------------------------------
+Payment History: 66 payments from 2019-06-04 to 2024-11-18
+
+PAYMENT SCHEDULE ANALYSIS:
+  Inferred Schedule: Monthly (confidence: 0.88)
+  Average Gap: 30.7 days
+  Gap Analysis: {1: 63, 2: 1, 0: 1} (in months)
+  Database Setting: Monthly
+
+FEE STRUCTURE ANALYSIS:
+  Inferred Structure: Percentage (confidence: 0.90)
+  Consistency: High (CV: 0.0038)
+  Inferred Rate: 0.0417%
+  Database Setting: Percentage
+  Database Rate: 0.0417%
+
+MISSING PAYMENT ANALYSIS:
+  Potential Missing Payments: 1
+  Missing Dates: 2021-01-04
+
+POTENTIAL MAKEUP PAYMENTS:
+  2021-01-28: $270.94 (2.1x avg) - may cover: 2021-01-04
+  2021-02-08: $279.95 (2.1x avg) - may cover: 2021-01-04
+
+CLIENT: Lynnwood Honda (ID: 16)
+Provider: Empower (Contract ID: 33)
+--------------------------------------------------------------------------------
+Payment History: 15 payments from 2021-04-04 to 2024-10-21
+
+PAYMENT SCHEDULE ANALYSIS:
+  Inferred Schedule: Quarterly (confidence: 0.86)
+  Average Gap: 92.6 days
+  Gap Analysis: {3: 14} (in months)
+  Database Setting: Quarterly
+
+FEE STRUCTURE ANALYSIS:
+  Inferred Structure: Flat (confidence: 0.90)
+  Consistency: High (CV: 0.0000)
+  Inferred Amount: $3,500.00
+  Database Setting: Flat
+  Database Amount: $3,500.00
+
+MISSING PAYMENT ANALYSIS:
+  Potential Missing Payments: 8
+  Missing Dates: 2023-01-04, 2023-04-04, 2023-07-04, 2023-10-04, 2024-01-04 (plus 3 more)
+
+CLIENT: Mobile Focused (ID: 21)
+Provider: John Hancock (Contract ID: 21)
+--------------------------------------------------------------------------------
+Payment History: 44 payments from 2021-08-16 to 2025-02-07
+
+PAYMENT SCHEDULE ANALYSIS:
+  Inferred Schedule: Monthly (confidence: 0.59)
+  Average Gap: 29.6 days
+  Gap Analysis: {1: 38, 0: 3, 2: 2} (in months)
+  Database Setting: Monthly
+
+FEE STRUCTURE ANALYSIS:
+  Inferred Structure: Percentage (confidence: 0.90)
+  Consistency: High (CV: 0.0005)
+  Inferred Rate: 0.0829%
+  Database Setting: Percentage
+  Database Rate: 0.0833%
+
+MISSING PAYMENT ANALYSIS:
+  Potential Missing Payments: 2
+  Missing Dates: 2022-11-16, 2023-01-16
+
+CLIENT: PSWM Inc (ID: 22)
+Provider: Voya (Contract ID: 22)
+--------------------------------------------------------------------------------
+Payment History: 61 payments from 2019-07-10 to 2024-07-31
+
+PAYMENT SCHEDULE ANALYSIS:
+  Inferred Schedule: Monthly (confidence: 0.97)
+  Average Gap: 30.8 days
+  Gap Analysis: {1: 60} (in months)
+  Database Setting: Monthly
+
+FEE STRUCTURE ANALYSIS:
+  Inferred Structure: Percentage (confidence: 0.90)
+  Consistency: High (CV: 0.0075)
+  Inferred Rate: 0.0418%
+  Database Setting: Percentage
+  Database Rate: 12.50%
+
+MISSING PAYMENT ANALYSIS:
+  Potential Missing Payments: 2
+  Missing Dates: 2020-05-10, 2024-07-10
+
+CLIENT: Urban Renaissance (ID: 26)
+Provider: John Hancock (Contract ID: 26)
+--------------------------------------------------------------------------------
+Payment History: 26 payments from 2019-05-03 to 2025-01-02
+
+PAYMENT SCHEDULE ANALYSIS:
+  Inferred Schedule: Quarterly (confidence: 0.36)
+  Average Gap: 82.8 days
+  Gap Analysis: {1: 8, 0: 1, 3: 13, 4: 1, 2: 1, 15: 1} (in months)
+  Database Setting: Quarterly
+
+FEE STRUCTURE ANALYSIS:
+  Inferred Structure: Variable (insufficient data for determination)
+
+MISSING PAYMENT ANALYSIS:
+  Potential Missing Payments: 18
+  Missing Dates: 2020-05-03, 2020-08-03, 2021-02-03, 2021-05-03, 2021-08-03 (plus 13 more)
+
+CLIENT: BDR Interactive (ID: 5)
+Provider: Ascensus Trust Company (Contract ID: 5)
+--------------------------------------------------------------------------------
+Payment History: 23 payments from 2019-10-14 to 2025-01-14
+
+PAYMENT SCHEDULE ANALYSIS:
+  Inferred Schedule: Quarterly (confidence: 0.86)
+  Average Gap: 87.2 days
+  Gap Analysis: {3: 21, 0: 1} (in months)
+  Database Setting: Quarterly
+
+FEE STRUCTURE ANALYSIS:
+  Inferred Structure: Variable (insufficient data for determination)
+
+MISSING PAYMENT ANALYSIS:
+  No missing payments detected
+
+CLIENT: Bumgardner Architects (ABC) (ID: 2)
+Provider: Voya (Contract ID: 2)
+--------------------------------------------------------------------------------
+Payment History: 59 payments from 2019-09-16 to 2024-07-31
+
+PAYMENT SCHEDULE ANALYSIS:
+  Inferred Schedule: Monthly (confidence: 0.93)
+  Average Gap: 30.7 days
+  Gap Analysis: {1: 58} (in months)
+  Database Setting: Monthly
+
+FEE STRUCTURE ANALYSIS:
+  Inferred Structure: Percentage (confidence: 0.90)
+  Consistency: High (CV: 0.0000)
+  Inferred Rate: 0.0417%
+  Database Setting: Percentage
+  Database Rate: 0.0416%
+
+MISSING PAYMENT ANALYSIS:
+  No missing payments detected
+
+CLIENT: CG Engineering (ID: 9)
+Provider: Direct from CG Engineering (Contract ID: 9)
+--------------------------------------------------------------------------------
+Payment History: 19 payments from 2019-06-01 to 2024-05-20
+
+PAYMENT SCHEDULE ANALYSIS:
+  Inferred Schedule: Irregular (insufficient data for determination)
+
+FEE STRUCTURE ANALYSIS:
+  Inferred Structure: Variable (insufficient data for determination)
+
+MISSING PAYMENT ANALYSIS:
+  Cannot determine missing payments (schedule unclear)
+
+CLIENT: Corina Bakery (ID: 7)
+Provider: Voya (Contract ID: 32)
+--------------------------------------------------------------------------------
+Payment History: 36 payments from 2021-08-23 to 2024-07-31
+
+PAYMENT SCHEDULE ANALYSIS:
+  Inferred Schedule: Monthly (confidence: 0.97)
+  Average Gap: 30.7 days
+  Gap Analysis: {1: 35} (in months)
+  Database Setting: Monthly
+
+FEE STRUCTURE ANALYSIS:
+  Inferred Structure: Variable (insufficient data for determination)
+
+MISSING PAYMENT ANALYSIS:
+  No missing payments detected
+
+CLIENT: Dakota Creek (ID: 8)
+Provider: Ascensus (Contract ID: 8)
+--------------------------------------------------------------------------------
+Payment History: 5 payments from 2024-01-17 to 2025-01-14
+
+PAYMENT SCHEDULE ANALYSIS:
+  Inferred Schedule: Quarterly (confidence: 0.75)
+  Average Gap: 90.8 days
+  Gap Analysis: {3: 4} (in months)
+  Database Setting: Quarterly
+
+FEE STRUCTURE ANALYSIS:
+  Inferred Structure: Variable (insufficient data for determination)
+
+MISSING PAYMENT ANALYSIS:
+  No missing payments detected
+
+CLIENT: Fast Water Heater (ID: 10)
+Provider: Empower (Contract ID: 10)
+--------------------------------------------------------------------------------
+Payment History: 59 payments from 2020-03-20 to 2025-01-15
+
+PAYMENT SCHEDULE ANALYSIS:
+  Inferred Schedule: Monthly (confidence: 0.95)
+  Average Gap: 30.4 days
+  Gap Analysis: {1: 58} (in months)
+  Database Setting: Monthly
+
+FEE STRUCTURE ANALYSIS:
+  Inferred Structure: Percentage (confidence: 0.90)
+  Consistency: High (CV: 0.0055)
+  Inferred Rate: 0.0666%
+  Database Setting: Percentage
+  Database Rate: 0.0667%
+
+MISSING PAYMENT ANALYSIS:
+  No missing payments detected
+
+CLIENT: Hos Bros (ID: 14)
+Provider: Fidelity (Contract ID: 14)
+--------------------------------------------------------------------------------
+Payment History: 22 payments from 2019-07-09 to 2024-10-16
+
+PAYMENT SCHEDULE ANALYSIS:
+  Inferred Schedule: Quarterly (confidence: 0.62)
+  Average Gap: 91.7 days
+  Gap Analysis: {3: 21} (in months)
+  Database Setting: Quarterly
+
+FEE STRUCTURE ANALYSIS:
+  Inferred Structure: Likely Flat (confidence: 0.70)
+  Consistency: Medium (CV: 0.0722)
+  Inferred Amount: $3,693.18
+  Database Setting: Flat
+  Database Amount: $3,750.00
+
+MISSING PAYMENT ANALYSIS:
+  No missing payments detected
+
+CLIENT: Marten Law (ID: 18)
+Provider: Fidelity (Contract ID: 18)
+--------------------------------------------------------------------------------
+Payment History: 22 payments from 2019-07-09 to 2024-10-16
+
+PAYMENT SCHEDULE ANALYSIS:
+  Inferred Schedule: Quarterly (confidence: 0.67)
+  Average Gap: 91.7 days
+  Gap Analysis: {3: 21} (in months)
+  Database Setting: Quarterly
+
+FEE STRUCTURE ANALYSIS:
+  Inferred Structure: Likely Flat (confidence: 0.70)
+  Consistency: Medium (CV: 0.1299)
+  Inferred Amount: $2,518.93
+  Database Setting: Flat
+  Database Amount: $2,499.99
+
+MISSING PAYMENT ANALYSIS:
+  No missing payments detected
+
+CLIENT: MoxiWorks (ID: 20)
+Provider: Hunnex & Shoemaker (Contract ID: 20)
+--------------------------------------------------------------------------------
+Payment History: 20 payments from 2020-02-13 to 2024-11-11
+
+PAYMENT SCHEDULE ANALYSIS:
+  Inferred Schedule: Irregular (insufficient data for determination)
+
+FEE STRUCTURE ANALYSIS:
+  Inferred Structure: Variable (insufficient data for determination)
+
+MISSING PAYMENT ANALYSIS:
+  Cannot determine missing payments (schedule unclear)
+
+CLIENT: Nordic Museum (ID: 17)
+Provider: Capital Group / American Funds (Contract ID: 17)
+--------------------------------------------------------------------------------
+Payment History: 3 payments from 2024-03-11 to 2024-05-20
+
+PAYMENT SCHEDULE ANALYSIS:
+  Inferred Schedule: Irregular (insufficient data for determination)
+
+FEE STRUCTURE ANALYSIS:
+  Inferred Structure: Variable (insufficient data for determination)
+
+MISSING PAYMENT ANALYSIS:
+  Cannot determine missing payments (schedule unclear)
+
+CLIENT: Opportunity Interactive (ID: 19)
+Provider: Ascensus (Contract ID: 19)
+--------------------------------------------------------------------------------
+Payment History: 16 payments from 2021-04-14 to 2025-01-14
+
+PAYMENT SCHEDULE ANALYSIS:
+  Inferred Schedule: Quarterly (confidence: 0.93)
+  Average Gap: 91.4 days
+  Gap Analysis: {3: 15} (in months)
+  Database Setting: Quarterly
+
+FEE STRUCTURE ANALYSIS:
+  Inferred Structure: Flat (confidence: 0.90)
+  Consistency: High (CV: 0.0000)
+  Inferred Amount: $2,000.00
+  Database Setting: Flat
+  Database Amount: $2,000.00
+
+MISSING PAYMENT ANALYSIS:
+  No missing payments detected
+
+CLIENT: Tony's Coffee (ID: 24)
+Provider: Pricipal (Contract ID: 24)
+--------------------------------------------------------------------------------
+Payment History: 6 payments from 2023-07-12 to 2024-10-14
+
+PAYMENT SCHEDULE ANALYSIS:
+  Inferred Schedule: Quarterly (confidence: 0.80)
+  Average Gap: 92.0 days
+  Gap Analysis: {3: 5} (in months)
+  Database Setting: Quarterly
+
+FEE STRUCTURE ANALYSIS:
+  Inferred Structure: Variable (insufficient data for determination)
+
+MISSING PAYMENT ANALYSIS:
+  No missing payments detected
+
+CLIENT: XFire (ID: 27)
+Provider: Capital Group / American Funds (Contract ID: 27)
+--------------------------------------------------------------------------------
+Payment History: 9 payments from 2023-01-26 to 2025-01-13
+
+PAYMENT SCHEDULE ANALYSIS:
+  Inferred Schedule: Quarterly (confidence: 0.88)
+  Average Gap: 89.8 days
+  Gap Analysis: {3: 8} (in months)
+  Database Setting: Quarterly
+
+FEE STRUCTURE ANALYSIS:
+  Inferred Structure: Percentage (confidence: 0.90)
+  Consistency: High (CV: 0.0080)
+  Inferred Rate: 0.2502%
+  Database Setting: Percentage
+  Database Rate: 0.2500%
+
+MISSING PAYMENT ANALYSIS:
+  No missing payments detected
+
+CLIENT: Younker Motors (ID: 28)
+Provider: Empower (Contract ID: 34)
+--------------------------------------------------------------------------------
+Payment History: 56 payments from 2020-06-29 to 2025-01-15
+
+PAYMENT SCHEDULE ANALYSIS:
+  Inferred Schedule: Monthly (confidence: 0.91)
+  Average Gap: 30.2 days
+  Gap Analysis: {1: 55} (in months)
+  Database Setting: Monthly
+
+FEE STRUCTURE ANALYSIS:
+  Inferred Structure: Percentage (confidence: 0.90)
+  Consistency: High (CV: 0.0237)
+  Inferred Rate: 0.0669%
+  Database Setting: Percentage
+  Database Rate: 0.0667%
+
+MISSING PAYMENT ANALYSIS:
+  No missing payments detected
+
+CLIENT: Youth Dynamics (ID: 29)
+Provider: Principal (Contract ID: 35)
+--------------------------------------------------------------------------------
+Payment History: 5 payments from 2023-10-19 to 2024-10-14
+
+PAYMENT SCHEDULE ANALYSIS:
+  Inferred Schedule: Quarterly (confidence: 1.00)
+  Average Gap: 90.2 days
+  Gap Analysis: {3: 4} (in months)
+  Database Setting: Quarterly
+
+FEE STRUCTURE ANALYSIS:
+  Inferred Structure: Variable (insufficient data for determination)
+
+MISSING PAYMENT ANALYSIS:
+  No missing payments detected

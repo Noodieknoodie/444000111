@@ -1,0 +1,27 @@
+---
+description: 
+globs: .jsx, .tsx, /components//.js, /components//.ts
+alwaysApply: false
+---
+---
+description: React-specific best practices focusing on component structure and hooks usage
+globs: .jsx, .tsx, /components//.js, /components//.ts
+alwaysApply: false
+---
+# React Best Practices
+
+1. FUNCTIONAL COMPONENTS: Prefer functional components with hooks over class components.
+
+2. HOOKS ORGANIZATION: Place hooks at the top level of your component. Don't place hooks inside conditionals or loops.
+
+3. DEPENDENCY ARRAYS: Keep dependency arrays complete and accurate in useEffect and other hooks to prevent stale closures.
+
+4. CUSTOM HOOKS: Extract repetitive stateful logic into custom hooks for reuse across components.
+
+5. COMPONENT BREAKDOWN: Create smaller, focused components with clear responsibilities rather than monolithic components.
+
+6. PROP DRILLING: Avoid excessive prop drilling by using Context API or state management libraries for deeply shared state.
+
+7. MEMOIZATION: Use React.memo, useMemo, and useCallback appropriately to prevent unnecessary re-renders.
+
+8. STATE UPDATES: Use functional updates for state that depends on previous state (setState(prev => prev + 1)).

@@ -1,0 +1,638 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="401k_payments_66.db" readonly="0" foreign_keys="0" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="browser query structure" current="0"/></window><tab_structure><column_width id="0" width="300"/><column_width id="1" width="0"/><column_width id="2" width="100"/><column_width id="3" width="25962"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><table title="v_payment_history" custom_title="0" dock_id="1" table="4,17:mainv_payment_history"/><dock_state state="000000ff00000000fd0000000100000002000004010000020cfc0100000001fb000000160064006f0063006b00420072006f00770073006500310100000000000004010000012f00ffffff000002830000000000000004000000040000000800000008fc00000000"/><default_encoding codec=""/><browse_table_settings><table schema="main" name="client_files" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="42"/><column index="2" value="58"/><column index="3" value="300"/><column index="4" value="300"/><column index="5" value="87"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="clients" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="56"/><column index="2" value="223"/><column index="3" value="300"/><column index="4" value="106"/><column index="5" value="131"/><column index="6" value="159"/><column index="7" value="54"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="contacts" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="68"/><column index="2" value="58"/><column index="3" value="87"/><column index="4" value="167"/><column index="5" value="103"/><column index="6" value="287"/><column index="7" value="111"/><column index="8" value="300"/><column index="9" value="300"/><column index="10" value="159"/><column index="11" value="54"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="contracts" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="73"/><column index="2" value="58"/><column index="3" value="107"/><column index="4" value="247"/><column index="5" value="124"/><column index="6" value="87"/><column index="7" value="83"/><column index="8" value="63"/><column index="9" value="116"/><column index="10" value="78"/><column index="11" value="159"/><column index="12" value="54"/><column index="13" value="59"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="period_reference" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="96"/><column index="2" value="127"/><column index="3" value="94"/><column index="4" value="133"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="v_active_contracts" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="73"/><column index="2" value="56"/><column index="3" value="107"/><column index="4" value="247"/><column index="5" value="124"/><column index="6" value="87"/><column index="7" value="83"/><column index="8" value="63"/><column index="9" value="116"/><column index="10" value="78"/><column index="11" value="159"/><column index="12" value="54"/><column index="13" value="59"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="v_all_periods" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="56"/><column index="2" value="73"/><column index="3" value="39"/><column index="4" value="45"/><column index="5" value="51"/><column index="6" value="91"/><column index="7" value="72"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="v_client_details" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="56"/><column index="2" value="223"/><column index="3" value="300"/><column index="4" value="106"/><column index="5" value="300"/><column index="6" value="73"/><column index="7" value="107"/><column index="8" value="247"/><column index="9" value="116"/><column index="10" value="87"/><column index="11" value="83"/><column index="12" value="63"/><column index="13" value="76"/><column index="14" value="102"/><column index="15" value="93"/><column index="16" value="148"/><column index="17" value="135"/><column index="18" value="140"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="v_client_sidebar" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="56"/><column index="2" value="223"/><column index="3" value="45"/><column index="4" value="247"/><column index="5" value="102"/><column index="6" value="158"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="v_current_period" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="96"/><column index="2" value="88"/><column index="3" value="99"/><column index="4" value="94"/><column index="5" value="111"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="v_expected_fees" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="56"/><column index="2" value="73"/><column index="3" value="39"/><column index="4" value="45"/><column index="5" value="51"/><column index="6" value="91"/><column index="7" value="72"/><column index="8" value="87"/><column index="9" value="83"/><column index="10" value="63"/><column index="11" value="168"/><column index="12" value="86"/><column index="13" value="76"/><column index="14" value="135"/><column index="15" value="48"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="v_last_payment" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="76"/><column index="2" value="56"/><column index="3" value="223"/><column index="4" value="157"/><column index="5" value="92"/><column index="6" value="71"/><column index="7" value="86"/><column index="8" value="71"/><column index="9" value="108"/><column index="10" value="137"/><column index="11" value="48"/><column index="12" value="42"/><column index="13" value="64"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="v_missing_payment_periods" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="56"/><column index="2" value="223"/><column index="3" value="1362"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="v_missing_payments" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="56"/><column index="2" value="73"/><column index="3" value="223"/><column index="4" value="39"/><column index="5" value="45"/><column index="6" value="51"/><column index="7" value="91"/><column index="8" value="72"/><column index="9" value="109"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="v_monthly_periods" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort><column index="2" mode="1"/></sort><column_widths><column index="1" value="56"/><column index="2" value="73"/><column index="3" value="39"/><column index="4" value="45"/><column index="5" value="72"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="v_payment_history" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="76"/><column index="2" value="56"/><column index="3" value="223"/><column index="4" value="157"/><column index="5" value="144"/><column index="6" value="137"/><column index="7" value="95"/><column index="8" value="86"/><column index="9" value="71"/><column index="10" value="48"/><column index="11" value="108"/><column index="12" value="137"/><column index="13" value="127"/><column index="14" value="300"/><column index="15" value="42"/><column index="16" value="727"/><column index="17" value="1055"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="v_payment_status" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="56"/><column index="2" value="73"/><column index="3" value="223"/><column index="4" value="116"/><column index="5" value="83"/><column index="6" value="94"/><column index="8" value="121"/><column index="9" value="102"/><column index="10" value="158"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="v_payment_variance" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort/><column_widths><column index="1" value="56"/><column index="2" value="73"/><column index="3" value="39"/><column index="4" value="45"/><column index="5" value="51"/><column index="6" value="91"/><column index="7" value="72"/><column index="8" value="87"/><column index="9" value="83"/><column index="10" value="63"/><column index="11" value="168"/><column index="12" value="86"/><column index="13" value="76"/><column index="14" value="135"/><column index="15" value="48"/><column index="16" value="108"/><column index="17" value="129"/><column index="18" value="137"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="v_quarterly_periods" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_" freeze_columns="0"><sort><column index="2" mode="0"/></sort><column_widths><column index="1" value="56"/><column index="2" value="73"/><column index="3" value="39"/><column index="4" value="51"/><column index="5" value="72"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table></browse_table_settings></tab_browse><tab_sql><sql name="SQL 1*">-- Clear any existing views
+DROP VIEW IF EXISTS v_missing_payment_periods;
+DROP VIEW IF EXISTS v_last_payment;
+DROP VIEW IF EXISTS v_payment_history;
+DROP VIEW IF EXISTS v_client_details;
+DROP VIEW IF EXISTS v_client_sidebar;
+DROP VIEW IF EXISTS v_missing_payments;
+DROP VIEW IF EXISTS v_payment_status;
+DROP VIEW IF EXISTS v_payment_variance;
+DROP VIEW IF EXISTS v_expected_fees;
+DROP VIEW IF EXISTS v_payments_expanded;
+DROP VIEW IF EXISTS v_all_periods;
+DROP VIEW IF EXISTS v_quarterly_periods;
+DROP VIEW IF EXISTS v_monthly_periods;
+DROP VIEW IF EXISTS v_active_contracts;
+DROP VIEW IF EXISTS v_current_period;
+
+-- 1. Current Period Reference
+CREATE VIEW v_current_period AS
+SELECT
+    reference_date,
+    current_month_year AS monthly_year,
+    current_month AS monthly_month,
+    current_quarter_year AS quarterly_year,
+    current_quarter AS quarterly_quarter
+FROM period_reference
+ORDER BY reference_date DESC
+LIMIT 1;
+
+-- 2. Active Contracts
+CREATE VIEW v_active_contracts AS
+SELECT
+    c.*
+FROM contracts c
+WHERE c.valid_to IS NULL
+AND c.is_active = 1;
+
+-- 3. Monthly Period Timeline
+CREATE VIEW v_monthly_periods AS
+WITH 
+client_periods AS (
+    SELECT
+        c.client_id,
+        c.contract_id,
+        MIN(CASE WHEN p.applied_start_month IS NOT NULL 
+            THEN p.applied_start_month_year * 100 + p.applied_start_month 
+            ELSE NULL END) AS first_period,
+        (SELECT cp.monthly_year * 100 + cp.monthly_month FROM v_current_period cp) AS current_period
+    FROM v_active_contracts c
+    LEFT JOIN payments p ON c.client_id = p.client_id AND p.valid_to IS NULL
+    WHERE c.payment_schedule = 'monthly'
+    GROUP BY c.client_id, c.contract_id
+)
+SELECT
+    cp.client_id,
+    cp.contract_id,
+    period / 100 AS year,
+    period % 100 AS month,
+    period AS period_key
+FROM client_periods cp
+JOIN (
+    WITH RECURSIVE months(period) AS (
+        SELECT MIN(first_period) FROM client_periods
+        UNION ALL
+        SELECT 
+            CASE 
+                WHEN period % 100 = 12 THEN (period / 100 + 1) * 100 + 1
+                ELSE period + 1
+            END
+        FROM months
+        WHERE period &lt; (SELECT MAX(current_period) FROM client_periods)
+    )
+    SELECT period FROM months
+) m
+WHERE m.period &gt;= cp.first_period
+AND m.period &lt;= cp.current_period;
+
+-- 4. Quarterly Period Timeline
+CREATE VIEW v_quarterly_periods AS
+WITH 
+client_periods AS (
+    SELECT
+        c.client_id,
+        c.contract_id,
+        MIN(CASE WHEN p.applied_start_quarter IS NOT NULL 
+            THEN p.applied_start_quarter_year * 10 + p.applied_start_quarter 
+            ELSE NULL END) AS first_period,
+        (SELECT cp.quarterly_year * 10 + cp.quarterly_quarter FROM v_current_period cp) AS current_period
+    FROM v_active_contracts c
+    LEFT JOIN payments p ON c.client_id = p.client_id AND p.valid_to IS NULL
+    WHERE c.payment_schedule = 'quarterly'
+    GROUP BY c.client_id, c.contract_id
+)
+SELECT
+    cp.client_id,
+    cp.contract_id,
+    period / 10 AS year,
+    period % 10 AS quarter,
+    period AS period_key
+FROM client_periods cp
+JOIN (
+    WITH RECURSIVE quarters(period) AS (
+        SELECT MIN(first_period) FROM client_periods
+        UNION ALL
+        SELECT 
+            CASE 
+                WHEN period % 10 = 4 THEN (period / 10 + 1) * 10 + 1
+                ELSE period + 1
+            END
+        FROM quarters
+        WHERE period &lt; (SELECT MAX(current_period) FROM client_periods)
+    )
+    SELECT period FROM quarters
+) q
+WHERE q.period &gt;= cp.first_period
+AND q.period &lt;= cp.current_period;
+
+-- 5. Combined Period Timeline
+CREATE VIEW v_all_periods AS
+-- Monthly periods
+SELECT
+    client_id,
+    contract_id,
+    year,
+    month,
+    NULL AS quarter,
+    'monthly' AS schedule_type,
+    period_key
+FROM v_monthly_periods
+
+UNION ALL
+
+-- Quarterly periods
+SELECT
+    client_id,
+    contract_id,
+    year,
+    NULL AS month,
+    quarter,
+    'quarterly' AS schedule_type,
+    period_key
+FROM v_quarterly_periods;
+
+-- 6. Split Payment Expansion
+CREATE VIEW v_payments_expanded AS
+WITH 
+-- Process monthly payments
+monthly_payments AS (
+    SELECT
+        p.payment_id,
+        p.client_id,
+        p.contract_id,
+        p.received_date,
+        p.total_assets,
+        p.actual_fee,
+        p.applied_start_month,
+        p.applied_start_month_year,
+        p.applied_end_month,
+        p.applied_end_month_year,
+        (SELECT COUNT(*) 
+         FROM v_monthly_periods mp 
+         WHERE mp.client_id = p.client_id
+         AND mp.period_key &gt;= (p.applied_start_month_year * 100 + p.applied_start_month)
+         AND mp.period_key &lt;= (p.applied_end_month_year * 100 + p.applied_end_month)
+        ) AS periods_covered,
+        p.applied_start_month_year * 100 + p.applied_start_month AS start_period_key,
+        p.applied_end_month_year * 100 + p.applied_end_month AS end_period_key,
+        'monthly' AS schedule_type,
+        CASE 
+            WHEN (p.applied_start_month_year &lt;&gt; p.applied_end_month_year) OR 
+                 (p.applied_start_month &lt;&gt; p.applied_end_month) THEN 1
+            ELSE 0
+        END AS is_split
+    FROM payments p
+    JOIN v_active_contracts c ON p.contract_id = c.contract_id
+    WHERE p.valid_to IS NULL
+    AND p.applied_start_month IS NOT NULL
+    AND c.payment_schedule = 'monthly'
+),
+-- Process quarterly payments
+quarterly_payments AS (
+    SELECT
+        p.payment_id,
+        p.client_id,
+        p.contract_id,
+        p.received_date,
+        p.total_assets,
+        p.actual_fee,
+        p.applied_start_quarter,
+        p.applied_start_quarter_year,
+        p.applied_end_quarter,
+        p.applied_end_quarter_year,
+        (SELECT COUNT(*) 
+         FROM v_quarterly_periods qp 
+         WHERE qp.client_id = p.client_id
+         AND qp.period_key &gt;= (p.applied_start_quarter_year * 10 + p.applied_start_quarter)
+         AND qp.period_key &lt;= (p.applied_end_quarter_year * 10 + p.applied_end_quarter)
+        ) AS periods_covered,
+        p.applied_start_quarter_year * 10 + p.applied_start_quarter AS start_period_key,
+        p.applied_end_quarter_year * 10 + p.applied_end_quarter AS end_period_key,
+        'quarterly' AS schedule_type,
+        CASE 
+            WHEN (p.applied_start_quarter_year &lt;&gt; p.applied_end_quarter_year) OR 
+                 (p.applied_start_quarter &lt;&gt; p.applied_end_quarter) THEN 1
+            ELSE 0
+        END AS is_split
+    FROM payments p
+    JOIN v_active_contracts c ON p.contract_id = c.contract_id
+    WHERE p.valid_to IS NULL
+    AND p.applied_start_quarter IS NOT NULL
+    AND c.payment_schedule = 'quarterly'
+)
+-- Combine and expand monthly payments to periods
+SELECT
+    p.payment_id,
+    p.client_id,
+    p.contract_id,
+    p.received_date,
+    p.total_assets,
+    CASE 
+        WHEN p.is_split = 1 THEN p.actual_fee / p.periods_covered
+        ELSE p.actual_fee
+    END AS period_fee,
+    p.actual_fee AS total_fee,
+    mp.year,
+    mp.month,
+    NULL AS quarter,
+    p.schedule_type,
+    mp.period_key,
+    p.is_split,
+    p.start_period_key,
+    p.end_period_key,
+    p.periods_covered
+FROM monthly_payments p
+JOIN v_monthly_periods mp ON p.client_id = mp.client_id
+WHERE mp.period_key &gt;= p.start_period_key
+AND mp.period_key &lt;= p.end_period_key
+
+UNION ALL
+
+-- Combine and expand quarterly payments to periods
+SELECT
+    p.payment_id,
+    p.client_id,
+    p.contract_id,
+    p.received_date,
+    p.total_assets,
+    CASE 
+        WHEN p.is_split = 1 THEN p.actual_fee / p.periods_covered
+        ELSE p.actual_fee
+    END AS period_fee,
+    p.actual_fee AS total_fee,
+    qp.year,
+    NULL AS month,
+    qp.quarter,
+    p.schedule_type,
+    qp.period_key,
+    p.is_split,
+    p.start_period_key,
+    p.end_period_key,
+    p.periods_covered
+FROM quarterly_payments p
+JOIN v_quarterly_periods qp ON p.client_id = qp.client_id
+WHERE qp.period_key &gt;= p.start_period_key
+AND qp.period_key &lt;= p.end_period_key;
+
+-- 7. Expected Fee Calculation
+CREATE VIEW v_expected_fees AS
+SELECT
+    a.client_id,
+    a.contract_id,
+    a.year,
+    a.month,
+    a.quarter,
+    a.schedule_type,
+    a.period_key,
+    c.fee_type,
+    c.percent_rate,
+    c.flat_rate,
+    p.total_assets AS assets_under_management,
+    CASE
+        WHEN c.fee_type = 'percentage' AND p.total_assets IS NOT NULL THEN ROUND(p.total_assets * c.percent_rate, 2)
+        WHEN c.fee_type = 'flat' THEN c.flat_rate
+        ELSE NULL
+    END AS expected_fee,
+    p.payment_id,
+    p.period_fee AS actual_fee,
+    p.is_split
+FROM v_all_periods a
+LEFT JOIN v_payments_expanded p ON a.client_id = p.client_id AND a.period_key = p.period_key
+JOIN v_active_contracts c ON a.contract_id = c.contract_id;
+
+-- 8. Payment Variance Analysis
+CREATE VIEW v_payment_variance AS
+SELECT
+    ef.*,
+    CASE 
+        WHEN ef.is_split = 1 THEN NULL  -- Mute variance for split payments
+        WHEN ef.actual_fee IS NULL THEN NULL  -- No payment
+        WHEN ef.expected_fee IS NULL THEN NULL  -- Can't calculate variance
+        ELSE ROUND(ef.actual_fee - ef.expected_fee, 2)
+    END AS variance_amount,
+    CASE 
+        WHEN ef.is_split = 1 THEN NULL  -- Mute variance for split payments
+        WHEN ef.actual_fee IS NULL THEN NULL  -- No payment
+        WHEN ef.expected_fee IS NULL THEN NULL  -- Can't calculate variance
+        WHEN ef.expected_fee = 0 THEN NULL  -- Avoid division by zero
+        ELSE ROUND((ef.actual_fee - ef.expected_fee) / ef.expected_fee * 100, 2)
+    END AS variance_percentage,
+    CASE 
+        WHEN ef.is_split = 1 THEN NULL  -- Mute classification for split payments
+        WHEN ef.actual_fee IS NULL THEN NULL  -- No payment
+        WHEN ef.expected_fee IS NULL THEN NULL  -- Can't calculate
+        WHEN ABS(ef.actual_fee - ef.expected_fee) &lt;= 3 THEN 'Within Target'
+        WHEN ef.actual_fee &gt; ef.expected_fee THEN 'Overpaid'
+        ELSE 'Underpaid'
+    END AS variance_classification
+FROM v_expected_fees ef;
+
+-- 9. Missing Payments Identification
+CREATE VIEW v_missing_payments AS
+SELECT
+    v.client_id,
+    v.contract_id,
+    c.display_name,
+    v.year,
+    v.month,
+    v.quarter,
+    v.schedule_type,
+    v.period_key,
+    CASE
+        WHEN v.schedule_type = 'monthly' THEN 
+            CASE 
+                WHEN v.month = 1 THEN 'Jan'
+                WHEN v.month = 2 THEN 'Feb'
+                WHEN v.month = 3 THEN 'Mar'
+                WHEN v.month = 4 THEN 'Apr'
+                WHEN v.month = 5 THEN 'May'
+                WHEN v.month = 6 THEN 'Jun'
+                WHEN v.month = 7 THEN 'Jul'
+                WHEN v.month = 8 THEN 'Aug'
+                WHEN v.month = 9 THEN 'Sep'
+                WHEN v.month = 10 THEN 'Oct'
+                WHEN v.month = 11 THEN 'Nov'
+                WHEN v.month = 12 THEN 'Dec'
+            END || ' ' || v.year
+        WHEN v.schedule_type = 'quarterly' THEN 
+            'Q' || v.quarter || ' ' || v.year
+    END AS formatted_period
+FROM v_payment_variance v
+JOIN clients c ON v.client_id = c.client_id
+WHERE v.payment_id IS NULL
+AND c.valid_to IS NULL
+ORDER BY v.client_id, v.period_key;
+
+-- 10. Payment Status Determination
+CREATE VIEW v_payment_status AS
+WITH 
+current_period AS (
+    SELECT * FROM v_current_period
+),
+current_payment_status AS (
+    SELECT
+        c.client_id,
+        con.contract_id,  -- Correctly reference contract_id from contracts table
+        c.display_name,
+        con.payment_schedule,
+        CASE
+            WHEN con.payment_schedule = 'monthly' THEN 
+                (SELECT cp.monthly_year FROM current_period cp)
+            ELSE 
+                (SELECT cp.quarterly_year FROM current_period cp)
+        END AS current_year,
+        CASE
+            WHEN con.payment_schedule = 'monthly' THEN 
+                (SELECT cp.monthly_month FROM current_period cp)
+            ELSE 
+                NULL
+        END AS current_month,
+        CASE
+            WHEN con.payment_schedule = 'quarterly' THEN 
+                (SELECT cp.quarterly_quarter FROM current_period cp)
+            ELSE 
+                NULL
+        END AS current_quarter,
+        CASE
+            WHEN con.payment_schedule = 'monthly' THEN 
+                (SELECT cp.monthly_year * 100 + cp.monthly_month FROM current_period cp)
+            ELSE 
+                (SELECT cp.quarterly_year * 10 + cp.quarterly_quarter FROM current_period cp)
+        END AS current_period_key,
+        CASE
+            WHEN EXISTS (
+                SELECT 1 FROM v_payments_expanded p
+                WHERE p.client_id = c.client_id
+                AND (
+                    (con.payment_schedule = 'monthly' AND p.period_key = (SELECT cp.monthly_year * 100 + cp.monthly_month FROM current_period cp)) OR
+                    (con.payment_schedule = 'quarterly' AND p.period_key = (SELECT cp.quarterly_year * 10 + cp.quarterly_quarter FROM current_period cp))
+                )
+            ) THEN 'PAID'
+            ELSE 'UNPAID'
+        END AS payment_status
+    FROM clients c
+    JOIN v_active_contracts con ON c.client_id = con.client_id
+    WHERE c.valid_to IS NULL
+)
+SELECT
+    cps.*,
+    CASE
+        WHEN cps.payment_schedule = 'monthly' THEN 
+            CASE 
+                WHEN cps.current_month = 1 THEN 'Jan'
+                WHEN cps.current_month = 2 THEN 'Feb'
+                WHEN cps.current_month = 3 THEN 'Mar'
+                WHEN cps.current_month = 4 THEN 'Apr'
+                WHEN cps.current_month = 5 THEN 'May'
+                WHEN cps.current_month = 6 THEN 'Jun'
+                WHEN cps.current_month = 7 THEN 'Jul'
+                WHEN cps.current_month = 8 THEN 'Aug'
+                WHEN cps.current_month = 9 THEN 'Sep'
+                WHEN cps.current_month = 10 THEN 'Oct'
+                WHEN cps.current_month = 11 THEN 'Nov'
+                WHEN cps.current_month = 12 THEN 'Dec'
+            END || ' ' || cps.current_year
+        ELSE 
+            'Q' || cps.current_quarter || ' ' || cps.current_year
+    END AS formatted_current_period
+FROM current_payment_status cps;
+
+-- 11. Client Sidebar Information
+CREATE VIEW v_client_sidebar AS
+SELECT
+    c.client_id,
+    c.display_name,
+    SUBSTR(c.display_name, 1, 1) AS initials,
+    con.provider_name,
+    ps.payment_status,
+    ps.formatted_current_period
+FROM clients c
+JOIN v_active_contracts con ON c.client_id = con.client_id
+JOIN v_payment_status ps ON c.client_id = ps.client_id
+WHERE c.valid_to IS NULL
+ORDER BY c.display_name;
+
+-- 12. Comprehensive Client Details
+CREATE VIEW v_client_details AS
+SELECT
+    c.client_id,
+    c.display_name,
+    c.full_name,
+    c.ima_signed_date,
+    (SELECT physical_address FROM contacts WHERE client_id = c.client_id AND contact_type = 'Primary' AND valid_to IS NULL LIMIT 1) AS address,
+    con.contract_id,
+    con.contract_number,
+    con.provider_name,
+    con.payment_schedule,
+    con.fee_type,
+    con.percent_rate,
+    con.flat_rate,
+    con.num_people AS participants,
+    ps.payment_status,
+    ps.formatted_current_period AS current_period,
+    (
+        SELECT COUNT(*)
+        FROM v_missing_payments mp
+        WHERE mp.client_id = c.client_id
+    ) AS missing_payment_count,
+    julianday('now') - julianday(c.ima_signed_date) AS client_days,
+    CASE 
+        WHEN c.ima_signed_date IS NULL THEN NULL
+        ELSE strftime('%m/%d/%Y', c.ima_signed_date) 
+    END AS client_since_formatted
+FROM clients c
+JOIN v_active_contracts con ON c.client_id = con.client_id
+JOIN v_payment_status ps ON c.client_id = ps.client_id
+WHERE c.valid_to IS NULL;
+
+-- 13. Payment History with Attachments
+CREATE VIEW v_payment_history AS
+SELECT
+    p.payment_id,
+    p.client_id,
+    c.display_name,
+    strftime('%m/%d/%Y', p.received_date) AS payment_date_formatted,
+    CASE
+        WHEN p.applied_start_month IS NOT NULL THEN
+            CASE 
+                WHEN p.applied_start_month = 1 THEN 'Jan'
+                WHEN p.applied_start_month = 2 THEN 'Feb'
+                WHEN p.applied_start_month = 3 THEN 'Mar'
+                WHEN p.applied_start_month = 4 THEN 'Apr'
+                WHEN p.applied_start_month = 5 THEN 'May'
+                WHEN p.applied_start_month = 6 THEN 'Jun'
+                WHEN p.applied_start_month = 7 THEN 'Jul'
+                WHEN p.applied_start_month = 8 THEN 'Aug'
+                WHEN p.applied_start_month = 9 THEN 'Sep'
+                WHEN p.applied_start_month = 10 THEN 'Oct'
+                WHEN p.applied_start_month = 11 THEN 'Nov'
+                WHEN p.applied_start_month = 12 THEN 'Dec'
+            END || ' ' || p.applied_start_month_year
+        ELSE 
+            'Q' || p.applied_start_quarter || ' ' || p.applied_start_quarter_year
+    END AS period_start_formatted,
+    CASE
+        WHEN (p.applied_start_month IS NOT NULL AND 
+             (p.applied_start_month != p.applied_end_month OR 
+              p.applied_start_month_year != p.applied_end_month_year)) OR
+             (p.applied_start_quarter IS NOT NULL AND 
+             (p.applied_start_quarter != p.applied_end_quarter OR 
+              p.applied_start_quarter_year != p.applied_end_quarter_year))
+        THEN 
+            CASE
+                WHEN p.applied_end_month IS NOT NULL THEN
+                    ' to ' || 
+                    CASE 
+                        WHEN p.applied_end_month = 1 THEN 'Jan'
+                        WHEN p.applied_end_month = 2 THEN 'Feb'
+                        WHEN p.applied_end_month = 3 THEN 'Mar'
+                        WHEN p.applied_end_month = 4 THEN 'Apr'
+                        WHEN p.applied_end_month = 5 THEN 'May'
+                        WHEN p.applied_end_month = 6 THEN 'Jun'
+                        WHEN p.applied_end_month = 7 THEN 'Jul'
+                        WHEN p.applied_end_month = 8 THEN 'Aug'
+                        WHEN p.applied_end_month = 9 THEN 'Sep'
+                        WHEN p.applied_end_month = 10 THEN 'Oct'
+                        WHEN p.applied_end_month = 11 THEN 'Nov'
+                        WHEN p.applied_end_month = 12 THEN 'Dec'
+                    END || ' ' || p.applied_end_month_year
+                ELSE 
+                    ' to Q' || p.applied_end_quarter || ' ' || p.applied_end_quarter_year
+            END
+        ELSE ''
+    END AS period_end_formatted,
+    p.total_assets AS aum,
+    CASE 
+        WHEN con.fee_type = 'percentage' AND p.total_assets IS NOT NULL 
+        THEN ROUND(p.total_assets * con.percent_rate, 2)
+        WHEN con.fee_type = 'flat' 
+        THEN con.flat_rate
+        ELSE NULL
+    END AS expected_fee,
+    p.actual_fee,
+    CASE 
+        WHEN (p.applied_start_month IS NOT NULL AND 
+             (p.applied_start_month != p.applied_end_month OR 
+              p.applied_start_month_year != p.applied_end_month_year)) OR
+             (p.applied_start_quarter IS NOT NULL AND 
+             (p.applied_start_quarter != p.applied_end_quarter OR 
+              p.applied_start_quarter_year != p.applied_end_quarter_year))
+        THEN 1
+        ELSE 0
+    END AS is_split,
+    CASE 
+        WHEN (p.applied_start_month IS NOT NULL AND 
+             (p.applied_start_month != p.applied_end_month OR 
+              p.applied_start_month_year != p.applied_end_month_year)) OR
+             (p.applied_start_quarter IS NOT NULL AND 
+             (p.applied_start_quarter != p.applied_end_quarter OR 
+              p.applied_start_quarter_year != p.applied_end_quarter_year))
+        THEN NULL -- Mute variance for split payments
+        WHEN con.fee_type = 'percentage' AND p.total_assets IS NOT NULL 
+        THEN ROUND(p.actual_fee - (p.total_assets * con.percent_rate), 2)
+        WHEN con.fee_type = 'flat' 
+        THEN ROUND(p.actual_fee - con.flat_rate, 2)
+        ELSE NULL
+    END AS variance_amount,
+    CASE 
+        WHEN (p.applied_start_month IS NOT NULL AND 
+             (p.applied_start_month != p.applied_end_month OR 
+              p.applied_start_month_year != p.applied_end_month_year)) OR
+             (p.applied_start_quarter IS NOT NULL AND 
+             (p.applied_start_quarter != p.applied_end_quarter OR 
+              p.applied_start_quarter_year != p.applied_end_quarter_year))
+        THEN NULL -- Mute classification for split payments
+        WHEN con.fee_type = 'percentage' AND p.total_assets IS NOT NULL 
+        THEN 
+            CASE
+                WHEN ABS(p.actual_fee - (p.total_assets * con.percent_rate)) &lt;= 3 THEN 'Within Target'
+                WHEN p.actual_fee &gt; (p.total_assets * con.percent_rate) THEN 'Overpaid'
+                ELSE 'Underpaid'
+            END
+        WHEN con.fee_type = 'flat' 
+        THEN 
+            CASE
+                WHEN ABS(p.actual_fee - con.flat_rate) &lt;= 3 THEN 'Within Target'
+                WHEN p.actual_fee &gt; con.flat_rate THEN 'Overpaid'
+                ELSE 'Underpaid'
+            END
+        ELSE NULL
+    END AS variance_classification,
+    p.method,
+    p.notes,
+    cf.file_id,
+    cf.file_name,
+    cf.onedrive_path
+FROM payments p
+JOIN clients c ON p.client_id = c.client_id
+JOIN v_active_contracts con ON p.contract_id = con.contract_id
+LEFT JOIN payment_files pf ON p.payment_id = pf.payment_id
+LEFT JOIN client_files cf ON pf.file_id = cf.file_id
+WHERE p.valid_to IS NULL
+AND c.valid_to IS NULL
+ORDER BY p.client_id, p.received_date DESC;
+
+-- 14. Most Recent Payment
+CREATE VIEW v_last_payment AS
+WITH 
+ranked_payments AS (
+    SELECT
+        ph.*,
+        ROW_NUMBER() OVER (PARTITION BY ph.client_id ORDER BY ph.payment_date_formatted DESC) AS row_num
+    FROM v_payment_history ph
+)
+SELECT
+    rp.payment_id,
+    rp.client_id,
+    rp.display_name,
+    rp.payment_date_formatted,
+    rp.period_start_formatted || rp.period_end_formatted AS applied_period,
+    rp.aum,
+    rp.expected_fee,
+    rp.actual_fee,
+    rp.variance_amount,
+    rp.variance_classification,
+    rp.is_split,
+    rp.file_id,
+    rp.file_name
+FROM ranked_payments rp
+WHERE rp.row_num = 1;
+
+-- 15. Missing Payments Consolidated
+CREATE VIEW v_missing_payment_periods AS
+SELECT
+    client_id,
+    display_name,
+    GROUP_CONCAT(formatted_period, ', ') AS missing_periods
+FROM v_missing_payments
+GROUP BY client_id, display_name;</sql><current_tab id="0"/></tab_sql></sqlb_project>

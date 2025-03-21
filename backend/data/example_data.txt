@@ -1,0 +1,83 @@
+----------------
+SAMPLE DATA
+----------------
+-- TABLE: client_files
+file_id, client_id, file_name, onedrive_path, uploaded_at
+63, 6, John Hancock - 401K Adivsor Fee Bellmont AirSea Benevon MFM, FlorForm, 3 Sigma 2.24.25.pdf, Bellmont Cabinets\Consulting Fee\2025\John Hancock - 401K Adivsor Fee Bellmont AirSea Benevon MFM, FlorForm, 3 Sigma 2.24.25.pdf, 2025-02-24
+64, 1, John Hancock - 401K Adivsor Fee Bellmont AirSea Benevon MFM, FlorForm, 3 Sigma 2.24.25.pdf, Air Sea America\Consulting Fee\2025\John Hancock - 401K Adivsor Fee Bellmont AirSea Benevon MFM, FlorForm, 3 Sigma 2.24.25.pdf, 2025-02-24
+65, 23, John Hancock - 401K Adivsor Fee Bellmont AirSea Benevon MFM, FlorForm, 3 Sigma 2.24.25.pdf, Three Sigma\Consulting Fee\2025\John Hancock - 401K Adivsor Fee Bellmont AirSea Benevon MFM, FlorForm, 3 Sigma 2.24.25.pdf, 2025-02-24
+78, 6, John Hancock - 401K Advisor Fee Bellmont,AirSea,3Sigma,FF MFM 11.19.24.pdf, Bellmont Cabinets\Consulting Fee\2024\John Hancock - 401K Advisor Fee Bellmont,AirSea,3Sigma,FF MFM 11.19.24.pdf, 2024-11-19
+79, 1, John Hancock - 401K Advisor Fee Bellmont,AirSea,3Sigma,FF MFM 11.19.24.pdf, Air Sea America\Consulting Fee\2024\John Hancock - 401K Advisor Fee Bellmont,AirSea,3Sigma,FF MFM 11.19.24.pdf, 2024-11-19
+80, 23, John Hancock - 401K Advisor Fee Bellmont,AirSea,3Sigma,FF MFM 11.19.24.pdf, Three Sigma\Consulting Fee\2024\John Hancock - 401K Advisor Fee Bellmont,AirSea,3Sigma,FF MFM 11.19.24.pdf, 2024-11-19
+92, 28, Empower - 401K Advisor Fee -Fast Water & Younker 11.20.24.pdf, Younker Motors\Consulting Fee\Empower - 401K Advisor Fee -Fast Water & Younker 11.20.24.pdf, 2024-11-20
+93, 19, Ascensus - 401k Advisor Fee-Q4-24- Opportunity Interactive - rcvd 1.22.25.pdf, Opportunity Interactive\Consulting Fee\Ascensus - 401k Advisor Fee-Q4-24- Opportunity Interactive - rcvd 1.22.25.pdf, 2025-01-22
+94, 27, Capital Grp -Advisor Fee xFire chk rcvd 2.3.25.pdf, XFire Industries\Consulting Fee\Capital Grp -Advisor Fee xFire chk rcvd 2.3.25.pdf, 2025-02-03
+-- TABLE: clients
+client_id, display_name, full_name, ima_signed_date, onedrive_folder_path, valid_from, valid_to
+1, AirSea America, THE TRUSTEES OF AIRSEA AMERICA INC 401K PLAN AND TRUST, 2020-07-31, NULL, 2025-03-14 04:04:16, NULL
+2, Bumgardner Architects (ABC), THE BUMGARDNER ARCHITECTS A WASHINGTON CORPORATION PROFIT, 2020-08-02, NULL, 2025-03-14 04:04:16, NULL
+3, Amplero, AMPLERO INC 401K, 2019-03-15, NULL, 2025-03-14 04:04:16, NULL
+14, Hos Bros, HOS BROS CONSTRUCTION INC, 2019-05-08, NULL, 2025-03-14 04:04:16, NULL
+15, Lavle USA, LAVLE USA INC 401K, 2019-03-22, NULL, 2025-03-14 04:04:16, NULL
+16, Lynnwood Honda, LYNNWOOD ENTERPRISES INC 401K, 2020-02-06, NULL, 2025-03-14 04:04:16, NULL
+27, XFire, XFIRE INDUSTRIES INC 401K PLAN, NULL, NULL, 2025-03-14 04:04:16, NULL
+28, Younker Motors, YOUNKER MOTORS, 2020-07-30, NULL, 2025-03-14 04:04:16, NULL
+29, Youth Dynamics, YOUTH DYNAMICS, NULL, NULL, 2025-03-14 04:04:16, NULL
+-- TABLE: contacts
+contact_id, client_id, contact_type, contact_name, phone, email, fax, physical_address, mailing_address, valid_from, valid_to
+1, 1, Primary, Donald Jay, 253-395-9551, djay@asamerica.com, NULL, 3500 West Vally HWY, Ste B-106, Auburn, WA 98001, 3500 West Vally HWY, Ste B-106, Auburn, WA 98001, 2025-03-14 04:04:33, NULL
+2, 2, Primary, Mark Simpson, 206-223-1361, marks@bumgardner.biz, NULL, 2111 Third Ave, Seattle, WA 98121, 2111 Third Ave, Seattle, WA 98121, 2025-03-14 04:04:33, NULL
+3, 3, Primary, Doug Gelfand, 206-816-3700, dgelfand@amplero.com, NULL, 1218 3rd Ave #900, Seattle, WA 98101, NULL, 2025-03-14 04:04:33, NULL
+34, 8, Authorized, Katie Duran, NULL, kdurantnuno@dakotacreek.com, NULL, NULL, NULL, 2025-03-14 04:04:33, NULL
+35, 8, Authorized, Nancy Loftis, NULL, nancyl@dakotacreek.com, NULL, NULL, NULL, 2025-03-14 04:04:33, NULL
+36, 8, Authorized, Mike Nelson, NULL, mike@dakotacreek.com, NULL, NULL, NULL, 2025-03-14 04:04:33, NULL
+66, 26, Provider, Austin Del Prado, 800-333-0963, delprau@jhancock.com, NULL, 601 Congress St, Boston, MA 02210, NULL, 2025-03-14 04:04:33, NULL
+67, 27, Provider, Brett Lundgren, 866-421-2137, Brett.Lundgren@capgroup.com, NULL, NULL, NULL, 2025-03-14 04:04:33, NULL
+68, 29, Provider, Maria Viala-Wood, NULL, maria.vialawood@transamerica.com, NULL, NULL, NULL, 2025-03-14 04:04:33, NULL
+-- TABLE: contracts
+contract_id, client_id, contract_number, provider_name, contract_start_date, fee_type, percent_rate, flat_rate, payment_schedule, num_people, valid_from, valid_to, is_active
+1, 1, 134565, John Hancock, 2018-03-22, percentage, 0.0007, NULL, monthly, 18, 2025-03-14 04:04:26, NULL, 1
+2, 2, NULL, Voya, 2019-04-19, percentage, 0.000416, NULL, monthly, 35, 2025-03-14 04:04:26, NULL, 1
+3, 3, 551296, Voya, NULL, flat, NULL, 666.66, monthly, NULL, 2025-03-14 04:04:26, NULL, 1
+17, 17, NULL, Capital Group / American Funds, NULL, flat, NULL, 1000.0, quarterly, 15, 2025-03-14 04:04:26, NULL, 1
+18, 18, 24277, Fidelity, NULL, flat, NULL, 2499.99, quarterly, 32, 2025-03-14 04:04:26, NULL, 1
+19, 19, NULL, Ascensus, NULL, flat, NULL, 2000.0, quarterly, 18, 2025-03-14 04:04:26, NULL, 1
+33, 16, NULL, Empower, NULL, flat, NULL, 3500.0, quarterly, NULL, 2025-03-14 04:04:26, NULL, 1
+34, 28, NULL, Empower, NULL, percentage, 0.000667, NULL, monthly, 43, 2025-03-14 04:04:26, NULL, 1
+35, 29, NULL, Principal, NULL, percentage, 0.001875, NULL, quarterly, 15, 2025-03-14 04:04:26, NULL, 1
+-- TABLE: payment_files
+payment_id, file_id, linked_at
+1054, 64, 2025-03-11 04:28:02
+1055, 69, 2025-03-11 04:28:02
+1056, 74, 2025-03-11 04:28:02
+1067, 71, 2025-03-11 04:28:02
+1068, 76, 2025-03-11 04:28:02
+1069, 81, 2025-03-11 04:28:02
+1080, 94, 2025-03-11 04:28:02
+1081, 84, 2025-03-11 04:28:02
+1082, 92, 2025-03-11 04:28:02
+-- TABLE: payments
+payment_id, contract_id, client_id, received_date, total_assets, actual_fee, method, notes, valid_from, valid_to, applied_start_month, applied_start_month_year, applied_end_month, applied_end_month_year, applied_start_quarter, applied_start_quarter_year, applied_end_quarter, applied_end_quarter_year
+1, 1, 1, 2019-05-03, 824305, 547.51, Auto - Check, waiting on how John Hancock calculates fee payments, 2025-03-14 03:57:29, NULL, 4, 2019, 4, 2019, NULL, NULL, NULL, NULL
+2, 1, 1, 2019-06-07, 805477, 535.03, Auto - Check, NULL, 2025-03-14 03:57:29, NULL, 5, 2019, 5, 2019, NULL, NULL, NULL, NULL
+3, 1, 1, 2019-07-05, 839288, 557.54, Auto - Check, NULL, 2025-03-14 03:57:29, NULL, 6, 2019, 6, 2019, NULL, NULL, NULL, NULL
+466, 14, 14, 2019-10-08, NULL, 3750.0, Auto - ACH, NULL, 2025-03-14 03:57:29, NULL, NULL, NULL, NULL, NULL, 3, 2019, 3, 2019
+467, 14, 14, 2020-01-13, NULL, 3750.0, Auto - ACH, Emailed received from Tom RE: this fee payment 1/15/2020 (Oct. Nov. Dec.), 2025-03-14 03:57:29, NULL, NULL, NULL, NULL, NULL, 4, 2019, 4, 2019
+468, 14, 14, 2020-04-13, NULL, 3750.0, Auto - ACH, Per statement received 4/13/2020, 2025-03-14 03:57:29, NULL, NULL, NULL, NULL, NULL, 1, 2020, 1, 2020
+1080, 27, 27, 2025-01-13, 61703.1, 155.1, Check, Period 10/01/2024 to 12/31/2024, 2025-03-14 03:57:29, NULL, NULL, NULL, NULL, NULL, 4, 2024, 4, 2024
+1081, 34, 28, 2025-01-15, 2009546.67, 1339.69, Check, Empower payment for December 2024, 2025-03-14 03:57:29, NULL, 12, 2024, 12, 2024, NULL, NULL, NULL, NULL
+1082, 34, 28, 2024-12-17, 2009948.21, 1339.97, Check, NULL, 2025-03-14 03:57:29, NULL, 11, 2024, 11, 2024, NULL, NULL, NULL, NULL
+-- TABLE: period_reference
+reference_date, current_month_year, current_month, current_quarter_year, current_quarter
+2025-03-20, 2025, 2, 2024, 4
+-- VIEW: distributed_payments
+payment_id, contract_id, client_id, period_type, period_year, period_number, is_split, whole_amount, distributed_amount, received_date
+1, 1, 1, MONTH, 2019, 4, 0, 547.51, 547.51, 2019-05-03
+2, 1, 1, MONTH, 2019, 5, 0, 535.03, 535.03, 2019-06-07
+3, 1, 1, MONTH, 2019, 6, 0, 557.54, 557.54, 2019-07-05
+453, 13, 13, MONTH, 2022, 1, 1, 5000.01, 1666.67, 2022-01-20
+453, 13, 13, MONTH, 2022, 2, 1, 5000.01, 1666.67, 2022-01-20
+453, 13, 13, MONTH, 2022, 3, 1, 5000.01, 1666.67, 2022-01-20
+922, 35, 29, QUARTER, 2024, 1, 0, 915.53, 915.53, 2024-04-15
+923, 35, 29, QUARTER, 2024, 2, 0, 946.32, 946.32, 2024-07-16
+924, 35, 29, QUARTER, 2024, 3, 0, 1043.09, 1043.09, 2024-10-14
