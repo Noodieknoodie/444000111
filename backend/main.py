@@ -1,25 +1,131 @@
-from fastapi import FastAPI, HTTPException, Path
+# backend/main.py
+import os
+import logging
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from config.config import settings
+import uvicorn
+import asyncio
+from fastapi_utils.tasks import repeat_every
+from datetime import datetime
 
-app = FastAPI(
-    title=settings.APP_NAME,
-    version=settings.APP_VERSION,
-    description="API for 401(k) payment tracking system",
+# Setup logging
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    handlers=[
+        logging.FileHandler("backend/logs/app.log"),
+        logging.StreamHandler()
+    ]
 )
 
+# Ensure log directory exists
+os.makedirs("backend/logs", exist_ok=True)
+
+# Create FastAPI app
+app = FastAPI(
+    title="401(k) Payment Management System",
+    description="Backend API for managing 401(k) plan payments",
+    version="1.0.0"
+)
+
+# Add CORS middleware to allow frontend access
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=settings.ORIGINS,
+    allow_origins=["http://localhost:3000"],  # Frontend URL
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
+# Import database connection
+from backend.database import get_db_connection, backup_database
+
+# Create API router imports here
+# from backend.api import clients, payments, contracts, files
+
+# Include API routers here
+# app.include_router(clients.router, prefix="/api/clients", tags=["clients"])
+# app.include_router(payments.router, prefix="/api/payments", tags=["payments"])
+# app.include_router(contracts.router, prefix="/api/contracts", tags=["contracts"])
+# app.include_router(files.router, prefix="/api/files", tags=["files"])
+
+@app.on_event("startup")
+async def startup_event():
+    """Run startup tasks"""
+    # Create backup of database
+    backup_database()
+    
+    # Start period reference maintenance task
+    asyncio.create_task(update_period_reference())
+
+async def update_period_reference():
+    """Update the period_reference table with current periods"""
+    try:
+        conn = get_db_connection()
+        today = datetime.now()
+        
+        # For monthly: previous month
+        if today.month == 1:
+            current_month = 12
+            current_month_year = today.year - 1
+        else:
+            current_month = today.month - 1
+            current_month_year = today.year
+            
+        # For quarterly: previous quarter
+        current_quarter = (today.month - 1) // 3
+        if current_quarter == 0:
+            current_quarter = 4
+            current_quarter_year = today.year - 1
+        else:
+            current_quarter_year = today.year
+            
+        with conn:
+            conn.execute(
+                """
+                INSERT OR REPLACE INTO period_reference(
+                    reference_date, current_month_year, current_month,
+                    current_quarter_year, current_quarter
+                ) VALUES (?, ?, ?, ?, ?)
+                """,
+                (today.strftime("%Y-%m-%d"), current_month_year, 
+                 current_month, current_quarter_year, current_quarter)
+            )
+        
+        logging.info("Period reference updated successfully")
+            
+    except Exception as e:
+        logging.error(f"Failed to update period reference: {str(e)}")
+
+@app.on_event("startup")
+@repeat_every(seconds=60*60*24)  # Run once a day
+async def scheduled_period_reference_update():
+    """Daily scheduled task to update period reference"""
+    await update_period_reference()
+
 @app.get("/")
 async def root():
-    return {"status": "ok", "message": f"{settings.APP_NAME} API is running"}
+    """Root endpoint to verify API is running"""
+    return {"message": "401(k) Payment Management System API"}
 
 @app.get("/health")
 async def health_check():
-    return {"status": "healthy"}
+    """Health check endpoint"""
+    try:
+        # Test database connection
+        conn = get_db_connection()
+        conn.execute("SELECT 1").fetchone()
+        conn.close()
+        
+        return {
+            "status": "healthy",
+            "database": "connected"
+        }
+    except Exception as e:
+        return {
+            "status": "unhealthy",
+            "database": str(e)
+        }
+
+if __name__ == "__main__":
+    uvicorn.run("backend.main:app", host="0.0.0.0", port=8000, reload=True)

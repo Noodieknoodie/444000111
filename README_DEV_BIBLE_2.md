@@ -1,4 +1,4 @@
-# README_LLM.md
+# README_DEV_BIBLE_2.md
 
 # 401(k) Payment Management System: Technical Implementation Guide
 
@@ -40,38 +40,7 @@ The database leverages SQLite views for complex business logic, with a tiered st
 ## Application Structure
 
 ```
-/app
-  /backend
-    main.py                # FastAPI app initialization, CORS setup
-    config.py              # Configuration handling (YAML, paths)
-    db.py                  # Database connection management
-    
-    /api                   # API routes grouped by UI components
-      clients.py           # Client sidebar & details endpoints
-      payments.py          # Payment history & operations
-      documents.py         # Document handling
-      reports.py           # Quarterly summary endpoints
-      
-    /models                # Pydantic models mapping to UI views
-      client_models.py     # Models for v_client_sidebar, v_client_details
-      payment_models.py    # Models for v_payment_history, v_payment_status
-      document_models.py   # Models for file uploads/downloads
-      
-    /utils
-      file_manager.py      # OneDrive path handling
-      period_manager.py    # Period reference maintenance task
-      sql_helpers.py       # Common SQL operations
-      
-  /frontend
-    /components            # React components
-      /client              # Client-related components
-      /payment             # Payment-related components
-      /document            # Document-related components
-      /ui                  # Shared UI components
-      
-    /pages                 # Page components
-    /hooks                 # Custom React hooks
-    /utils                 # Frontend utilities
+// YOU DECIDE WHAT IS BEST FOR THIS PROJECT AND WHAT WOULD RESONATE WITH ME. IM TRUSTING YOU TO MAKE THE BEST DECISIONS.
 ```
 
 ## Configuration Management
@@ -82,6 +51,7 @@ The application uses a YAML configuration file to manage database paths and othe
 database:
   office: C:/Users/{username}/Hohimer Wealth Management/Hohimer Company Portal - Company/Hohimer Team Shared 4-15-19/HohimerPro/database/401k_payments_66.db
   home: backend/data/401k_payments_66.db
+  test: backend/data/401k_payments_test.db
   fallback: backend/data/401k_payments_master.db
 
 files:

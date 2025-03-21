@@ -84,10 +84,10 @@ period_reference:
 
 ### INDEX ###
 
-idx_payments_received_date ON payments(received_date)');
-idx_payments_client_date ON payments(client_id, received_date)');
-idx_payment_files_payment_id ON payment_files(payment_id)');
-idx_payments_valid_to ON payments(valid_to)');
+idx_payments_received_date ON payments(received_date)
+idx_payments_client_date ON payments(client_id, received_date)
+idx_payment_files_payment_id ON payment_files(payment_id)
+idx_payments_valid_to ON payments(valid_to)
 
 
 

@@ -5,3 +5,7 @@ pytest
 pandas
 numpy
 python-dateutil
+python-multipart
+pyyaml
+aiofiles
+fastapi_utils
