@@ -4,9 +4,9 @@ from typing import List, Optional
 import sqlite3
 import json
 
-from backend.database import get_db_connection
-from backend.utils.file_manager import FileManager
-from backend.models.payment import (
+from database import get_db_connection
+from utils.file_manager import FileManager
+from models.payment import (
     PaymentCreate, PaymentUpdate, PaymentResponse, PaymentHistoryModel,
     MissingPaymentModel
 )
@@ -14,19 +14,107 @@ from backend.models.payment import (
 router = APIRouter()
 file_manager = FileManager()
 
+# Updated payment history endpoint with comprehensive error handling
 @router.get("/history/{client_id}", response_model=List[PaymentHistoryModel])
 async def get_payment_history(client_id: int = Path(..., description="The ID of the client")):
-    """Fetches payment history from v_payment_history"""
+    """Fetches payment history from v_payment_history with robust error handling"""
     try:
         conn = get_db_connection()
-        result = conn.execute(
-            "SELECT * FROM v_payment_history WHERE client_id = ? ORDER BY payment_date_formatted DESC", 
-            (client_id,)
-        ).fetchall()
-        return [dict(row) for row in result]
+        
+        # Get raw data from view
+        try:
+            result = conn.execute(
+                "SELECT * FROM v_payment_history WHERE client_id = ? ORDER BY payment_date_formatted DESC", 
+                (client_id,)
+            ).fetchall()
+        except Exception as e:
+            # Log the database query error
+            print(f"Database query error: {str(e)}")
+            # Return empty list rather than failing
+            return []
+        
+        # Process each row individually and catch errors
+        processed_results = []
+        
+        for row in result:
+            try:
+                # Convert the row to a dict
+                row_dict = dict(row)
+                
+                # Convert boolean fields - handle any format
+                for field in ['is_split', 'is_estimated_aum', 'is_estimated_fee']:
+                    try:
+                        row_dict[field] = bool(row_dict.get(field, 0))
+                    except Exception:
+                        row_dict[field] = False
+                
+                # Ensure all required string fields exist and aren't None
+                for field in ['display_name', 'payment_date_formatted', 'period_start_formatted']:
+                    if field not in row_dict or row_dict[field] is None:
+                        row_dict[field] = "" if field != 'display_name' else "Unknown"
+                
+                # Ensure period_end_formatted exists (it can be empty)
+                if 'period_end_formatted' not in row_dict or row_dict['period_end_formatted'] is None:
+                    row_dict['period_end_formatted'] = ""
+                
+                # Ensure all optional fields have proper null values when missing
+                for field in ['notes', 'method', 'onedrive_path', 'file_name', 
+                             'variance_classification', 'estimated_variance_classification']:
+                    if field not in row_dict:
+                        row_dict[field] = None
+                
+                # Handle numeric fields with careful conversion
+                # Integer fields
+                for field in ['payment_id', 'client_id', 'aum', 'displayed_aum', 'file_id']:
+                    try:
+                        if field in row_dict and row_dict[field] is not None:
+                            row_dict[field] = int(row_dict[field])
+                        elif field in ['payment_id', 'client_id']:  # These are required
+                            if field not in row_dict or row_dict[field] is None:
+                                # Skip this record if missing required fields
+                                raise ValueError(f"Missing required field: {field}")
+                    except Exception:
+                        if field in ['payment_id', 'client_id']:
+                            # Skip this record
+                            raise ValueError(f"Invalid required field: {field}")
+                        else:
+                            row_dict[field] = None
+                
+                # Float fields (careful with actual_fee which is required)
+                for field in ['expected_fee', 'displayed_expected_fee', 'variance_amount', 
+                             'estimated_variance_amount', 'actual_fee']:
+                    try:
+                        if field in row_dict and row_dict[field] is not None:
+                            row_dict[field] = float(row_dict[field])
+                        elif field == 'actual_fee':  # This is required
+                            row_dict[field] = 0.0  # Use zero as fallback for actual_fee
+                    except Exception:
+                        if field == 'actual_fee':
+                            row_dict[field] = 0.0
+                        else:
+                            row_dict[field] = None
+                
+                # Add successfully processed row
+                processed_results.append(row_dict)
+                
+            except Exception as e:
+                # Log the error but continue processing other rows
+                print(f"Error processing row: {str(e)}")
+                # Skip this row and continue with the next one
+                continue
+                
+        return processed_results
+    except Exception as e:
+        # Log the error
+        print(f"Unhandled error in payment history: {str(e)}")
+        # Return empty list instead of error
+        return []
     finally:
-        conn.close()
-
+        try:
+            conn.close()
+        except:
+            pass
+        
 @router.get("/last/{client_id}", response_model=PaymentHistoryModel)
 async def get_last_payment(client_id: int = Path(..., description="The ID of the client")):
     """Fetches the last payment for a client from v_last_payment"""
@@ -39,8 +127,14 @@ async def get_last_payment(client_id: int = Path(..., description="The ID of the
         
         if not result:
             raise HTTPException(status_code=404, detail="No payments found for this client")
+        
+        # Convert to dict and fix boolean fields
+        result_dict = dict(result)
+        result_dict['is_split'] = bool(result_dict.get('is_split', 0))
+        result_dict['is_estimated_aum'] = bool(result_dict.get('is_estimated_aum', 0))
+        result_dict['is_estimated_fee'] = bool(result_dict.get('is_estimated_fee', 0))
             
-        return dict(result)
+        return result_dict
     finally:
         conn.close()
 

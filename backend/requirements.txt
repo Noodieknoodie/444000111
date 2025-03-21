@@ -9,3 +9,5 @@ python-multipart
 pyyaml
 aiofiles
 fastapi_utils
+typing-inspect
+requests

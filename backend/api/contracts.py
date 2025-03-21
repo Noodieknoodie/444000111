@@ -3,8 +3,8 @@ from fastapi import APIRouter, Depends, HTTPException, Path, Query
 from typing import List, Optional
 import sqlite3
 
-from backend.database import get_db_connection
-from backend.models.contract import (
+from database import get_db_connection
+from models.contract import (
     ContractBase, ContractCreate, ContractUpdate, ContractResponse
 )
 

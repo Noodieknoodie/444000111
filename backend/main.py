@@ -7,21 +7,21 @@ import uvicorn
 import asyncio
 from fastapi_utils.tasks import repeat_every
 from datetime import datetime
-from backend.api import clients_router, payments_router, contracts_router, files_router, contacts_router
-from backend.database import get_db_connection, backup_database
+from api import clients_router, payments_router, contracts_router, files_router, contacts_router
+from database import get_db_connection, backup_database
 
 # Setup logging
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
     handlers=[
-        logging.FileHandler("backend/logs/app.log"),
+        logging.FileHandler("logs/app.log"),
         logging.StreamHandler()
     ]
 )
 
 # Ensure log directory exists
-os.makedirs("backend/logs", exist_ok=True)
+os.makedirs("logs", exist_ok=True)
 
 # Create FastAPI app
 app = FastAPI(
@@ -124,4 +124,4 @@ async def health_check():
         }
 
 if __name__ == "__main__":
-    uvicorn.run("backend.main:app", host="0.0.0.0", port=8000, reload=True)
+    uvicorn.run("main:app", host="0.0.0.0", port=6069, reload=True)

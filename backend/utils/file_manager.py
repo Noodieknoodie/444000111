@@ -6,8 +6,8 @@ from pathlib import Path
 from datetime import datetime
 from typing import Dict, Optional
 
-from backend.config import settings
-from backend.database import get_db_connection
+from config import settings
+from database import get_db_connection
 
 class FileManager:
     def __init__(self, test_mode=False):

@@ -6,7 +6,7 @@ from pathlib import Path
 from datetime import datetime
 import shutil
 
-from backend.config import settings
+from config import settings
 
 def get_db_connection(test_mode=False):
     """

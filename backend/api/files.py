@@ -5,9 +5,9 @@ from typing import List, Optional
 import os
 import logging
 
-from backend.database import get_db_connection
-from backend.utils.file_manager import FileManager
-from backend.models.file import FileResponse, FileCreate, PaymentFileLink
+from database import get_db_connection
+from utils.file_manager import FileManager
+from models.file import FileResponse, FileCreate, PaymentFileLink
 
 router = APIRouter()
 file_manager = FileManager()

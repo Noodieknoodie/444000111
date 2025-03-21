@@ -3,8 +3,8 @@ from fastapi import APIRouter, Depends, HTTPException, Path, Query
 from typing import List, Optional
 import sqlite3
 
-from backend.database import get_db_connection
-from backend.models.client import (
+from database import get_db_connection
+from models.client import (
     ClientBase, ClientCreate, ClientUpdate, ClientResponse,
     ClientSidebarModel, ClientDetailsModel
 )
@@ -34,7 +34,13 @@ async def get_client_details(client_id: int = Path(..., description="The ID of t
         if not result:
             raise HTTPException(status_code=404, detail="Client not found")
             
-        return dict(result)
+        # Convert to dict and ensure correct types
+        result_dict = dict(result)
+        # Convert string days to integer if needed
+        result_dict['client_days'] = int(result_dict['client_days']) if result_dict['client_days'] else 0
+        result_dict['missing_payment_count'] = int(result_dict['missing_payment_count']) if result_dict['missing_payment_count'] else 0
+        
+        return result_dict
     finally:
         conn.close()
 

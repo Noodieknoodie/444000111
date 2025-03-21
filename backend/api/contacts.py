@@ -3,8 +3,8 @@ from fastapi import APIRouter, Depends, HTTPException, Path, Query
 from typing import List, Optional
 import sqlite3
 
-from backend.database import get_db_connection
-from backend.models.contacts import (
+from database import get_db_connection
+from models.contacts import (
     ContactBase, ContactCreate, ContactUpdate, ContactResponse, ContactType
 )
 

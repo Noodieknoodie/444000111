@@ -1,13 +1,13 @@
 # backend/config.yaml
 database:
   office: C:/Users/{username}/Hohimer Wealth Management/Hohimer Company Portal - Company/Hohimer Team Shared 4-15-19/HohimerPro/database/401k_payments_66.db
-  home: backend/data/401k_payments_66.db
-  test: backend/data/401k_payments_test.db
-  fallback: backend/data/401k_payments_master.db
+  home: data/401k_payments_66.db
+  test: data/401k_payments_test.db
+  fallback: data/401k_payments_master.db
   backup:
     office: C:/Users/{username}/Hohimer Wealth Management/Hohimer Company Portal - Company/Hohimer Team Shared 4-15-19/HohimerPro/database/backups
-    home: backend/data/backup_dbs
+    home: data/backup_dbs
 
 files:
   base_path: C:/Users/{username}/Hohimer Wealth Management/Hohimer Company Portal - Company/Hohimer Team Shared 4-15-19/401Ks/Current Plans
-  test_path: backend/data/test_files
+  test_path: data/test_files
