@@ -377,4 +377,56 @@ As a Windows desktop application, deployment involves:
 
 ---
 
-This implementation guide provides a foundation for developing the 401(k) Payment Management System as a Windows desktop application that leverages the existing SQLite views while providing a modern, responsive UI.​​​​​​​​​​​​​​​​
+# Additional Implementation Details
+
+## Error Logging
+```
+/logs
+  app.log          # Central error log location
+```
+
+The application implements focused error logging with:
+- Log location: Project directory `/logs/app.log`
+- Log level: ERROR (only actionable errors)
+- Format: Timestamp, error message, file location, and line number
+- Purpose: Debugging support with minimal verbosity
+
+## Database Backup
+```python
+# Executed daily on application startup
+def backup_database():
+    """Creates a timestamped backup of the current database"""
+    config = read_config()
+    current_db_path = get_current_database_path()
+    
+    # Determine backup location based on environment
+    if "office" in current_db_path:
+        backup_dir = config['database']['backup']['office'].replace("{username}", os.getlogin())
+    else:
+        backup_dir = config['database']['backup']['home']
+        
+    os.makedirs(backup_dir, exist_ok=True)
+    backup_filename = f"backup_{datetime.now().strftime('%Y%m%d')}.db"
+    backup_path = os.path.join(backup_dir, backup_filename)
+    
+    # Create backup
+    shutil.copy2(current_db_path, backup_path)
+    
+    # Retention policy: 7 daily backups + 4 weekly backups
+    cleanup_old_backups(backup_dir)
+```
+
+## Data Refresh Strategy
+- Pull data from database when view is loaded
+- Simple manual refresh button in UI
+- No automatic background refresh
+
+## File System Access
+- Access files directly via standard filesystem operations
+- OneDrive synchronization handled by operating system
+- Store relative paths in database, construct full paths at runtime
+
+## Initial Application View
+- Application launches directly to Payments screen
+- No client selection is preserved between sessions
+
