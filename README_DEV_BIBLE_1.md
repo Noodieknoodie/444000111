@@ -106,10 +106,11 @@ The views are built in tiers, each building on the previous:
      - Monthly: Current month is previous month in current year
      - Quarterly: Current quarter is previous quarter (or Q4 of previous year if current is Q1)
 
-3. **File Storage**: (see README_LLM.md)
-   - Physical file storage in OneDrive
-   - File metadata updates in `client_files`
-   - Payment-file linking in `payment_files`
+3. **File Storage**: (see README_FILE_SYSTEM.md)
+   - Primary document storage in central mail dump folder
+   - Windows shortcuts in client folders pointing to original files
+   - Document metadata stored in `client_files` table
+   - Many-to-many relationships managed in `payment_files` table
 
 4. **Data Entry Validation**:
    - Form validation for payment entry
@@ -132,7 +133,11 @@ The views are built in tiers, each building on the previous:
 1. **Payment Entry Flow**:
    1. User enters payment data in form
    2. Backend validates and inserts into `payments` table
-   3. File upload handled and linked in `payment_files`
+   3. Document handling:
+      - Document uploaded to mail dump folder
+      - Metadata stored in `client_files` table
+      - Association created in `payment_files` table
+      - Windows shortcuts generated in client folders
    4. Views automatically reflect new payment:
       - `v_payments_expanded` distributes split payments
       - `v_payment_status` updates PAID/UNPAID

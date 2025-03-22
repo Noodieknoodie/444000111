@@ -45,7 +45,7 @@ The database leverages SQLite views for complex business logic, with a tiered st
 
 ## Configuration Management
 
-The application uses a YAML configuration file to manage database paths and other settings:
+The application uses a YAML configuration file to manage database and file paths:
 
 ```yaml
 database:
@@ -55,8 +55,10 @@ database:
   fallback: backend/data/401k_payments_master.db
 
 files:
-  base_path: C:/Users/{username}/Hohimer Wealth Management/Hohimer Company Portal - Company/Hohimer Team Shared 4-15-19/401Ks/Current Plans
+  mail_dump: C:/Users/{username}/Hohimer Wealth Management/Hohimer Company Portal - Company/Hohimer Team Shared 4-15-19/compliance/mail/{year}/
+  client_base: C:/Users/{username}/Hohimer Wealth Management/Hohimer Company Portal - Company/Hohimer Team Shared 4-15-19/401k Clients/
 ```
+The application resolves these paths at runtime, replacing variables like {username} with the current Windows user and {year} with the appropriate year.
 
 The application will attempt to connect to the database in the following order:
 1. Office path (with dynamic username)
@@ -167,55 +169,62 @@ def create_payment(payment: PaymentCreateModel):
 
 ## Document Management
 
-Documents are stored on OneDrive with paths structured as follows:
+The system uses a dual-location approach for document management:
 
-```
-[Base Path]/[Client Folder]/Consulting Fee/[Year]/[Filename]
-```
+1. **Primary Storage (Mail Dump)**:
+C:/Users/{username}/Hohimer Wealth Management/.../compliance/mail/{year}/
+All files are physically stored once in this location.
 
-Where:
-- Base Path: `C:/Users/{username}/Hohimer Wealth Management/Hohimer Company Portal - Company/Hohimer Team Shared 4-15-19/401Ks/Current Plans`
-- Username: Dynamically replaced with the current Windows user
-- Client Folder: Folder specific to each client
-- Year: Current year folder (e.g., "2024")
+2. **Client Access (Windows Shortcuts)**:
+C:/Users/{username}/Hohimer Wealth Management/.../401k Clients/{client_name}/Consulting Fee/{year}/
+Windows shortcuts (.lnk files) in client folders point to the original files in the mail dump.
 
-### Document Path Management
+Variables in paths are resolved at runtime:
+- {username}: Current Windows user (from os.getlogin())
+- {year}: Appropriate year (current year or extracted from document)
+- {client_name}: Client display name from the database
+
+### Document Path Management### Document Path Management
 
 ```python
 class FileManager:
     def __init__(self, config):
-        self.base_path = config['files']['base_path']
+        self.mail_dump_path = config['files']['mail_dump']
+        self.client_base_path = config['files']['client_base']
         
-    def get_full_path(self, relative_path):
-        """Converts a relative path to a full OneDrive path"""
-        base = self.base_path.replace("{username}", os.getlogin())
-        return os.path.join(base, relative_path)
+    def get_mail_dump_path(self, year=None):
+        """Gets the mail dump path for a specific year"""
+        if year is None:
+            year = datetime.now().year
+        path = self.mail_dump_path.replace("{username}", os.getlogin()).replace("{year}", str(year))
+        return path
         
-    def create_client_file_path(self, client_id, filename):
-        """Creates a client-specific file path"""
+    def get_client_shortcut_path(self, client_name, year, filename):
+        """Creates a path for a client shortcut file"""
+        base = self.client_base_path.replace("{username}", os.getlogin())
+        return os.path.join(base, client_name, "Consulting Fee", str(year), filename + ".lnk")
+        
+    def save_document(self, file_data, filename, document_date=None):
+        """Saves document to mail dump and creates database entry"""
+        year = datetime.now().year if document_date is None else document_date.year
+        mail_path = self.get_mail_dump_path(year)
+        os.makedirs(mail_path, exist_ok=True)
+        
+        full_path = os.path.join(mail_path, filename)
+        with open(full_path, 'wb') as f:
+            f.write(file_data)
+            
+        # Create database entry
         conn = get_db_connection()
-        client = conn.execute(
-            "SELECT display_name FROM clients WHERE client_id = ?", 
-            (client_id,)
-        ).fetchone()
-        
-        if not client:
-            raise ValueError(f"Client ID {client_id} not found")
+        cursor = conn.cursor()
+        cursor.execute(
+            "INSERT INTO client_files(file_path, original_filename, document_date) VALUES (?, ?, ?)",
+            (full_path, filename, document_date or datetime.now().strftime("%Y-%m-%d"))
+        )
+        file_id = cursor.lastrowid
+        conn.commit()
             
-        # Create relative path
-        year = datetime.now().strftime("%Y")
-        relative_path = f"{client['display_name']}/Consulting Fee/{year}/{filename}"
-        
-        # Store in database
-        with conn:
-            cursor = conn.cursor()
-            cursor.execute(
-                "INSERT INTO client_files(client_id, file_name, onedrive_path, uploaded_at) VALUES (?, ?, ?, CURRENT_TIMESTAMP)",
-                (client_id, filename, relative_path)
-            )
-            file_id = cursor.lastrowid
-            
-        return {"file_id": file_id, "full_path": self.get_full_path(relative_path)}
+        return {"file_id": file_id, "file_path": full_path}
 ```
 
 ## UI Components
@@ -302,11 +311,13 @@ async def setup_periodic_tasks():
    - Break down components when it improves readability and maintenance
    - Don't artificially split components when it harms cohesion
 
+
 3. **File Handling Best Practices**
-   - Store relative paths in the database for portability
-   - Construct full paths at runtime with current username
-   - Use consistent folder structures for new documents
-   - Handle file operations in dedicated modules
+   - Store complete file paths in the database for direct access
+   - Create Windows shortcuts (.lnk files) to maintain folder hierarchy
+   - Use standardized naming convention for mail dump files
+   - Handle document associations through database tables, not filesystem organization
+   - Resolve path variables at runtime for portability across user environments
 
 4. **Error Handling**
    - Provide meaningful error messages for file and database operations

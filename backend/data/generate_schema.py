@@ -153,25 +153,46 @@ def generate_sample_data(conn, sample_data_file):
     with open(sample_data_file, 'w', encoding='utf-8') as f:
         f.write("----------------\nSAMPLE DATA\n----------------\n")
         for obj_type, name in objects:
-            cursor.execute(f'SELECT COUNT(*) FROM "{name}"')
-            count = cursor.fetchone()[0]
-            if count == 0:
-                continue
-            positions = set(range(3)) | \
-                        set(range(max(0, count//2 - 1), min(count//2 + 2, count))) | \
-                        set(range(max(count - 3, 0), count))
-            positions = sorted(positions)
-            cursor.execute(f'SELECT * FROM "{name}" LIMIT 1')
-            headers = [desc[0] for desc in cursor.description]
-            f.write(f"-- {obj_type.upper()}: {name}\n")
-            f.write(", ".join(headers) + "\n")
-            for pos in positions:
-                cursor.execute(f'SELECT * FROM "{name}" LIMIT 1 OFFSET ?', (pos,))
-                row = cursor.fetchone()
-                if row:
-                    row_display = ", ".join('NULL' if v is None else str(v) for v in row)
-                    f.write(row_display + "\n")
-            f.write("\n")
+            try:
+                # Skip views that might be problematic
+                if obj_type == 'view' and name in ['DocumentView', 'DocumentProcessingView']:
+                    # Use a safer query for these views
+                    cursor.execute(f'SELECT * FROM "{name}" LIMIT 1')
+                    headers = [desc[0] for desc in cursor.description]
+                    
+                    f.write(f"-- {obj_type.upper()}: {name}\n")
+                    f.write(", ".join(headers) + "\n")
+                    
+                    cursor.execute(f'SELECT * FROM "{name}" LIMIT 3')
+                    rows = cursor.fetchall()
+                    for row in rows:
+                        row_display = ", ".join('NULL' if v is None else str(v) for v in row)
+                        f.write(row_display + "\n")
+                    f.write("\n")
+                    continue
+                
+                cursor.execute(f'SELECT COUNT(*) FROM "{name}"')
+                count = cursor.fetchone()[0]
+                if count == 0:
+                    continue
+                
+                positions = set(range(3)) | \
+                            set(range(max(0, count//2 - 1), min(count//2 + 2, count))) | \
+                            set(range(max(count - 3, 0), count))
+                positions = sorted(positions)
+                cursor.execute(f'SELECT * FROM "{name}" LIMIT 1')
+                headers = [desc[0] for desc in cursor.description]
+                f.write(f"-- {obj_type.upper()}: {name}\n")
+                f.write(", ".join(headers) + "\n")
+                for pos in positions:
+                    cursor.execute(f'SELECT * FROM "{name}" LIMIT 1 OFFSET ?', (pos,))
+                    row = cursor.fetchone()
+                    if row:
+                        row_display = ", ".join('NULL' if v is None else str(v) for v in row)
+                        f.write(row_display + "\n")
+                f.write("\n")
+            except sqlite3.Error as e:
+                f.write(f"-- {obj_type.upper()}: {name} - Error: {str(e)}\n\n")
     
     with open(sample_data_file, 'r', encoding='utf-8') as file:
         content = file.read()
@@ -208,6 +229,7 @@ def main():
     Path(os.path.dirname(args.data_file)).mkdir(parents=True, exist_ok=True)
     
     conn = sqlite3.connect(args.database)
+    conn.row_factory = sqlite3.Row
     cursor = conn.cursor()
     
     try:

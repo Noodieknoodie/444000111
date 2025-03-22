@@ -8,6 +8,8 @@ import asyncio
 from fastapi_utils.tasks import repeat_every
 from datetime import datetime
 from api import clients_router, payments_router, contracts_router, files_router, contacts_router
+from api.documents import router as documents_router
+from utils.document_processor import DocumentProcessor
 from database import get_db_connection, backup_database
 
 # Setup logging
@@ -44,6 +46,7 @@ app.include_router(payments_router, prefix="/api/payments", tags=["payments"])
 app.include_router(contracts_router, prefix="/api/contracts", tags=["contracts"])
 app.include_router(files_router, prefix="/api/files", tags=["files"])
 app.include_router(contacts_router, prefix="/api/contacts", tags=["contacts"])
+app.include_router(documents_router, prefix="/api/documents", tags=["documents"])
 
 @app.on_event("startup")
 async def startup_event():
@@ -98,6 +101,19 @@ async def update_period_reference():
 async def scheduled_period_reference_update():
     """Daily scheduled task to update period reference"""
     await update_period_reference()
+
+@app.on_event("startup")
+@repeat_every(seconds=60*60)  # Run once an hour
+async def scheduled_document_processing():
+    """Hourly scheduled task to process new documents"""
+    try:
+        logging.info("Running scheduled document processing")
+        processor = DocumentProcessor()
+        processed_ids = processor.scan_mail_dump()
+        if processed_ids:
+            logging.info(f"Processed {len(processed_ids)} documents")
+    except Exception as e:
+        logging.error(f"Scheduled document processing failed: {str(e)}")
 
 @app.get("/")
 async def root():

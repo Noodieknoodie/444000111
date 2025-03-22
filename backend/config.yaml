@@ -11,3 +11,6 @@ database:
 files:
   base_path: C:/Users/{username}/Hohimer Wealth Management/Hohimer Company Portal - Company/Hohimer Team Shared 4-15-19/401Ks/Current Plans
   test_path: data/test_files
+  # New paths for document management system
+  mail_dump: C:/Users/{username}/Hohimer Wealth Management/Hohimer Company Portal - Company/Hohimer Team Shared 4-15-19/compliance/mail/{year}/
+  client_base: C:/Users/{username}/Hohimer Wealth Management/Hohimer Company Portal - Company/Hohimer Team Shared 4-15-19/401k Clients/

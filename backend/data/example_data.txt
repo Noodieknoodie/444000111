@@ -2,27 +2,27 @@
 SAMPLE DATA
 ----------------
 -- TABLE: client_files
-file_id, client_id, file_name, onedrive_path, uploaded_at
-63, 6, John Hancock - 401K Adivsor Fee Bellmont AirSea Benevon MFM, FlorForm, 3 Sigma 2.24.25.pdf, Bellmont Cabinets\Consulting Fee\2025\John Hancock - 401K Adivsor Fee Bellmont AirSea Benevon MFM, FlorForm, 3 Sigma 2.24.25.pdf, 2025-02-24
-64, 1, John Hancock - 401K Adivsor Fee Bellmont AirSea Benevon MFM, FlorForm, 3 Sigma 2.24.25.pdf, Air Sea America\Consulting Fee\2025\John Hancock - 401K Adivsor Fee Bellmont AirSea Benevon MFM, FlorForm, 3 Sigma 2.24.25.pdf, 2025-02-24
-65, 23, John Hancock - 401K Adivsor Fee Bellmont AirSea Benevon MFM, FlorForm, 3 Sigma 2.24.25.pdf, Three Sigma\Consulting Fee\2025\John Hancock - 401K Adivsor Fee Bellmont AirSea Benevon MFM, FlorForm, 3 Sigma 2.24.25.pdf, 2025-02-24
-78, 6, John Hancock - 401K Advisor Fee Bellmont,AirSea,3Sigma,FF MFM 11.19.24.pdf, Bellmont Cabinets\Consulting Fee\2024\John Hancock - 401K Advisor Fee Bellmont,AirSea,3Sigma,FF MFM 11.19.24.pdf, 2024-11-19
-79, 1, John Hancock - 401K Advisor Fee Bellmont,AirSea,3Sigma,FF MFM 11.19.24.pdf, Air Sea America\Consulting Fee\2024\John Hancock - 401K Advisor Fee Bellmont,AirSea,3Sigma,FF MFM 11.19.24.pdf, 2024-11-19
-80, 23, John Hancock - 401K Advisor Fee Bellmont,AirSea,3Sigma,FF MFM 11.19.24.pdf, Three Sigma\Consulting Fee\2024\John Hancock - 401K Advisor Fee Bellmont,AirSea,3Sigma,FF MFM 11.19.24.pdf, 2024-11-19
-92, 28, Empower - 401K Advisor Fee -Fast Water & Younker 11.20.24.pdf, Younker Motors\Consulting Fee\Empower - 401K Advisor Fee -Fast Water & Younker 11.20.24.pdf, 2024-11-20
-93, 19, Ascensus - 401k Advisor Fee-Q4-24- Opportunity Interactive - rcvd 1.22.25.pdf, Opportunity Interactive\Consulting Fee\Ascensus - 401k Advisor Fee-Q4-24- Opportunity Interactive - rcvd 1.22.25.pdf, 2025-01-22
-94, 27, Capital Grp -Advisor Fee xFire chk rcvd 2.3.25.pdf, XFire Industries\Consulting Fee\Capital Grp -Advisor Fee xFire chk rcvd 2.3.25.pdf, 2025-02-03
+file_id, file_path, original_filename, upload_date, document_date, provider_id, is_processed, metadata
+63, C:/Users/{username}/Hohimer Wealth Management/Hohimer Company Portal - Company/Hohimer Team Shared 4-15-19/compliance/mail/2025/John Hancock - 401K Adivsor Fee Bellmont AirSea Benevon MFM, FlorForm, 3 Sigma 2.24.25.pdf, John Hancock - 401K Adivsor Fee Bellmont AirSea Benevon MFM, FlorForm, 3 Sigma 2.24.25.pdf, 2025-02-24, 2025-02-24, 8, 1, NULL
+64, C:/Users/{username}/Hohimer Wealth Management/Hohimer Company Portal - Company/Hohimer Team Shared 4-15-19/compliance/mail/2025/John Hancock - 401K Adivsor Fee Bellmont AirSea Benevon MFM, FlorForm, 3 Sigma 2.24.25.pdf, John Hancock - 401K Adivsor Fee Bellmont AirSea Benevon MFM, FlorForm, 3 Sigma 2.24.25.pdf, 2025-02-24, 2025-02-24, 8, 1, NULL
+65, C:/Users/{username}/Hohimer Wealth Management/Hohimer Company Portal - Company/Hohimer Team Shared 4-15-19/compliance/mail/2025/John Hancock - 401K Adivsor Fee Bellmont AirSea Benevon MFM, FlorForm, 3 Sigma 2.24.25.pdf, John Hancock - 401K Adivsor Fee Bellmont AirSea Benevon MFM, FlorForm, 3 Sigma 2.24.25.pdf, 2025-02-24, 2025-02-24, 8, 1, NULL
+78, C:/Users/{username}/Hohimer Wealth Management/Hohimer Company Portal - Company/Hohimer Team Shared 4-15-19/compliance/mail/2024/John Hancock - 401K Advisor Fee Bellmont,AirSea,3Sigma,FF MFM 11.19.24.pdf, John Hancock - 401K Advisor Fee Bellmont,AirSea,3Sigma,FF MFM 11.19.24.pdf, 2024-11-19, 2024-11-19, 8, 1, NULL
+79, C:/Users/{username}/Hohimer Wealth Management/Hohimer Company Portal - Company/Hohimer Team Shared 4-15-19/compliance/mail/2024/John Hancock - 401K Advisor Fee Bellmont,AirSea,3Sigma,FF MFM 11.19.24.pdf, John Hancock - 401K Advisor Fee Bellmont,AirSea,3Sigma,FF MFM 11.19.24.pdf, 2024-11-19, 2024-11-19, 8, 1, NULL
+80, C:/Users/{username}/Hohimer Wealth Management/Hohimer Company Portal - Company/Hohimer Team Shared 4-15-19/compliance/mail/2024/John Hancock - 401K Advisor Fee Bellmont,AirSea,3Sigma,FF MFM 11.19.24.pdf, John Hancock - 401K Advisor Fee Bellmont,AirSea,3Sigma,FF MFM 11.19.24.pdf, 2024-11-19, 2024-11-19, 8, 1, NULL
+92, C:/Users/{username}/Hohimer Wealth Management/Hohimer Company Portal - Company/Hohimer Team Shared 4-15-19/compliance/mail/2024/Empower - 401K Advisor Fee -Fast Water & Younker 11.20.24.pdf, Empower - 401K Advisor Fee -Fast Water & Younker 11.20.24.pdf, 2024-11-20, 2024-11-20, 5, 1, NULL
+93, C:/Users/{username}/Hohimer Wealth Management/Hohimer Company Portal - Company/Hohimer Team Shared 4-15-19/compliance/mail/2025/Ascensus - 401k Advisor Fee-Q4-24- Opportunity Interactive - rcvd 1.22.25.pdf, Ascensus - 401k Advisor Fee-Q4-24- Opportunity Interactive - rcvd 1.22.25.pdf, 2025-01-22, 2025-01-22, 1, 1, NULL
+94, C:/Users/{username}/Hohimer Wealth Management/Hohimer Company Portal - Company/Hohimer Team Shared 4-15-19/compliance/mail/2025/Capital Grp -Advisor Fee xFire chk rcvd 2.3.25.pdf, Capital Grp -Advisor Fee xFire chk rcvd 2.3.25.pdf, 2025-02-03, 2025-02-03, NULL, 1, NULL
 -- TABLE: clients
-client_id, display_name, full_name, ima_signed_date, onedrive_folder_path, valid_from, valid_to
-1, AirSea America, THE TRUSTEES OF AIRSEA AMERICA INC 401K PLAN AND TRUST, 2020-07-31, NULL, 2025-03-14 04:04:16, NULL
-2, Bumgardner Architects (ABC), THE BUMGARDNER ARCHITECTS A WASHINGTON CORPORATION PROFIT, 2020-08-02, NULL, 2025-03-14 04:04:16, NULL
-3, Amplero, AMPLERO INC 401K, 2019-03-15, NULL, 2025-03-14 04:04:16, NULL
-14, Hos Bros, HOS BROS CONSTRUCTION INC, 2019-05-08, NULL, 2025-03-14 04:04:16, NULL
-15, Lavle USA, LAVLE USA INC 401K, 2019-03-22, NULL, 2025-03-14 04:04:16, NULL
-16, Lynnwood Honda, LYNNWOOD ENTERPRISES INC 401K, 2020-02-06, NULL, 2025-03-14 04:04:16, NULL
-27, XFire, XFIRE INDUSTRIES INC 401K PLAN, NULL, NULL, 2025-03-14 04:04:16, NULL
-28, Younker Motors, YOUNKER MOTORS, 2020-07-30, NULL, 2025-03-14 04:04:16, NULL
-29, Youth Dynamics, YOUTH DYNAMICS, NULL, NULL, 2025-03-14 04:04:16, NULL
+client_id, display_name, full_name, ima_signed_date, onedrive_folder_path, valid_from, valid_to, name_variants
+1, AirSea America, THE TRUSTEES OF AIRSEA AMERICA INC 401K PLAN AND TRUST, 2020-07-31, NULL, 2025-03-14 04:04:16, NULL, AirSea,AS,Air Sea
+2, Bumgardner Architects (ABC), THE BUMGARDNER ARCHITECTS A WASHINGTON CORPORATION PROFIT, 2020-08-02, NULL, 2025-03-14 04:04:16, NULL, Bumgardner,ABC
+3, Amplero, AMPLERO INC 401K, 2019-03-15, NULL, 2025-03-14 04:04:16, NULL, NULL
+16, Lynnwood Honda, LYNNWOOD ENTERPRISES INC 401K, 2020-02-06, NULL, 2025-03-14 04:04:16, NULL, NULL
+17, Nordic Museum, NATIONAL NORDIC MUSEUM, NULL, NULL, 2025-03-14 04:04:16, NULL, NULL
+18, Marten Law, MARTEN LAW GROUP PLLC, 2019-03-26, NULL, 2025-03-14 04:04:16, NULL, NULL
+50, string, string, string, string, 2025-03-21 08:12:00, NULL, NULL
+51, string, string, string, string, 2025-03-21 08:13:01, NULL, NULL
+52, string, string, string, string, 2025-03-21 08:13:02, NULL, NULL
 -- TABLE: contacts
 contact_id, client_id, contact_type, contact_name, phone, email, fax, physical_address, mailing_address, valid_from, valid_to
 1, 1, Primary, Donald Jay, 253-395-9551, djay@asamerica.com, NULL, 3500 West Vally HWY, Ste B-106, Auburn, WA 98001, 3500 West Vally HWY, Ste B-106, Auburn, WA 98001, 2025-03-14 04:04:33, NULL
@@ -45,6 +45,21 @@ contract_id, client_id, contract_number, provider_name, contract_start_date, fee
 33, 16, NULL, Empower, NULL, flat, NULL, 3500.0, quarterly, NULL, 2025-03-14 04:04:26, NULL, 1
 34, 28, NULL, Empower, NULL, percentage, 0.000667, NULL, monthly, 43, 2025-03-14 04:04:26, NULL, 1
 35, 29, NULL, Principal, NULL, percentage, 0.001875, NULL, quarterly, 15, 2025-03-14 04:04:26, NULL, 1
+-- TABLE: date_format_patterns
+format_id, format_pattern, format_description, regex_pattern, priority
+1, MM.DD.YYYY, Month.Day.Year with 4-digit year, (0?[1-9]|1[0-2])\.(0?[1-9]|[12][0-9]|3[01])\.([0-9]{4}), 9
+2, QN-YY, Quarter format Q1-24, Q2-24, etc, Q([1-4])-([0-9]{2}), 8
+3, QN-YYYY, Quarter format with 4-digit year, Q([1-4])-([0-9]{4}), 7
+-- TABLE: document_patterns
+pattern_id, pattern_type, pattern, description, priority, is_active
+1, document_type, Advisory Fee, Alternative payment document naming, 8, 1
+2, document_type, Advisor FEe, Alternative payment document naming with capitalization error, 8, 1
+3, client_list_pattern, 401[kK] Advisor Fee[s]? - ([^-]+), Client list after "401k Advisor Fee -", 10, 1
+4, client_list_pattern, 401[kK] Advisor Fee[s]? ([^-]+), Client list after "401k Advisor Fee", 8, 1
+5, date_pattern, Q([1-4])-([0-9]{2,4}), Quarter reference (Q1-24), 8, 1
+6, date_pattern, chk rcvd ([0-9]{1,2}\\.[0-9]{1,2}\\.[0-9]{2,4}), Check received date, 6, 1
+7, client_delimiter,  and , Word "and" as client separator, 8, 1
+8, client_delimiter, &, Ampersand as client separator, 6, 1
 -- TABLE: payment_files
 payment_id, file_id, linked_at
 1054, 64, 2025-03-11 04:28:02
@@ -61,15 +76,44 @@ payment_id, contract_id, client_id, received_date, total_assets, actual_fee, met
 1, 1, 1, 2019-05-03, 824305, 547.51, Auto - Check, waiting on how John Hancock calculates fee payments, 2025-03-14 03:57:29, NULL, 4, 2019, 4, 2019, NULL, NULL, NULL, NULL
 2, 1, 1, 2019-06-07, 805477, 535.03, Auto - Check, NULL, 2025-03-14 03:57:29, NULL, 5, 2019, 5, 2019, NULL, NULL, NULL, NULL
 3, 1, 1, 2019-07-05, 839288, 557.54, Auto - Check, NULL, 2025-03-14 03:57:29, NULL, 6, 2019, 6, 2019, NULL, NULL, NULL, NULL
-466, 14, 14, 2019-10-08, NULL, 3750.0, Auto - ACH, NULL, 2025-03-14 03:57:29, NULL, NULL, NULL, NULL, NULL, 3, 2019, 3, 2019
 467, 14, 14, 2020-01-13, NULL, 3750.0, Auto - ACH, Emailed received from Tom RE: this fee payment 1/15/2020 (Oct. Nov. Dec.), 2025-03-14 03:57:29, NULL, NULL, NULL, NULL, NULL, 4, 2019, 4, 2019
 468, 14, 14, 2020-04-13, NULL, 3750.0, Auto - ACH, Per statement received 4/13/2020, 2025-03-14 03:57:29, NULL, NULL, NULL, NULL, NULL, 1, 2020, 1, 2020
-1080, 27, 27, 2025-01-13, 61703.1, 155.1, Check, Period 10/01/2024 to 12/31/2024, 2025-03-14 03:57:29, NULL, NULL, NULL, NULL, NULL, 4, 2024, 4, 2024
-1081, 34, 28, 2025-01-15, 2009546.67, 1339.69, Check, Empower payment for December 2024, 2025-03-14 03:57:29, NULL, 12, 2024, 12, 2024, NULL, NULL, NULL, NULL
+469, 14, 14, 2020-07-13, NULL, 3750.0, Auto - ACH, Per email 7/13/2020 from DH/TB, 2025-03-14 03:57:29, NULL, NULL, NULL, NULL, NULL, 2, 2020, 2, 2020
 1082, 34, 28, 2024-12-17, 2009948.21, 1339.97, Check, NULL, 2025-03-14 03:57:29, NULL, 11, 2024, 11, 2024, NULL, NULL, NULL, NULL
+1083, 1, 1, 2025-03-21, 1000000, 1250.0, Check, Test payment from API, 2025-03-21 08:08:05, NULL, 3, 2025, 3, 2025, NULL, NULL, NULL, NULL
+1084, 1, 1, 2025-03-21, 1000000, 1250.0, Check, Test payment from API, 2025-03-21 08:08:17, NULL, 3, 2025, 3, 2025, NULL, NULL, NULL, NULL
 -- TABLE: period_reference
 reference_date, current_month_year, current_month, current_quarter_year, current_quarter
 2025-03-20, 2025, 2, 2024, 4
+2025-03-21, 2025, 2, 2024, 4
+-- TABLE: providers
+provider_id, provider_name, name_variants, valid_from, valid_to
+1, Ascensus, Asc, 2025-03-22 04:30:56, NULL
+2, Ascensus Trust Company, ATC, 2025-03-22 04:30:56, NULL
+3, Capital Group / American Funds, CG,AMFUNDS, 2025-03-22 04:30:56, NULL
+6, Fidelity, Fid, 2025-03-22 04:30:56, NULL
+7, Hunnex & Shoemaker, NULL, 2025-03-22 04:30:56, NULL
+8, John Hancock, JH, 2025-03-22 04:30:56, NULL
+10, Principal, Prin, 2025-03-22 04:30:56, NULL
+11, Transamerica, TA, 2025-03-22 04:30:56, NULL
+12, Voya, NULL, 2025-03-22 04:30:56, NULL
+-- TABLE: system_config
+config_key, config_value, description, last_updated
+client_folder_path, C:/Users/{username}/Hohimer Wealth Management/Hohimer Company Portal - Company/Hohimer Team Shared 4-15-19/401k Clients/{client_name}/, Path template for client folders, 2025-03-22 04:44:22
+shortcut_subfolder, Consulting Fee/{year}/, Subfolder within client folder where shortcuts are placed, 2025-03-22 04:44:25
+processing_frequency_minutes, 60, How often to check for new documents, 2025-03-22 04:44:31
+days_to_match_payment, 30, Number of days before/after document date to look for matching payments, 2025-03-22 04:44:35
+enable_shortcuts, true, Whether to create Windows shortcuts for documents, 2025-03-22 04:44:44
+-- VIEW: DocumentProcessingView
+file_id, file_path, original_filename, document_date, is_processed, provider_id, provider_name, provider_variants, linked_client_ids, linked_client_names, linked_client_variants, payment_count
+63, C:/Users/{username}/Hohimer Wealth Management/Hohimer Company Portal - Company/Hohimer Team Shared 4-15-19/compliance/mail/2025/John Hancock - 401K Adivsor Fee Bellmont AirSea Benevon MFM, FlorForm, 3 Sigma 2.24.25.pdf, John Hancock - 401K Adivsor Fee Bellmont AirSea Benevon MFM, FlorForm, 3 Sigma 2.24.25.pdf, 2025-02-24, 1, 8, John Hancock, JH, 6, Bellmont Cabinets, Bellmont,BC,Bell, 1
+64, C:/Users/{username}/Hohimer Wealth Management/Hohimer Company Portal - Company/Hohimer Team Shared 4-15-19/compliance/mail/2025/John Hancock - 401K Adivsor Fee Bellmont AirSea Benevon MFM, FlorForm, 3 Sigma 2.24.25.pdf, John Hancock - 401K Adivsor Fee Bellmont AirSea Benevon MFM, FlorForm, 3 Sigma 2.24.25.pdf, 2025-02-24, 1, 8, John Hancock, JH, 1, AirSea America, AirSea,AS,Air Sea, 1
+65, C:/Users/{username}/Hohimer Wealth Management/Hohimer Company Portal - Company/Hohimer Team Shared 4-15-19/compliance/mail/2025/John Hancock - 401K Adivsor Fee Bellmont AirSea Benevon MFM, FlorForm, 3 Sigma 2.24.25.pdf, John Hancock - 401K Adivsor Fee Bellmont AirSea Benevon MFM, FlorForm, 3 Sigma 2.24.25.pdf, 2025-02-24, 1, 8, John Hancock, JH, 23, Three Sigma, 3Sig,3 Sigma,3S, 1
+-- VIEW: DocumentView
+file_id, file_path, original_filename, document_date, is_processed, provider_id, provider_name, payment_id, payment_date, actual_fee, client_id, client_name
+63, C:/Users/{username}/Hohimer Wealth Management/Hohimer Company Portal - Company/Hohimer Team Shared 4-15-19/compliance/mail/2025/John Hancock - 401K Adivsor Fee Bellmont AirSea Benevon MFM, FlorForm, 3 Sigma 2.24.25.pdf, John Hancock - 401K Adivsor Fee Bellmont AirSea Benevon MFM, FlorForm, 3 Sigma 2.24.25.pdf, 2025-02-24, 1, 8, John Hancock, 1059, 2025-02-07, 1921.31, 6, Bellmont Cabinets
+64, C:/Users/{username}/Hohimer Wealth Management/Hohimer Company Portal - Company/Hohimer Team Shared 4-15-19/compliance/mail/2025/John Hancock - 401K Adivsor Fee Bellmont AirSea Benevon MFM, FlorForm, 3 Sigma 2.24.25.pdf, John Hancock - 401K Adivsor Fee Bellmont AirSea Benevon MFM, FlorForm, 3 Sigma 2.24.25.pdf, 2025-02-24, 1, 8, John Hancock, 1054, 2025-02-07, 930.44, 1, AirSea America
+65, C:/Users/{username}/Hohimer Wealth Management/Hohimer Company Portal - Company/Hohimer Team Shared 4-15-19/compliance/mail/2025/John Hancock - 401K Adivsor Fee Bellmont AirSea Benevon MFM, FlorForm, 3 Sigma 2.24.25.pdf, John Hancock - 401K Adivsor Fee Bellmont AirSea Benevon MFM, FlorForm, 3 Sigma 2.24.25.pdf, 2025-02-24, 1, 8, John Hancock, 1075, 2025-02-07, 887.95, 23, Three Sigma
 -- VIEW: v_active_contracts
 contract_id, client_id, contract_number, provider_name, contract_start_date, fee_type, percent_rate, flat_rate, payment_schedule, num_people, valid_from, valid_to, is_active
 1, 1, 134565, John Hancock, 2018-03-22, percentage, 0.0007, NULL, monthly, 18, 2025-03-14 04:04:26, NULL, 1
@@ -105,26 +149,26 @@ client_id, contract_id, year, month, quarter, schedule_type, period_key, actual_
 29, 35, 2024, NULL, 4, quarterly, 20244, NULL, NULL, 0
 -- VIEW: v_client_details
 client_id, display_name, full_name, ima_signed_date, address, contract_id, contract_number, provider_name, payment_schedule, fee_type, percent_rate, flat_rate, participants, payment_status, current_period, missing_payment_count, client_days, client_since_formatted
-1, AirSea America, THE TRUSTEES OF AIRSEA AMERICA INC 401K PLAN AND TRUST, 2020-07-31, 3500 West Vally HWY, Ste B-106, Auburn, WA 98001, 1, 134565, John Hancock, monthly, percentage, 0.0007, NULL, 18, UNPAID, Feb 2025, 2, 2149.248911990784, 05/03/2019
-2, Bumgardner Architects (ABC), THE BUMGARDNER ARCHITECTS A WASHINGTON CORPORATION PROFIT, 2020-08-02, 2111 Third Ave, Seattle, WA 98121, 2, NULL, Voya, monthly, percentage, 0.000416, NULL, 35, UNPAID, Feb 2025, 8, 2013.2489121644758, 09/16/2019
-3, Amplero, AMPLERO INC 401K, 2019-03-15, 1218 3rd Ave #900, Seattle, WA 98101, 3, 551296, Voya, monthly, flat, NULL, 666.66, NULL, UNPAID, Feb 2025, 8, 2090.248912326526, 07/01/2019
-14, Hos Bros, HOS BROS CONSTRUCTION INC, 2019-05-08, 7733 W. Bostian Rd, Woodinville, WA 98072, 14, 34283, Fidelity, quarterly, flat, NULL, 3750.0, 24, UNPAID, Q4 2024, 1, 2082.248912488576, 07/09/2019
-15, Lavle USA, LAVLE USA INC 401K, 2019-03-22, 916 8th St, Anacortes, WA 98221, 15, 809872, Transamerica, monthly, percentage, 0.000417, NULL, NULL, UNPAID, Feb 2025, 4, 2117.2489126734436, 06/04/2019
-16, Lynnwood Honda, LYNNWOOD ENTERPRISES INC 401K, 2020-02-06, 22020 Highway 99, Edmonds, WA 98026, 33, NULL, Empower, quarterly, flat, NULL, 3500.0, NULL, UNPAID, Q4 2024, 1, 1447.2489128471352, 04/04/2021
-27, XFire, XFIRE INDUSTRIES INC 401K PLAN, NULL, 22916 57th Ave E, Spanaway WA 98387, 27, 171414, Capital Group / American Funds, quarterly, percentage, 0.0025, NULL, 2, PAID, Q4 2024, 0, 785.2489130324684, 01/26/2023
-28, Younker Motors, YOUNKER MOTORS, 2020-07-30, 3401 E. Valley Rd, Renton, WA 98057, 34, NULL, Empower, monthly, percentage, 0.000667, NULL, 43, UNPAID, Feb 2025, 2, 1726.2489132289775, 06/29/2020
-29, Youth Dynamics, YOUTH DYNAMICS, NULL, NULL, 35, NULL, Principal, quarterly, percentage, 0.001875, NULL, 15, UNPAID, Q4 2024, 1, 519.2489134259522, 10/19/2023
+1, AirSea America, THE TRUSTEES OF AIRSEA AMERICA INC 401K PLAN AND TRUST, 2020-07-31, 3500 West Vally HWY, Ste B-106, Auburn, WA 98001, 1, 134565, John Hancock, monthly, percentage, 0.0007, NULL, 18, UNPAID, Feb 2025, 2, 2150.2170209954493, 05/03/2019
+2, Bumgardner Architects (ABC), THE BUMGARDNER ARCHITECTS A WASHINGTON CORPORATION PROFIT, 2020-08-02, 2111 Third Ave, Seattle, WA 98121, 2, NULL, Voya, monthly, percentage, 0.000416, NULL, 35, UNPAID, Feb 2025, 8, 2014.2170210070908, 09/16/2019
+3, Amplero, AMPLERO INC 401K, 2019-03-15, 1218 3rd Ave #900, Seattle, WA 98101, 3, 551296, Voya, monthly, flat, NULL, 666.66, NULL, UNPAID, Feb 2025, 8, 2091.217021331191, 07/01/2019
+14, Hos Bros, HOS BROS CONSTRUCTION INC, 2019-05-08, 7733 W. Bostian Rd, Woodinville, WA 98072, 14, 34283, Fidelity, quarterly, flat, NULL, 3750.0, 24, UNPAID, Q4 2024, 1, 2083.217021493241, 07/09/2019
+15, Lavle USA, LAVLE USA INC 401K, 2019-03-22, 916 8th St, Anacortes, WA 98221, 15, 809872, Transamerica, monthly, percentage, 0.000417, NULL, NULL, UNPAID, Feb 2025, 4, 2118.21702164365, 06/04/2019
+16, Lynnwood Honda, LYNNWOOD ENTERPRISES INC 401K, 2020-02-06, 22020 Highway 99, Edmonds, WA 98026, 33, NULL, Empower, quarterly, flat, NULL, 3500.0, NULL, UNPAID, Q4 2024, 1, 1448.2170218173414, 04/04/2021
+27, XFire, XFIRE INDUSTRIES INC 401K PLAN, NULL, 22916 57th Ave E, Spanaway WA 98387, 27, 171414, Capital Group / American Funds, quarterly, percentage, 0.0025, NULL, 2, PAID, Q4 2024, 0, 786.21702196775, 01/26/2023
+28, Younker Motors, YOUNKER MOTORS, 2020-07-30, 3401 E. Valley Rd, Renton, WA 98057, 34, NULL, Empower, monthly, percentage, 0.000667, NULL, 43, UNPAID, Feb 2025, 2, 1727.2170221991837, 06/29/2020
+29, Youth Dynamics, YOUTH DYNAMICS, NULL, NULL, 35, NULL, Principal, quarterly, percentage, 0.001875, NULL, 15, UNPAID, Q4 2024, 1, 520.2170223840512, 10/19/2023
 -- VIEW: v_client_first_payment
 client_id, display_name, first_payment_date, client_days, client_since_formatted
-1, AirSea America, 2019-05-03, 2149.248913634103, 05/03/2019
-2, Bumgardner Architects (ABC), 2019-09-16, 2013.2489136341028, 09/16/2019
-3, Amplero, 2019-07-01, 2090.248913634103, 07/01/2019
-14, Hos Bros, 2019-07-09, 2082.248913634103, 07/09/2019
-15, Lavle USA, 2019-06-04, 2117.248913634103, 06/04/2019
-16, Lynnwood Honda, 2021-04-04, 1447.2489136341028, 04/04/2021
-27, XFire, 2023-01-26, 785.2489136341028, 01/26/2023
-28, Younker Motors, 2020-06-29, 1726.2489136341028, 06/29/2020
-29, Youth Dynamics, 2023-10-19, 519.2489136341028, 10/19/2023
+1, AirSea America, 2019-05-03, 2150.2170226159506, 05/03/2019
+2, Bumgardner Architects (ABC), 2019-09-16, 2014.2170226159506, 09/16/2019
+3, Amplero, 2019-07-01, 2091.2170226159506, 07/01/2019
+16, Lynnwood Honda, 2021-04-04, 1448.2170226159506, 04/04/2021
+17, Nordic Museum, 2024-03-11, 376.21702263876796, 03/11/2024
+18, Marten Law, 2019-07-09, 2083.217022638768, 07/09/2019
+50, string, NULL, NULL, NULL
+51, string, NULL, NULL, NULL
+52, string, NULL, NULL, NULL
 -- VIEW: v_client_sidebar
 client_id, display_name, initials, provider_name, payment_status, formatted_current_period
 1, AirSea America, A, John Hancock, UNPAID, Feb 2025
@@ -138,7 +182,7 @@ client_id, display_name, initials, provider_name, payment_status, formatted_curr
 29, Youth Dynamics, Y, Principal, UNPAID, Q4 2024
 -- VIEW: v_current_period
 reference_date, monthly_year, monthly_month, quarterly_year, quarterly_quarter
-2025-03-20, 2025, 2, 2024, 4
+2025-03-21, 2025, 2, 2024, 4
 -- VIEW: v_expected_fees
 client_id, contract_id, year, month, quarter, schedule_type, period_key, fee_type, percent_rate, flat_rate, assets_under_management, expected_fee, payment_id, actual_fee, is_split
 1, 1, 2019, 4, NULL, monthly, 201904, percentage, 0.0007, NULL, 824305, 577.01, 1, 547.51, 0
@@ -161,17 +205,7 @@ client_id, contract_id, year, month, quarter, schedule_type, period_key, fee_typ
 29, 35, 2024, NULL, 2, quarterly, 20242, percentage, 0.001875, NULL, NULL, NULL, 923, 946.32, 0, NULL, 0, NULL, 0
 29, 35, 2024, NULL, 3, quarterly, 20243, percentage, 0.001875, NULL, NULL, NULL, 924, 1043.09, 0, NULL, 0, NULL, 0
 29, 35, 2024, NULL, 4, quarterly, 20244, percentage, 0.001875, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, 0
--- VIEW: v_last_payment
-payment_id, client_id, display_name, payment_date_formatted, applied_period, aum, displayed_aum, is_estimated_aum, expected_fee, displayed_expected_fee, is_estimated_fee, actual_fee, variance_amount, variance_classification, is_split, estimated_variance_amount, estimated_variance_classification, file_id, file_name
-57, 1, AirSea America, 12/19/2023, Nov 2023, 1208139, 1208139, 0, 845.7, 845.7, 0, 802.51, -43.19, Underpaid, 0, NULL, NULL, NULL, NULL
-86, 2, Bumgardner Architects (ABC), 12/18/2020, Nov 2020, NULL, 3247119, 1, NULL, 1350.8, 1, 1295.02, NULL, NULL, 0, -55.78, Underpaid, NULL, NULL
-148, 3, Amplero, 12/18/2020, Nov 2020, NULL, NULL, 0, 666.66, 666.66, 0, 666.66, 0.0, Within Target, 0, NULL, NULL, NULL, NULL
-474, 14, Hos Bros, 10/18/2021, Q3 2021, NULL, NULL, 0, 3750.0, 3750.0, 0, 3749.99, -0.01, Within Target, 0, NULL, NULL, NULL, NULL
-529, 15, Lavle USA, 12/13/2022, Nov 2022, 166997, 166997, 0, 69.64, 69.64, 0, 69.58, -0.06, Within Target, 0, NULL, NULL, NULL, NULL
-570, 16, Lynnwood Honda, 10/23/2023, Q3 2023, NULL, NULL, 0, 3500.0, 3500.0, 0, 3500.0, 0.0, Within Target, 0, NULL, NULL, NULL, NULL
-823, 27, XFire, 10/23/2023, Q3 2023, 41457, 41457, 0, 103.64, 103.64, 0, 104.49, 0.85, Within Target, 0, NULL, NULL, NULL, NULL
-838, 28, Younker Motors, 12/23/2020, Nov 2020, 2074496, 2074496, 0, 1383.69, 1383.69, 0, 1383.03, -0.66, Within Target, 0, NULL, NULL, NULL, NULL
-920, 29, Youth Dynamics, 10/19/2023, Q3 2023, NULL, NULL, 0, NULL, NULL, 0, 665.49, NULL, NULL, 0, NULL, NULL, NULL, NULL
+-- VIEW: v_last_payment - Error: no such column: cf.file_name
 -- VIEW: v_missing_payment_periods
 client_id, display_name, missing_periods
 1, AirSea America, Oct 2022, Feb 2025
@@ -205,17 +239,7 @@ client_id, contract_id, year, month, period_key
 28, 34, 2024, 12, 202412
 28, 34, 2025, 1, 202501
 28, 34, 2025, 2, 202502
--- VIEW: v_payment_history
-payment_id, client_id, display_name, payment_date_formatted, period_start_formatted, period_end_formatted, aum, displayed_aum, is_estimated_aum, expected_fee, displayed_expected_fee, is_estimated_fee, actual_fee, is_split, variance_amount, variance_classification, estimated_variance_amount, estimated_variance_classification, method, notes, file_id, file_name, onedrive_path
-1054, 1, AirSea America, 02/07/2025, Jan 2025, , 1400805.79, 1400805.79, 0, 980.56, 980.56, 0, 930.44, 0, -50.12, Underpaid, NULL, NULL, Check, John Hancock payment, 64, John Hancock - 401K Adivsor Fee Bellmont AirSea Benevon MFM, FlorForm, 3 Sigma 2.24.25.pdf, Air Sea America\Consulting Fee\2025\John Hancock - 401K Adivsor Fee Bellmont AirSea Benevon MFM, FlorForm, 3 Sigma 2.24.25.pdf
-1055, 1, AirSea America, 01/03/2025, Dec 2024, , 1373196.53, 1373196.53, 0, 961.24, 961.24, 0, 912.13, 0, -49.11, Underpaid, NULL, NULL, Check, John Hancock payment, 69, John Hancock-401K Advisor Fee Bellmont,AirSea,3Sig,FF, MFM 1.16.25.pdf, Air Sea America\Consulting Fee\2025\John Hancock-401K Advisor Fee Bellmont,AirSea,3Sig,FF, MFM 1.16.25.pdf
-1056, 1, AirSea America, 12/06/2024, Nov 2024, , 1395147.37, 1395147.37, 0, 976.6, 976.6, 0, 926.68, 0, -49.92, Underpaid, NULL, NULL, Check, John Hancock payment, 74, John Hancock - Air Sea, Bellmont, 3sigma, FloForm, MFM chk rcvd 12.20.24.pdf, Air Sea America\Consulting Fee\2024\John Hancock - Air Sea, Bellmont, 3sigma, FloForm, MFM chk rcvd 12.20.24.pdf
-457, 13, Harper Engineering, 01/24/2023, Dec 2022,  to Feb 2023, NULL, NULL, 0, 1250.0, 1250.0, 0, 4999.97, 1, NULL, NULL, NULL, NULL, Auto - Check, Per fee statement payment (October, November December ), NULL, NULL, NULL
-456, 13, Harper Engineering, 10/10/2022, Sep 2022,  to Nov 2022, NULL, NULL, 0, 1250.0, 1250.0, 0, 5000.01, 1, NULL, NULL, NULL, NULL, Auto - Check, Per fee statement payment (July, August, September), NULL, NULL, NULL
-455, 13, Harper Engineering, 07/18/2022, Jun 2022,  to Aug 2022, NULL, NULL, 0, 1250.0, 1250.0, 0, 5000.01, 1, NULL, NULL, NULL, NULL, Auto - Check, Per fee statement payment (April, May, June ), NULL, NULL, NULL
-922, 29, Youth Dynamics, 04/15/2024, Q1 2024, , NULL, NULL, 0, NULL, NULL, 0, 915.53, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL
-921, 29, Youth Dynamics, 01/17/2024, Q4 2023, , NULL, NULL, 0, NULL, NULL, 0, 748.16, 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL
-920, 29, Youth Dynamics, 10/19/2023, Q3 2023, , NULL, NULL, 0, NULL, NULL, 0, 665.49, 0, NULL, NULL, NULL, NULL, NULL, Newly established at Principal; amount will be posted on 10.27.23, NULL, NULL, NULL
+-- VIEW: v_payment_history - Error: no such column: cf.file_name
 -- VIEW: v_payment_status
 client_id, contract_id, display_name, payment_schedule, current_year, current_month, current_quarter, current_period_key, payment_status, formatted_current_period
 1, 1, AirSea America, monthly, 2025, 2, NULL, 202502, UNPAID, Feb 2025

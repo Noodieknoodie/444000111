@@ -1,9 +1,12 @@
-# README_DATABASE.md
+# 401K Payment System Database
 
 //// THE FOLLOWING IS SHORTHAND / MINIFIED / SQL DATABASE SCHEMAS FOR THE DB. THE GOAL WAS TO GIVE ALL THE INFORMATION AS THE ORIGINAL IN LESS TOKENS FOR EFFICIENCY. USE YOUR BRAIN TO FILL IN WHAT THE ACTUAL SQLITE SCHEMA'S BOILERPLATE IS LIKE. 
 
-### TABLES ###
+## Core Tables
 
+### Client Management
+
+```sql
 contacts:
 - contact_id: INTEGER, PK, AUTOINCREMENT.
 - client_id: INTEGER, NOT NULL, FK → clients(client_id) ON DELETE CASCADE.
@@ -25,19 +28,7 @@ clients:
 - onedrive_folder_path: TEXT.
 - valid_from: DATETIME DEFAULT CURRENT_TIMESTAMP.
 - valid_to: DATETIME.
-
-client_files:
-- file_id: INTEGER, PK, AUTOINCREMENT, NOT NULL.
-- client_id: INTEGER, NOT NULL, FK → clients(client_id) ON DELETE CASCADE.
-- file_name: TEXT, NOT NULL.
-- onedrive_path: TEXT, NOT NULL.
-- uploaded_at: DATETIME DEFAULT CURRENT_TIMESTAMP.
-
-payment_files:
-- payment_id: INTEGER, NOT NULL, FK → payments(payment_id) ON DELETE CASCADE.
-- file_id: INTEGER, NOT NULL, FK → client_files(file_id) ON DELETE CASCADE.
-- linked_at: DATETIME DEFAULT CURRENT_TIMESTAMP.
-- Composite PK: (payment_id, file_id).
+- name_variants: TEXT. -- Comma-separated list of aliases/abbreviations
 
 contracts:
 - contract_id: INTEGER, PK, AUTOINCREMENT, NOT NULL.
@@ -80,19 +71,103 @@ period_reference:
 - current_month: INTEGER.
 - current_quarter_year: INTEGER.
 - current_quarter: INTEGER.
+```
 
+### Document Management
 
-### INDEX ###
+```sql
+-- Document files (updated for "Store Once, Link Everywhere")
+client_files:
+- file_id: INTEGER PRIMARY KEY AUTOINCREMENT
+- file_path: TEXT NOT NULL         -- Path in mail dump
+- original_filename: TEXT NOT NULL
+- upload_date: DATETIME DEFAULT CURRENT_TIMESTAMP
+- document_date: TEXT              -- Date from document
+- provider_id: INTEGER             -- From providers table
+- is_processed: INTEGER DEFAULT 0  -- Shortcut creation flag
+- metadata: TEXT                   -- JSON additional data
+- FOREIGN KEY (provider_id) REFERENCES providers(provider_id)
 
+-- Document-payment associations
+payment_files:
+- payment_id: INTEGER NOT NULL
+- file_id: INTEGER NOT NULL
+- linked_at: DATETIME DEFAULT CURRENT_TIMESTAMP
+- PRIMARY KEY (payment_id, file_id)
+- FOREIGN KEY (payment_id) REFERENCES payments(payment_id) ON DELETE CASCADE
+- FOREIGN KEY (file_id) REFERENCES client_files(file_id) ON DELETE CASCADE
+
+-- Providers table
+providers:
+- provider_id: INTEGER PRIMARY KEY AUTOINCREMENT
+- provider_name: TEXT NOT NULL UNIQUE
+- name_variants: TEXT              -- Comma-separated list of alternate names/abbreviations
+- valid_from: DATETIME DEFAULT CURRENT_TIMESTAMP
+- valid_to: DATETIME                -- For soft delete consistency with other tables
+
+-- Document pattern recognition
+document_patterns:
+- pattern_id: INTEGER PRIMARY KEY AUTOINCREMENT
+- pattern_type: TEXT NOT NULL
+- pattern: TEXT NOT NULL
+- description: TEXT
+- priority: INTEGER DEFAULT 1
+- is_active: INTEGER DEFAULT 1
+
+-- Processing log
+processing_log:
+- log_id: INTEGER PRIMARY KEY AUTOINCREMENT
+- file_name: TEXT NOT NULL
+- process_date: DATETIME DEFAULT CURRENT_TIMESTAMP
+- status: TEXT NOT NULL  -- 'processed', 'error', 'skipped'
+- details: TEXT          -- Error messages or processing notes
+- file_id: INTEGER       -- Link to client_files if processed
+- FOREIGN KEY (file_id) REFERENCES client_files(file_id)
+
+-- Client-provider association
+client_providers:
+- client_id: INTEGER NOT NULL
+- provider_id: INTEGER NOT NULL
+- start_date: TEXT
+- end_date: TEXT
+- is_active: INTEGER DEFAULT 1
+- PRIMARY KEY (client_id, provider_id)
+- FOREIGN KEY (client_id) REFERENCES clients(client_id)
+- FOREIGN KEY (provider_id) REFERENCES providers(provider_id)
+
+-- Date format patterns
+date_format_patterns:
+- format_id: INTEGER PRIMARY KEY AUTOINCREMENT
+- format_pattern: TEXT NOT NULL
+- format_description: TEXT
+- regex_pattern: TEXT
+- priority: INTEGER DEFAULT 1
+
+-- System configuration
+system_config:
+- config_key: TEXT PRIMARY KEY
+- config_value: TEXT NOT NULL
+- description: TEXT
+- last_updated: DATETIME DEFAULT CURRENT_TIMESTAMP
+```
+
+## Indexes
+
+```sql
 idx_payments_received_date ON payments(received_date)
 idx_payments_client_date ON payments(client_id, received_date)
 idx_payment_files_payment_id ON payment_files(payment_id)
 idx_payments_valid_to ON payments(valid_to)
+idx_clients_display_name ON clients(display_name)
+idx_client_files_file_path ON client_files(file_path)
+idx_client_files_provider_id ON client_files(provider_id)
+```
 
+## Views
 
+### Payment Processing Views
 
-### VIEWS ###
-
+```sql
 v_active_contracts:
 - FROM: contracts (c)
 - WHERE: c.valid_to IS NULL AND c.is_active = 1
@@ -139,7 +214,6 @@ v_client_sidebar:
 - WHERE: c.valid_to IS NULL
 - ORDER BY: c.display_name
 
-
 v_current_period:
 - FROM period_reference.
 - SELECT reference_date, current_month_year AS monthly_year, current_month AS monthly_month, current_quarter_year AS quarterly_year, current_quarter AS quarterly_quarter.
@@ -178,7 +252,6 @@ v_monthly_periods:
 - WITH client_periods: SELECT c.client_id, c.contract_id, MIN(CASE WHEN p.applied_start_month IS NOT NULL THEN (p.applied_start_month_year * 100 + p.applied_start_month) END) AS first_period, and current_period from v_current_period as (monthly_year * 100 + monthly_month) from v_active_contracts (c) LEFT JOIN payments (p) ON c.client_id = p.client_id AND p.valid_to IS NULL; filter WHERE payment_schedule = 'monthly'; GROUP BY client_id, contract_id.
 - WITH RECURSIVE months(period): start at MIN(first_period) from client_periods; increment month by month (rollover December to January with year increment) until reaching MAX(current_period).
 - SELECT cp.client_id, cp.contract_id, year = period/100, month = period % 100, period AS period_key from client_periods (cp) JOIN months (m) where m.period BETWEEN cp.first_period AND cp.current_period.
-
 
 v_payment_history:
 - FROM: payments (p) JOIN clients (c) JOIN v_active_contracts (con) LEFT JOIN payment_files (pf) LEFT JOIN client_files (cf)
@@ -230,3 +303,135 @@ v_quarterly_periods:
   - Generate periods starting from MIN(first_period), incrementing: if period mod 10 = 4 then next = (period/10 + 1) * 10 + 1, else period + 1, until period reaches MAX(current_period)
 - SELECT: client_id, contract_id, year = period/10, quarter = period % 10, period AS period_key
 - WHERE: period between first_period and current_period
+```
+
+### Document Management Views
+
+```sql
+-- Main document view for API and frontend
+DocumentView:
+- FROM client_files (cf)
+- LEFT JOIN providers (pr) ON cf.provider_id = pr.provider_id
+- LEFT JOIN payment_files (pf) ON cf.file_id = pf.file_id
+- LEFT JOIN payments (p) ON pf.payment_id = p.payment_id
+- LEFT JOIN clients (c) ON p.client_id = c.client_id
+- SELECT:
+  - Document information: file_id, file_path, original_filename, document_date, is_processed
+  - Provider information: provider_id, provider_name
+  - Payment information: payment_id, payment_date (p.received_date), actual_fee
+  - Client information: client_id, client_name (c.display_name)
+
+-- Enhanced view for document processing
+DocumentProcessingView:
+- FROM client_files (cf)
+- LEFT JOIN providers (pr) ON cf.provider_id = pr.provider_id
+- LEFT JOIN payment_files (pf) ON cf.file_id = pf.file_id
+- LEFT JOIN payments (p) ON pf.payment_id = p.payment_id
+- LEFT JOIN clients (c) ON p.client_id = c.client_id
+- GROUP BY cf.file_id
+- SELECT:
+  - All document fields from DocumentView
+  - provider_variants from providers
+  - linked_client_ids: GROUP_CONCAT(DISTINCT c.client_id)
+  - linked_client_names: GROUP_CONCAT(DISTINCT c.display_name)
+  - linked_client_variants: GROUP_CONCAT(DISTINCT c.name_variants)
+  - payment_count: COUNT(DISTINCT pf.payment_id)
+```
+
+## Database Design Principles
+
+### Soft Delete
+
+Most tables use a soft delete pattern with `valid_from` and `valid_to` fields:
+- Records are never physically deleted
+- When a record is "deleted", its `valid_to` field is set to the current timestamp
+- Queries filter for records where `valid_to IS NULL` to get current data
+- Historical data remains for auditing
+
+### Pattern-Based Recognition
+
+Document recognition is driven by patterns stored in the database:
+- New patterns can be added without changing code
+- Patterns have priorities to determine precedence
+- Different pattern types for different extraction needs
+- Active flag to enable/disable patterns
+
+### Configuration as Data
+
+System settings are stored in the database:
+- Allows runtime configuration changes
+- Supports both technical and business settings
+- Centralizes configuration for all components
+
+## Common Queries
+
+### Client Management
+
+```sql
+-- Get active clients
+SELECT * FROM clients WHERE valid_to IS NULL;
+
+-- Get client with contracts and payment count
+SELECT 
+    c.client_id, c.display_name, 
+    COUNT(DISTINCT co.contract_id) AS contract_count,
+    COUNT(DISTINCT p.payment_id) AS payment_count
+FROM clients c
+LEFT JOIN contracts co ON c.client_id = co.client_id AND co.valid_to IS NULL
+LEFT JOIN payments p ON c.client_id = p.client_id AND p.valid_to IS NULL
+WHERE c.valid_to IS NULL
+GROUP BY c.client_id;
+```
+
+### Document Management
+
+```sql
+-- Get documents for a payment
+SELECT * FROM DocumentView WHERE payment_id = ?;
+
+-- Get all documents for a client
+SELECT * FROM DocumentView WHERE client_id = ?;
+
+-- Get unprocessed documents
+SELECT * FROM client_files WHERE is_processed = 0;
+
+-- Get documents with processing errors
+SELECT pl.* 
+FROM processing_log pl
+WHERE pl.status = 'error'
+ORDER BY pl.process_date DESC;
+```
+
+### Pattern Management
+
+```sql
+-- Get document type recognition patterns in priority order
+SELECT * FROM document_patterns 
+WHERE pattern_type = 'document_type' AND is_active = 1
+ORDER BY priority DESC;
+
+-- Update pattern priority
+UPDATE document_patterns 
+SET priority = 11
+WHERE pattern_id = ?;
+
+-- Disable a pattern
+UPDATE document_patterns 
+SET is_active = 0
+WHERE pattern_id = ?;
+```
+
+## Maintenance
+
+### Backups
+The database is automatically backed up on application startup.
+
+### Cleanup
+Processing logs can be periodically archived:
+
+```sql
+-- Archive old processing logs
+DELETE FROM processing_log 
+WHERE process_date < date('now', '-90 days') 
+AND status = 'processed';
+```

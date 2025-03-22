@@ -1,13 +1,26 @@
 -- TABLE DEFINITIONS
 -- client_files
 CREATE TABLE "client_files" (
-    "file_id" INTEGER NOT NULL,
-    "client_id" INTEGER NOT NULL,
-    "file_name" TEXT NOT NULL,
-    "onedrive_path" TEXT NOT NULL,
-    "uploaded_at" DATETIME DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY("file_id" AUTOINCREMENT),
-    FOREIGN KEY("client_id") REFERENCES "clients"("client_id") ON DELETE CASCADE
+    "file_id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "file_path" TEXT NOT NULL,
+    "original_filename" TEXT NOT NULL,
+    "upload_date" DATETIME DEFAULT CURRENT_TIMESTAMP,
+    "document_date" TEXT,
+    "provider_id" INTEGER,
+    "is_processed" INTEGER DEFAULT 0,
+    "metadata" TEXT,
+    FOREIGN KEY ("provider_id") REFERENCES "providers" ("provider_id")
+);
+-- client_providers
+CREATE TABLE client_providers (
+    client_id INTEGER NOT NULL,
+    provider_id INTEGER NOT NULL,
+    start_date TEXT,
+    end_date TEXT,
+    is_active INTEGER DEFAULT 1,
+    PRIMARY KEY (client_id, provider_id),
+    FOREIGN KEY (client_id) REFERENCES clients(client_id),
+    FOREIGN KEY (provider_id) REFERENCES providers(provider_id)
 );
 -- clients
 CREATE TABLE "clients" (
@@ -17,7 +30,7 @@ CREATE TABLE "clients" (
 	"ima_signed_date"	TEXT,
 	"onedrive_folder_path"	TEXT,
 	"valid_from"	DATETIME DEFAULT CURRENT_TIMESTAMP,
-	"valid_to"	DATETIME,
+	"valid_to"	DATETIME, name_variants TEXT,
 	PRIMARY KEY("client_id" AUTOINCREMENT)
 );
 -- contacts
@@ -52,14 +65,31 @@ CREATE TABLE "contracts" (
 	PRIMARY KEY("contract_id" AUTOINCREMENT),
 	FOREIGN KEY("client_id") REFERENCES "clients"("client_id") ON DELETE CASCADE
 );
+-- date_format_patterns
+CREATE TABLE date_format_patterns (
+    format_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    format_pattern TEXT NOT NULL,
+    format_description TEXT,
+    regex_pattern TEXT,
+    priority INTEGER DEFAULT 1
+);
+-- document_patterns
+CREATE TABLE document_patterns (
+    pattern_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    pattern_type TEXT NOT NULL,
+    pattern TEXT NOT NULL,
+    description TEXT,
+    priority INTEGER DEFAULT 1,
+    is_active INTEGER DEFAULT 1
+);
 -- payment_files
 CREATE TABLE "payment_files" (
     "payment_id" INTEGER NOT NULL,
     "file_id" INTEGER NOT NULL,
     "linked_at" DATETIME DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY("payment_id", "file_id"),
-    FOREIGN KEY("payment_id") REFERENCES "payments"("payment_id") ON DELETE CASCADE,
-    FOREIGN KEY("file_id") REFERENCES "client_files"("file_id") ON DELETE CASCADE
+    PRIMARY KEY ("payment_id", "file_id"),
+    FOREIGN KEY ("payment_id") REFERENCES "payments" ("payment_id") ON DELETE CASCADE,
+    FOREIGN KEY ("file_id") REFERENCES "client_files" ("file_id") ON DELETE CASCADE
 );
 -- payments
 CREATE TABLE "payments" (
@@ -93,7 +123,88 @@ CREATE TABLE period_reference (
     current_quarter_year INTEGER,
     current_quarter INTEGER
 );
+-- processing_log
+CREATE TABLE processing_log (
+    log_id INTEGER PRIMARY KEY AUTOINCREMENT,
+    file_name TEXT NOT NULL,
+    process_date DATETIME DEFAULT CURRENT_TIMESTAMP,
+    status TEXT NOT NULL, -- 'processed', 'error', 'skipped'
+    details TEXT,         -- Error messages or processing notes
+    file_id INTEGER,      -- Link to client_files if processed
+    FOREIGN KEY (file_id) REFERENCES client_files(file_id)
+);
+-- providers
+CREATE TABLE "providers" (
+    "provider_id" INTEGER PRIMARY KEY AUTOINCREMENT,
+    "provider_name" TEXT NOT NULL UNIQUE,
+    "name_variants" TEXT,
+    "valid_from" DATETIME DEFAULT CURRENT_TIMESTAMP,
+    "valid_to" DATETIME
+);
+-- system_config
+CREATE TABLE system_config (
+    config_key TEXT PRIMARY KEY,
+    config_value TEXT NOT NULL,
+    description TEXT,
+    last_updated DATETIME DEFAULT CURRENT_TIMESTAMP
+);
 -- VIEW DEFINITIONS
+-- DocumentProcessingView
+CREATE VIEW DocumentProcessingView AS
+SELECT
+    cf.file_id,
+    cf.file_path,
+    cf.original_filename,
+    cf.document_date,
+    cf.is_processed,
+    cf.provider_id,
+    pr.provider_name,
+    pr.name_variants AS provider_variants,
+    GROUP_CONCAT(DISTINCT c.client_id) AS linked_client_ids,
+    GROUP_CONCAT(DISTINCT c.display_name) AS linked_client_names,
+    GROUP_CONCAT(DISTINCT c.name_variants) AS linked_client_variants,
+    COUNT(DISTINCT pf.payment_id) AS payment_count
+FROM
+    client_files cf
+LEFT JOIN
+    providers pr ON cf.provider_id = pr.provider_id
+LEFT JOIN
+    payment_files pf ON cf.file_id = pf.file_id
+LEFT JOIN
+    payments p ON pf.payment_id = p.payment_id
+LEFT JOIN
+    clients c ON p.client_id = c.client_id
+GROUP BY
+    cf.file_id;
+-- DocumentView
+CREATE VIEW DocumentView AS
+SELECT
+    -- Document information
+    cf.file_id,
+    cf.file_path,
+    cf.original_filename,
+    cf.document_date,
+    cf.is_processed,
+    -- Provider information
+    pr.provider_id,
+    pr.provider_name,
+    -- Payment information
+    pf.payment_id,
+    p.received_date AS payment_date,
+    p.actual_fee,
+    -- Client information
+    c.client_id,
+    c.display_name AS client_name
+FROM
+    client_files cf
+LEFT JOIN
+    providers pr ON cf.provider_id = pr.provider_id
+LEFT JOIN
+    payment_files pf ON cf.file_id = pf.file_id
+LEFT JOIN
+    payments p ON pf.payment_id = p.payment_id
+LEFT JOIN
+    clients c ON p.client_id = c.client_id;
 -- v_active_contracts
 CREATE VIEW v_active_contracts AS
 SELECT
@@ -289,7 +400,8 @@ SELECT
     rp.client_id,
     rp.display_name,
     rp.payment_date_formatted,
-    rp.period_start_formatted || rp.period_end_formatted AS applied_period,
+    rp.period_start_formatted,
+    rp.period_end_formatted,
     rp.aum,
     rp.displayed_aum,
     rp.is_estimated_aum,
@@ -303,7 +415,10 @@ SELECT
     rp.estimated_variance_amount,
     rp.estimated_variance_classification,
     rp.file_id,
-    rp.file_name
+    rp.file_name,
+    rp.onedrive_path,
+    rp.method,
+    rp.notes
 FROM ranked_payments rp
 WHERE rp.row_num = 1;
 -- v_missing_payment_periods
@@ -866,8 +981,10 @@ JOIN (
 WHERE q.period >= cp.first_period
 AND q.period <= cp.current_period;
 -- INDEX DEFINITIONS
--- idx_payment_files_payment_id
-CREATE INDEX idx_payment_files_payment_id ON payment_files(payment_id);
+-- idx_client_files_file_path
+CREATE INDEX idx_client_files_file_path ON client_files(file_path);
+-- idx_client_files_provider_id
+CREATE INDEX idx_client_files_provider_id ON client_files(provider_id);
 -- idx_payments_client_date
 CREATE INDEX idx_payments_client_date ON payments(client_id, received_date);
 -- idx_payments_received_date

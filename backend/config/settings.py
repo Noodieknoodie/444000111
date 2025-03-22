@@ -92,6 +92,29 @@ class Settings:
             return self.config["files"]["base_path"].replace("{username}", username)
         else:
             return self._fix_path(self.config["files"]["base_path"])
+            
+    def get_mail_dump_path(self, year=None):
+        """Return mail dump path with username and year replaced"""
+        username = os.getlogin()
+        if year is None:
+            year = datetime.now().year
+            
+        if "mail_dump" in self.config["files"]:
+            path = self.config["files"]["mail_dump"]
+            return path.replace("{username}", username).replace("{year}", str(year))
+        else:
+            # Fallback to base path if mail_dump not defined
+            return self.get_files_base_path()
+    
+    def get_client_base_path(self):
+        """Return client base folder path with username replaced"""
+        username = os.getlogin()
+        if "client_base" in self.config["files"]:
+            path = self.config["files"]["client_base"]
+            return path.replace("{username}", username)
+        else:
+            # Fallback to base path if client_base not defined
+            return self.get_files_base_path()
     
     def get_backup_path(self):
         """Return backup directory path with username replaced"""

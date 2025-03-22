@@ -1,11 +1,17 @@
 [TABLES]
 contacts: contact_id(pk), client_id(nn)(fk:clients,cascade), contact_type(nn), contact_name, phone, email, fax, physical_address, mailing_address, valid_from(def:CURRENT_TIMESTAMP), valid_to
-clients: client_id(pk), display_name(nn), full_name, ima_signed_date, onedrive_folder_path, valid_from(def:CURRENT_TIMESTAMP), valid_to
-client_files: file_id(pk), client_id(nn)(fk:clients,cascade), file_name(nn), onedrive_path(nn), uploaded_at(def:CURRENT_TIMESTAMP)
-payment_files: payment_id(pk)(fk:payments,cascade), file_id(pk)(fk:client_files,cascade), linked_at(def:CURRENT_TIMESTAMP) UNIQUE(payment_id,file_id)
-contracts: contract_id(pk), client_id(nn)(fk:clients,cascade), contract_number, provider_name, contract_start_date, fee_type, percent_rate, flat_rate, payment_schedule, num_people, valid_from(def:CURRENT_TIMESTAMP), valid_to, is_active(nn)(def:1)
+clients: client_id(pk), display_name(nn), full_name, ima_signed_date, onedrive_folder_path, valid_from(def:CURRENT_TIMESTAMP), valid_to, name_variants
+contracts: contract_id(pk), client_id(nn)(fk:clients,cascade), contract_number, provider_name, contract_start_dff, fee_type, percent_rate, flat_rate, payment_schedule, num_people, valid_from(def:CURRENT_TIMESTAMP), valid_to, is_active(nn)(def:1)
 payments: payment_id(pk), contract_id(nn)(fk:contracts,cascade), client_id(nn)(fk:clients,cascade), received_date, total_assets, actual_fee, method, notes, valid_from(def:CURRENT_TIMESTAMP), valid_to, applied_start_month, applied_start_month_year, applied_end_month, applied_end_month_year, applied_start_quarter, applied_start_quarter_year, applied_end_quarter, applied_end_quarter_year
 period_reference: reference_date(pk)(unique), current_month_year, current_month, current_quarter_year, current_quarter
+providers: provider_id(pk), provider_name(nn)(unique), name_variants, valid_from(def:CURRENT_TIMESTAMP), valid_to
+client_files: file_id(pk), file_path(nn), original_filename(nn), upload_date(def:CURRENT_TIMESTAMP), document_date, provider_id(fk:providers), is_processed(def:0), metadata
+payment_files: payment_id(pk)(fk:payments,cascade), file_id(pk)(fk:client_files,cascade), linked_at(def:CURRENT_TIMESTAMP) UNIQUE(payment_id,file_id)
+document_patterns: pattern_id(pk), pattern_type(nn), pattern(nn), description, priority(def:1), is_active(def:1)
+system_config: config_key(pk)(unique), config_value(nn), description, last_updated(def:CURRENT_TIMESTAMP)
+processing_log: log_id(pk), file_name(nn), process_date(def:CURRENT_TIMESTAMP), status(nn), details, file_id(fk:client_files)
+client_providers: client_id(pk)(fk:clients), provider_id(pk)(fk:providers), start_date, end_date, is_active(def:1) UNIQUE(client_id,provider_id)
+date_format_patterns: format_id(pk), format_pattern(nn), format_description, regex_pattern, priority(def:1)
 [VIEWS]
 v_current_period: period_reference
 v_active_contracts: contracts
@@ -24,17 +30,22 @@ v_missing_payments: v_payment_variance JOIN clients
 v_client_sidebar: clients JOIN v_active_contracts JOIN v_payment_status
 v_client_details: contacts JOIN v_active_contracts JOIN v_payment_status JOIN v_client_first_payment
 v_payment_history: v_client_aum_history JOIN clients JOIN v_active_contracts JOIN payment_files JOIN client_files
-v_last_payment: v_payment_history
 v_missing_payment_periods: v_missing_payments
+v_last_payment: v_payment_history
+DocumentView: client_files JOIN providers JOIN payment_files JOIN payments JOIN clients
+DocumentProcessingView: client_files JOIN providers JOIN payment_files JOIN payments JOIN clients
 [TRIGGERS]
 [INDEXES]
 payments(received_date)
 payments(client_id, received_date)
-payment_files(payment_id)
 payments(valid_to)
+client_files(provider_id)
+client_files(file_path)
 [RELATIONSHIPS]
 contacts → clients
-client_files → clients
-payment_files → client_files, payments
 contracts → clients
 payments → contracts, clients
+client_files → providers
+payment_files → client_files, payments
+processing_log → client_files
+client_providers → providers, clients
